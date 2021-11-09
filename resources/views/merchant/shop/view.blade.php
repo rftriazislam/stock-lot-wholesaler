@@ -82,7 +82,22 @@
                             <a class="btn btn-success" style="color:white"><i class="fa fa-edit m-right-xs"></i>Live
                                 Preview</a>
                             <br />
-
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <!-- Current avatar -->
+                                    <img class="img-responsive avatar-view"
+                                        src="{{ asset('storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
+                                        alt="Avatar" title="Change the avatar" style="width:261;height:161">
+                                </div>
+                            </div>
+                            <div class="profile_img">
+                                <div id="crop-avatar">
+                                    <!-- Current avatar -->
+                                    <img class="img-responsive avatar-view"
+                                        src="{{ asset('storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
+                                        alt="Avatar" title="Change the avatar" style="width:261;height:161">
+                                </div>
+                            </div>
                             <!-- start skills -->
                             <h4>Product Sale</h4>
                             <ul class="list-unstyled user_data">

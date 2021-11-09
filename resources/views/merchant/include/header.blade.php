@@ -43,7 +43,7 @@
 
                     <li><a><i class="fa fa-bar-chart-o"></i>My Profile<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="chartjs.html">Profile</a></li>
+                            <li><a href="{{ route('myprofile') }}">Profile</a></li>
                             <li><a href="chartjs2.html">Update</a></li>
                         </ul>
                     </li>

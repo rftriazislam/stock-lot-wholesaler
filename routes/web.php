@@ -78,6 +78,11 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
 
     Route::get('/dashboard/merchant/shop/add', [MerchantController::class, 'add_shop'])->name('merchant.add.shop');
     Route::post('/dashboard/merchant/shop/save', [MerchantController::class, 'save_shop'])->name('merchant.save.shop');
+
+    Route::get('/dashboard/merchant/myprofile', [MerchantController::class, 'myprofile'])->name('myprofile');
+
+
+    Route::post('/dashboard/merchant/profile/update', [MerchantController::class, 'update_profile'])->name('update.profile');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 
