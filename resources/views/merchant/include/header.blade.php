@@ -29,8 +29,8 @@
                     <li><a href="{{ route('merchant') }}"><i class="fa fa-home"></i> Dashboard </a></li>
                     <li><a><i class="fa fa-edit"></i> My Product/Shop <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="form.html">Add Shop</a></li>
-                            <li><a href="form_advanced.html">View Shop</a></li>
+                            <li><a href="{{ route('merchant.add.shop') }}">Add Shop</a></li>
+                            <li><a href="{{ route('merchant.add.shop') }}">View Shop</a></li>
 
                         </ul>
                     </li>
