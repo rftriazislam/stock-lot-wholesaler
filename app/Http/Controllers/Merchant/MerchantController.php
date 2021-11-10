@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\MerchantShop;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -88,5 +89,13 @@ class MerchantController extends Controller
             }
         }
         return back();
+    }
+
+    public function add_product()
+    {
+
+        $product_id =   substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJK0123456789LMNOPQRSTUVWXYZ', ceil(7 / strlen($x)))), 1, 7);
+        $category = Category::where('status', 1)->get();
+        return view('merchant.product.create', compact('category', 'product_id'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('merchant.master')
+@extends('reseller.master')
 @section('content')
     <div class="">
         <div class="page-title">
@@ -49,7 +49,7 @@
                                     @if (Auth::user()->image)
                                         <img class="img-responsive avatar-view"
                                             src="{{ asset('public/storage/profile') }}/{{ Auth::user()->image }}"
-                                            alt="Avatar" title="Change the avatar">
+                                            alt="Avatar" style="height: 225px;width: 260px;" title="Change the avatar">
                                     @else
                                         <img class="img-responsive avatar-view"
                                             src="{{ asset('public/backend') }}/images/picture.jpg" alt="Avatar"
@@ -106,7 +106,7 @@
                                         <ul class="messages">
                                             <li>
 
-                                                <form id="demo-form2" action="{{ route('update.profile') }}"
+                                                <form id="demo-form2" action="{{ route('reseller.update.profile') }}"
                                                     method="POST" data-parsley-validate
                                                     class="form-horizontal form-label-left" enctype="multipart/form-data">
                                                     @csrf

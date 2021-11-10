@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Ajax\AjaxController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Frontend\FrontendController;
@@ -78,11 +79,10 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
 
     Route::get('/dashboard/merchant/shop/add', [MerchantController::class, 'add_shop'])->name('merchant.add.shop');
     Route::post('/dashboard/merchant/shop/save', [MerchantController::class, 'save_shop'])->name('merchant.save.shop');
-
     Route::get('/dashboard/merchant/myprofile', [MerchantController::class, 'myprofile'])->name('myprofile');
-
-
     Route::post('/dashboard/merchant/profile/update', [MerchantController::class, 'update_profile'])->name('update.profile');
+
+    Route::get('/dashboard/merchant/product/add', [MerchantController::class, 'add_product'])->name('merchant.add.product');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 
@@ -91,5 +91,9 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
 
 Route::group(['middleware' => ['auth', 'reseller'],], function () {
     Route::get('/dashboard/reseller', [ResellerController::class, 'index'])->name('reseller');
+
+    Route::get('/dashboard/reseller/myprofile', [ResellerController::class, 'myprofile'])->name('reseller.profile');
+    Route::post('/dashboard/reseller/profile/update', [MerchantController::class, 'update_profile'])->name('reseller.update.profile');
 });
 //------------------------------------------------------------Reseller----------------------------------------------------------------------------------
+Route::get('get-subcategory-list', [AjaxController::class, 'subcategory_list'])->name('get-subcategory-list');

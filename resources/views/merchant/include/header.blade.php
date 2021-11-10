@@ -36,7 +36,7 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Product <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="general_elements.html">Add Product</a></li>
+                            <li><a href="{{ route('merchant.add.product') }}">Add Product</a></li>
                             <li><a href="media_gallery.html">List Product</a></li>
                         </ul>
                     </li>
@@ -44,7 +44,7 @@
                     <li><a><i class="fa fa-bar-chart-o"></i>My Profile<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('myprofile') }}">Profile</a></li>
-                            <li><a href="chartjs2.html">Update</a></li>
+
                         </ul>
                     </li>
                     <li><a><i class="fa fa-clone"></i>Payment Method <span class="fa fa-chevron-down"></span></a>

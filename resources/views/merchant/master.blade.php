@@ -24,6 +24,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('backend') }}/build/css/custom.min.css" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body class="nav-md">
@@ -89,7 +90,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('backend') }}/build/js/custom.min.js"></script>
-
+    @yield('js')
 </body>
 
 </html>
