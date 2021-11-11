@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
 
     //----------merchant----------
     Route::get('/dashboard/merchant/lists', [AdminController::class, 'list_merchant'])->name('list.merchant');
+
     //----------merchant----------
 
     //----------reseller----------
@@ -83,6 +84,12 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
     Route::post('/dashboard/merchant/profile/update', [MerchantController::class, 'update_profile'])->name('update.profile');
 
     Route::get('/dashboard/merchant/product/add', [MerchantController::class, 'add_product'])->name('merchant.add.product');
+    Route::post('/dashboard/merchant/product/save', [MerchantController::class, 'save_product'])->name('merchant.save.product');
+    Route::get('/dashboard/merchant/product/lists', [MerchantController::class, 'list_product'])->name('merchant.list.product');
+
+    Route::get('/dashboard/merchant/product/status/{id}', [MerchantController::class, 'status_product'])->name('merchant.status.product');
+    Route::get('/dashboard/merchant/product/delete/{id}', [MerchantController::class, 'delete_product'])->name('merchant.delete.product');
+    Route::get('/dashboard/merchant/product/edit/{id}', [MerchantController::class, 'edit_product'])->name('merchant.edit.product');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 

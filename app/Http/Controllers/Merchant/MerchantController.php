@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -97,5 +98,101 @@ class MerchantController extends Controller
         $product_id =   substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJK0123456789LMNOPQRSTUVWXYZ', ceil(7 / strlen($x)))), 1, 7);
         $category = Category::where('status', 1)->get();
         return view('merchant.product.create', compact('category', 'product_id'));
+    }
+    public function save_product(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:subcategories,id',
+            'product_name' => 'required',
+            'product_id' => 'required',
+            'description' => 'required',
+            'size' => 'required',
+            'unit' => 'required',
+            'color.*' => 'required',
+            'stock' => 'required',
+            'mini_order' => 'required',
+            'order_note' => 'nullable',
+            'price' => 'required',
+            'files.*' => 'required|image|mimes:jpeg,jpg,png',
+            'video_link' => 'nullable',
+            'status' => 'required',
+            'service_charge' => 'required'
+
+        ]);
+
+        if ($files = $request->file('files')) {
+            $count = 0;
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $count = $count + 1;
+                $imagename = Auth::user()->id . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $destinationPath = public_path('/storage/merchant/product/');
+                $file->move($destinationPath, $imagename);
+                $images[] = array(
+                    'id' => $count,
+                    'extension' => $extension,
+                    'image' => $imagename
+                );
+
+
+                // }
+            }
+            $validate['files'] =  $images;
+        }
+        foreach ($request->color as $c) {
+            $col[] = array('color' => $c);
+        }
+        $validate['color'] =  $col;
+        // dd($validate);
+        $validate['user_id'] = Auth::user()->id;
+
+
+        $product_save = MerchantProduct::create($validate);
+
+        return back();
+    }
+
+    public function list_product()
+    {
+        $products = MerchantProduct::with(['category:id,name', 'subcategory:id,name'])->where('user_id', Auth::user()->id)->latest()->paginate();
+        return view('merchant.product.lists', compact('products'));
+    }
+
+    public function status_product($id)
+    {
+
+        $product = MerchantProduct::where('id', $id)->first();
+        if ($product) {
+            $product->update([
+                'status' => ($product->status == 1) ? '0' : "1"
+            ]);
+            return back();
+        } else {
+            return back();
+        }
+    }
+
+
+    public function delete_product($id)
+    {
+        $product = MerchantProduct::where('id', $id)->first();
+        if ($product) {
+            $product->delete();
+            return back();
+        } else {
+            return back();
+        }
+    }
+
+    public function edit_product($id)
+    {
+        $product = MerchantProduct::with(['category:id,name', 'subcategory:id,name'])->where('id', $id)->first();
+        $category = Category::where('status', 1)->get();
+        if ($product) {
+            return view('merchant.product.view', compact('product', 'category'));
+        } else {
+            return back();
+        }
     }
 }

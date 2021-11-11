@@ -37,7 +37,7 @@
                     <li><a><i class="fa fa-desktop"></i> Product <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('merchant.add.product') }}">Add Product</a></li>
-                            <li><a href="media_gallery.html">List Product</a></li>
+                            <li><a href="{{ route('merchant.list.product') }}">List Product</a></li>
                         </ul>
                     </li>
 

@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           } */
 
     </style>
 @endsection
@@ -31,7 +31,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Product Add</h2>
+                        <h2>Product Edit/Update</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -62,8 +62,8 @@
                         @endif
 
                         <br />
-                        <form id="demo-form2" action="{{ route('merchant.save.product') }}" method="POST"
-                            data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
+                        <form id="demo-form2" action=" " method="POST" data-parsley-validate
+                            class="form-horizontal form-label-left" enctype="multipart/form-data">
                             @csrf
 
                             <div class="borderr">
@@ -81,7 +81,9 @@
                                             <option>Select Category</option>
 
                                             @foreach ($category as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    {{ $product->category_id == $item->id ? 'Selected' : '' }}>
+                                                    {{ $item->name }}</option>
                                             @endforeach
 
 
@@ -98,7 +100,8 @@
                                     <div class="col-md-6 col-sm-6 ">
 
                                         <select class="form-control" required id="subcategory" name="subcategory_id">
-                                            <option>Select SubCategory</option>
+                                            <option value="{{ $product->subcategory_id }}">
+                                                {{ $product->subcategory->name }}</option>
 
                                         </select>
                                     </div>
@@ -116,7 +119,8 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="product_name" required="required" name="product_name"
-                                            class="form-control " placeholder="Samsung j2">
+                                            value="{{ $product->product_name }}" class="form-control "
+                                            placeholder="Samsung j2">
                                     </div>
                                 </div>
 
@@ -127,9 +131,9 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="product_id" name="product_id" disabled
-                                            value="{{ $product_id }}" class="form-control image file pb-34 "
+                                            value="{{ $product->product_id }}" class="form-control image file pb-34 "
                                             placeholder="J2">
-                                        <input type="hidden" name="product_id" value="{{ $product_id }}">
+                                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                                     </div>
                                 </div>
 
@@ -142,7 +146,7 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <textarea required="required" class="form-control "
                                             placeholder="Samsung Mobile Phone " id="description"
-                                            name="description"></textarea>
+                                            name="description"> {{ $product->description }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +160,8 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="size" name="size" required="required"
-                                            placeholder="XL,L,ML,M,L,S,1000" class="form-control image file pb-34 ">
+                                            placeholder="XL,L,ML,M,L,S,1000" value="{{ $product->size }}"
+                                            class="form-control image file pb-34 ">
                                     </div>
                                 </div>
                                 <div class="form-group item">
@@ -167,7 +172,7 @@
                                     <div class="col-md-6 col-sm-6 ">
 
                                         <select class="form-control" id="unit" required name="unit">
-                                            <option value="">None</option>
+                                            <option value="{{ $product->unit }}">{{ $product->unit }}</option>
                                             <option value="KG">KG</option>
                                             <option value="LITER">LITER</option>
                                             <option value="PCS">PCS</option>
@@ -196,16 +201,27 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment2">
-                                            <input type="text" name="color[]" id="cor" class=" demo1 form-control" multiple
-                                                value="#5367ce" required>
+                                            <input type="text" name="color[]" id="cor" class=" demo1 form-control" multiple>
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_color" type="button"><i
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
+                                        @foreach ($product->color as $item)
 
-
+                                            <div class="hdtuto control-group lst input-group" id="remove"
+                                                style="margin-top:10px">
+                                                <input type="text" name="color[]" class=" form-control" multiple required
+                                                    value="{{ $item['color'] }}"
+                                                    style="background: {{ $item['color'] }}">
+                                                <div class="input-group-btn">
+                                                    <button id="button" class="btn btn-danger btn_danger" type="button"><i
+                                                            class="fldemo glyphicon glyphicon-remove"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                         <div class="clone2 hide" style="display:none">
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
@@ -227,7 +243,8 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="stock" name="stock" required="required" placeholder="1000"
+                                        <input type="number" id="stock" name="stock" required="required"
+                                            value="{{ $product->stock }}" placeholder="1000"
                                             class="form-control image file pb-34 ">
                                     </div>
                                 </div>
@@ -238,8 +255,9 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="mini_order" required="required" name="mini_order"
-                                            class="form-control " placeholder="10">
+                                        <input type="text" id="mini_order" required="required"
+                                            value="{{ $product->mini_order }}" name="mini_order" class="form-control "
+                                            placeholder="10">
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -249,7 +267,8 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <textarea required="required" id="order_note" placeholder="X,XL,M,ML,M,L Color "
-                                            class="form-control " name="order_note"></textarea>
+                                            class="form-control "
+                                            name="order_note">{{ $product->order_note }}</textarea>
                                     </div>
                                 </div>
 
@@ -264,8 +283,9 @@
                                             {{ Auth::user()->currency }}</sup>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="price" required="required" min="1" name="price"
-                                            class="form-control " placeholder="8500 {{ Auth::user()->currency }}">
+                                        <input type="number" id="price" value="{{ $product->price }}" required="required"
+                                            min="1" name="price" class="form-control "
+                                            placeholder="8500 {{ Auth::user()->currency }}">
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -276,9 +296,9 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="prsice" required="required" disabled class="form-control "
-                                            value="42.5 {{ Auth::user()->currency }}">
+                                            value="{{ $product->service_charge }} {{ Auth::user()->currency }}">
                                         <input type="hidden" id="prsice2" required="required" name="service_charge"
-                                            class="form-control ">
+                                            value="{{ $product->service_charge }}" class="form-control ">
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -315,7 +335,8 @@
                                         <sup class="required">option</sup>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="video_link" name="video_link" required="required"
+                                        <input type="text" id="video_link" name="video_link"
+                                            value="{{ $product->video_link }}" required="required"
                                             placeholder="https://www.youtube.com/watch?v=yKS8v6HUIss"
                                             class="form-control image file pb-34 ">
                                     </div>
@@ -329,8 +350,10 @@
                                     <div class="col-md-6 col-sm-6 ">
 
                                         <select class="form-control" id="status" required name="status">
-                                            <option value="1">Published</option>
-                                            <option value="0">Unpublished</option>
+                                            <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Published
+                                            </option>
+                                            <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Unpublished
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -341,9 +364,9 @@
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <button class="btn btn-round  btn-danger" type="reset">Cancel</button>
+                                    <button class="btn btn-round  btn-danger">Back</button>
 
-                                    <button type="submit" class="btn btn-round  btn-success">Save</button>
+                                    <button type="submit" class="btn btn-round  btn-success">Update</button>
                                 </div>
                             </div>
 
@@ -395,6 +418,7 @@
             $("body").on("click", ".btn_danger", function() {
                 $(this).parents("#remove").remove();
             });
+
             $("#price").keyup(function() {
                 var value = $('#price').val();
 
@@ -403,9 +427,6 @@
                 $('#prsice2').val(p);
             });
         });
-
-
-
 
         $('#category').change(function() {
             var category_id = $(this).val();
