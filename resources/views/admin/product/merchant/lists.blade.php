@@ -1,4 +1,4 @@
-@extends('merchant.master')
+@extends('admin.master')
 @section('content')
 
     <div class="col-md-12 col-sm-12  ">
@@ -91,12 +91,12 @@
                                     <td class=" ">
 
                                         @if ($item->status == 1)
-                                            <a href="{{ route('merchant.status.product', $item->id) }}"
-                                                class="btn btn-success">Published</a>
-                                            <a class="btn btn-info">Checking</a>
+                                            <a href="{{ route('admin.merchant.status.product', $item->id) }}"
+                                                class="btn btn-success">Request</a>
+
                                         @elseif($item->status == 2)
-                                            <a href="" class="btn btn-success">Published</a>
-                                            <a class="btn btn-primary">Checked</a>
+                                            <a class="btn btn-success">Published</a>
+                                            <a class="btn btn-secondary">Accept</a>
                                         @else
                                             <a href="{{ route('merchant.status.product', $item->id) }}"
                                                 class="btn btn-danger">Unpublished</a>

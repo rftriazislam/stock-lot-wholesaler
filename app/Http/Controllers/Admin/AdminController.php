@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MerchantProduct;
+use App\Models\Method;
 use App\Models\Subcategory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -174,12 +176,46 @@ class AdminController extends Controller
         return redirect()->route('list.subcategory');
     }
 
+    public function add_method()
+    {
+        return view('admin.method.create');
+    }
+
+    public function save_method(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'name' => 'required|unique:methods,name',
+        ]);
+        Method::create($validate);
+        return  back();
+    }
+
     //-------------------merchant--------------
     public function list_merchant()
     {
         $merchants = User::where('role', 'merchant')->latest()->get();
         if ($merchants) {
             return view('admin.merchant.lists', compact('merchants'));
+        } else {
+            return back();
+        }
+    }
+
+    public function list_merchant_products()
+    {
+        $products = MerchantProduct::latest()->paginate();
+        return view('admin.product.merchant.lists', compact('products'));
+    }
+
+    public function status_merchant_product($id)
+    {
+
+        $product = MerchantProduct::where('id', $id)->first();
+        if ($product) {
+            $product->update([
+                'status' => ($product->status == 1) ? '2' : "1"
+            ]);
+            return back();
         } else {
             return back();
         }

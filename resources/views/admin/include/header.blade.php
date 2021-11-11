@@ -46,7 +46,7 @@
                     </li>
                     <li><a><i class="fa fa-table"></i> Product <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="chartjs.html">Merchant Product Lists</a></li>
+                            <li><a href="{{ route('admin.merchant.products') }}">Merchant Product Lists</a></li>
                             <li><a href="chartjs2.html">Reseller Product Lists</a></li>
                         </ul>
                     </li>
@@ -99,6 +99,16 @@
                         </ul>
                     </li>
                     <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Shipping</a></li>
+
+                    <li><a><i class="fa fa-bar-chart-o"></i>Payment Method add <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('method.add') }}">Method Add</a></li>
+                            <li><a href="chartjs2.html">Method list</a></li>
+
+
+                        </ul>
+                    </li>
                 </ul>
             </div>
 

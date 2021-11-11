@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
+use App\Models\PaymentMethod;
 use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class MerchantController extends Controller
 {
@@ -194,5 +197,57 @@ class MerchantController extends Controller
         } else {
             return back();
         }
+    }
+
+    public function payment_method_add()
+    {
+        return view('merchant.payment.create');
+    }
+
+    public function save_payment_method(Request $request)
+    {
+
+
+        $validate = $this->validate($request, [
+            'name' => 'required',
+            'account_number' => 'required',
+        ]);
+        $validate['user_id'] = Auth::user()->id;
+        PaymentMethod::create($validate);
+        return  back();
+    }
+
+    public function list_payment_method()
+    {
+        $payments =  PaymentMethod::where('user_id', Auth::user()->id)->get();
+
+        return view('merchant.payment.lists', compact('payments'));
+    }
+
+    public function merchant_withdraw_add()
+    {
+        return view('merchant.withdraw.create');
+    }
+    public function save_withdraw(Request $request)
+    {
+
+
+        $validate = $this->validate($request, [
+            'name' => 'required',
+            'account_number' => 'required',
+            'amount' => 'required'
+        ]);
+        $validate['user_id'] = Auth::user()->id;
+        // if ($request->amount <= Auth::user()->balance) {
+        Withdraw::create($validate);
+        // }
+        return  back();
+    }
+
+    public function list_withdraw()
+    {
+        $withdraws =  Withdraw::where('user_id', Auth::user()->id)->get();
+
+        return view('merchant.withdraw.lists', compact('withdraws'));
     }
 }

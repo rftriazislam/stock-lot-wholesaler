@@ -49,14 +49,14 @@
                     </li>
                     <li><a><i class="fa fa-clone"></i>Payment Method <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="fixed_sidebar.html">Add Method</a></li>
-                            <li><a href="fixed_footer.html">Method Lists</a></li>
+                            <li><a href="{{ route('merchant.payment.method.add') }}">Add Method</a></li>
+                            <li><a href="{{ route('merchant.payment.method.list') }}">Method Lists</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-dollar"></i> Withdraw <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="tables.html">Withdraw Request</a></li>
-                            <li><a href="tables_dynamic.html">Withdraw Lists</a></li>
+                            <li><a href="{{ route('merchant.withdraw.add') }}">Withdraw Request</a></li>
+                            <li><a href="{{ route('merchant.withdraw.list') }}">Withdraw Lists</a></li>
                         </ul>
                     </li>
                 </ul>

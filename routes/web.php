@@ -59,8 +59,18 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/subcategory/edit/{id}', [AdminController::class, 'edit_subcategory'])->name('edit.subcategory');
     Route::post('/dashboard/subcategory/update', [AdminController::class, 'update_subcategory'])->name('update.subcategory');
 
+    Route::get('/dashboard/method/add', [AdminController::class, 'add_method'])->name('method.add');
+
+    Route::post('/dashboard/method/save', [AdminController::class, 'save_method'])->name('method.save');
+
+
+
     //----------merchant----------
     Route::get('/dashboard/merchant/lists', [AdminController::class, 'list_merchant'])->name('list.merchant');
+    Route::get('/dashboard/merchant/products', [AdminController::class, 'list_merchant_products'])->name('admin.merchant.products');
+    Route::get('/dashboard/merchant/product/permission/{id}', [AdminController::class, 'status_merchant_product'])->name('admin.merchant.status.product');
+
+
 
     //----------merchant----------
 
@@ -90,6 +100,14 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
     Route::get('/dashboard/merchant/product/status/{id}', [MerchantController::class, 'status_product'])->name('merchant.status.product');
     Route::get('/dashboard/merchant/product/delete/{id}', [MerchantController::class, 'delete_product'])->name('merchant.delete.product');
     Route::get('/dashboard/merchant/product/edit/{id}', [MerchantController::class, 'edit_product'])->name('merchant.edit.product');
+
+    Route::get('/dashboard/merchant/payment/method/add', [MerchantController::class, 'payment_method_add'])->name('merchant.payment.method.add');
+    Route::post('/dashboard/merchant/payment/method/save', [MerchantController::class, 'save_payment_method'])->name('merchant.payment.method.save');
+    Route::get('/dashboard/merchant/payment/method/list', [MerchantController::class, 'list_payment_method'])->name('merchant.payment.method.list');
+
+    Route::get('/dashboard/merchant/withdraw/add', [MerchantController::class, 'merchant_withdraw_add'])->name('merchant.withdraw.add');
+    Route::post('/dashboard/merchant/withdraw/save', [MerchantController::class, 'save_withdraw'])->name('merchant.withdraw.save');
+    Route::get('/dashboard/merchant/withdraw/list', [MerchantController::class, 'list_withdraw'])->name('merchant.withdraw.list');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 
