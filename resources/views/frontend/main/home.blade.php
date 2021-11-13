@@ -514,7 +514,7 @@
                                             <div class="ps-product__content"><a class="ps-product__title"
                                                     href="product-default.html">{{ $subitem->product_name }}
                                                 </a>
-                                                <div class="ps-product__rating">
+                                                {{-- <div class="ps-product__rating">
                                                     <select class="ps-rating" data-read-only="true">
                                                         <option value="1">1</option>
                                                         <option value="1">2</option>
@@ -522,12 +522,14 @@
                                                         <option value="1">4</option>
                                                         <option value="2">5</option>
                                                     </select><span>02</span>
-                                                </div>
-                                                <p class="ps-product__price sale">$990.99 <del>$1050.50 </del></p>
+                                                </div> --}}
+                                                <p class="ps-product__price sale">{{ $subitem->price }} <del>00.00
+                                                    </del></p>
                                             </div>
                                             <div class="ps-product__content hover"><a class="ps-product__title"
                                                     href="product-default.html">Anderson Composites – Custom Hood</a>
-                                                <p class="ps-product__price sale">$990.99 <del>$1050.50 </del></p>
+                                                <p class="ps-product__price sale">{{ $subitem->price }} <del>00.00
+                                                    </del></p>
                                             </div>
                                         </div>
                                     </div>
