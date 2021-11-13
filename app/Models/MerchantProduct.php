@@ -25,6 +25,7 @@ class MerchantProduct extends Model
         'price',
         'files',
         'video_link',
+        'main_picture',
         'service_charge',
         'status',
     ];

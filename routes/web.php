@@ -39,6 +39,11 @@ Route::get('/home', [FrontendController::class, 'index']);
 Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 
+
+
+
+
+
 //------------------------------------------------------------Admin----------------------------------------------------------------------------------
 Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('admin');
@@ -59,8 +64,16 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/subcategory/edit/{id}', [AdminController::class, 'edit_subcategory'])->name('edit.subcategory');
     Route::post('/dashboard/subcategory/update', [AdminController::class, 'update_subcategory'])->name('update.subcategory');
 
-    Route::get('/dashboard/method/add', [AdminController::class, 'add_method'])->name('method.add');
 
+    Route::get('/dashboard/slider/add', [AdminController::class, 'add_slider'])->name('add.slider');
+    Route::post('/dashboard/slider/save', [AdminController::class, 'save_slider'])->name('save.slider');
+    Route::get('/dashboard/slider/lists', [AdminController::class, 'list_slider'])->name('list.slider');
+    Route::get('/dashboard/slider/delete/{id}', [AdminController::class, 'delete_slider'])->name('delete.slider');
+    Route::get('/dashboard/slider/status/{id}', [AdminController::class, 'status_slider'])->name('status.slider');
+    Route::get('/dashboard/slider/edit/{id}', [AdminController::class, 'edit_slider'])->name('edit.slider');
+    Route::post('/dashboard/slider/update', [AdminController::class, 'update_slider'])->name('update.slider');
+
+    Route::get('/dashboard/method/add', [AdminController::class, 'add_method'])->name('method.add');
     Route::post('/dashboard/method/save', [AdminController::class, 'save_method'])->name('method.save');
 
 
@@ -78,6 +91,7 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
 
     Route::get('/dashboard/reseller/lists', [AdminController::class, 'list_reseller'])->name('list.reseller');
     //----------reseller----------
+
 
 });
 //------------------------------------------------------------Admin----------------------------------------------------------------------------------

@@ -14,4 +14,12 @@ class Category extends Model
         'image',
         'status'
     ];
+    public function subcategory()
+    {
+        return $this->hasMany('App\Models\Subcategory', 'category_id', 'id');
+    }
+    public function cateproduct()
+    {
+        return $this->hasMany('App\Models\MerchantProduct', 'category_id', 'id');
+    }
 }

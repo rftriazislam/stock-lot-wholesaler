@@ -93,13 +93,13 @@
                                         @if ($item->status == 1)
                                             <a href="{{ route('merchant.status.product', $item->id) }}"
                                                 class="btn btn-success">Published</a>
-                                            <a class="btn btn-info">Checking</a>
+                                            <a class="btn btn-info" style="color: white">Checking</a>
                                         @elseif($item->status == 2)
                                             <a href="" class="btn btn-success">Published</a>
-                                            <a class="btn btn-primary">Checked</a>
+                                            <a class="btn btn-primary" style="color: white">Checked</a>
                                         @else
                                             <a href="{{ route('merchant.status.product', $item->id) }}"
-                                                class="btn btn-danger">Unpublished</a>
+                                                class="btn btn-danger" style="color: white">Unpublished</a>
                                         @endif
 
                                     </td>

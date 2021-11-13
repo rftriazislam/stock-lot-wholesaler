@@ -47,6 +47,15 @@ $category = App\Models\Category::where('status', 1)->get();
                     </div>
                     <div class="x_content">
                         <br />
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form id="demo-form2" action="{{ route('save.subcategory') }}" method="POST" data-parsley-validate
                             class="form-horizontal form-label-left" enctype="multipart/form-data">
                             @csrf

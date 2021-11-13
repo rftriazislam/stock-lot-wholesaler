@@ -28,6 +28,7 @@ class CreateMerchantProductsTable extends Migration
             $table->string('mini_order');
             $table->text('order_note')->nullable();
             $table->string('files');
+            $table->string('main_picture');
             $table->string('video_link')->nullable();
             $table->double('price', 16, 3);
             $table->double('service_charge', 16, 3);

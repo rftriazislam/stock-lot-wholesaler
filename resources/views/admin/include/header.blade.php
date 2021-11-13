@@ -71,6 +71,13 @@
                             <li><a href="{{ route('list.subcategory') }}">SubCategory List</a></li>
                         </ul>
                     </li>
+
+                    <li><a><i class="fa fa-clone"></i>Slider <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('add.slider') }}">Add Slider</a></li>
+                            <li><a href="{{ route('list.slider') }}">Slider List</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="menu_section">

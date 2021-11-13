@@ -22,7 +22,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Product Category</h2>
+                        <h2>Slider</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -52,11 +52,11 @@
                                 </ul>
                             </div>
                         @endif
-                        <form id="demo-form2" action="{{ route('save.category') }}" method="POST" data-parsley-validate
+                        <form id="demo-form2" action="{{ route('save.slider') }}" method="POST" data-parsley-validate
                             class="form-horizontal form-label-left" enctype="multipart/form-data">
                             @csrf
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Category Name
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Slider title
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Category Image
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Slider Image
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">

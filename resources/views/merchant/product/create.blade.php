@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
 
     </style>
 @endsection
@@ -116,7 +116,8 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="product_name" required="required" name="product_name"
-                                            class="form-control " placeholder="Samsung j2">
+                                            class="form-control " placeholder="Samsung j2"
+                                            value="{{ old('product_name') }}" autofocus autocomplete>
                                     </div>
                                 </div>
 
@@ -142,7 +143,7 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <textarea required="required" class="form-control "
                                             placeholder="Samsung Mobile Phone " id="description"
-                                            name="description"></textarea>
+                                            name="description">{{ old('description') }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -227,7 +228,8 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="stock" name="stock" required="required" placeholder="1000"
+                                        <input type="number" id="stock" name="stock" required="required"
+                                            value="{{ old('stock') }}" autofocus autocomplete placeholder="1000"
                                             class="form-control image file pb-34 ">
                                     </div>
                                 </div>
@@ -238,8 +240,9 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="mini_order" required="required" name="mini_order"
-                                            class="form-control " placeholder="10">
+                                        <input type="text" id="mini_order" value="{{ old('mini_order') }}" autofocus
+                                            autocomplete required="required" name="mini_order" class="form-control "
+                                            placeholder="10">
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -249,7 +252,8 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <textarea required="required" id="order_note" placeholder="X,XL,M,ML,M,L Color "
-                                            class="form-control " name="order_note"></textarea>
+                                            autofocus autocomplete class="form-control "
+                                            name="order_note"> {{ old('order_note') }}</textarea>
                                     </div>
                                 </div>
 
@@ -282,7 +286,24 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="files">Product
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="files">Main
+                                        Picture
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <div class="input-group hdtuto control-group ">
+                                            <input type="file" name="main_picture" class=" form-control" multiple
+                                                required>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="item form-group">
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="files">Add More
                                         Picture
                                         <span class="required">*</span>
                                     </label>
@@ -315,7 +336,8 @@
                                         <sup class="required">option</sup>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="video_link" name="video_link" required="required"
+                                        <input type="text" id="video_link" name="video_link"
+                                            value="{{ old('video_link') }}" autofocus autocomplete
                                             placeholder="https://www.youtube.com/watch?v=yKS8v6HUIss"
                                             class="form-control image file pb-34 ">
                                     </div>

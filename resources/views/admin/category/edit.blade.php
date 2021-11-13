@@ -65,7 +65,8 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="file" id="image" name="file" class="form-control image file pb-34 ">
-                                    <img src="{{ asset('storage/category') }}/{{ $category->image }}">
+                                    <img src="{{ asset('storage/category/small') }}/{{ $category->image }}">
+                                    <img src="{{ asset('storage/category/big') }}/{{ $category->image }}">
                                 </div>
                             </div>
 

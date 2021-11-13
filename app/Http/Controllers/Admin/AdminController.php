@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\MerchantProduct;
 use App\Models\Method;
+use App\Models\Slider;
 use App\Models\Subcategory;
 use App\Models\User;
+use CreateSlidersTable;
 use Illuminate\Http\Request;
+use Image;
 
 class AdminController extends Controller
 {
@@ -24,14 +27,26 @@ class AdminController extends Controller
     {
         $validate = $this->validate($request, [
             'name' => 'required|unique:categories,name',
-            'image' => 'required|image|mimes:jpg,png,jpeg',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+            $image2 = $request->file('image');
+
             $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/storage/category/');
-            $image->move($destinationPath, $imagename);
+            $destinationPath = public_path('/storage/category/big/');
+            $destinationPathsmall = public_path('/storage/category/small/');
+
+            $resize_image = Image::make($image);
+            $resize_image->resize(654, 295);
+            $resize_image->save($destinationPath . $imagename);
+
+            $resize_image_small = Image::make($image2);
+            $resize_image_small->resize(170, 170);
+            $resize_image_small->save($destinationPathsmall . $imagename);
+
+            // $image->move($destinationPath, $imagename);
             $validate['image'] = $imagename;
         }
         Category::create($validate);
@@ -83,9 +98,20 @@ class AdminController extends Controller
         $category->update($request->all());
         if ($request->hasFile('file')) {
             $image = $request->file('file');
+            $image2 = $request->file('file');
             $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/storage/category/');
-            $image->move($destinationPath, $imagename);
+            $destinationPath = public_path('/storage/category/big/');
+            $destinationPathsmall = public_path('/storage/category/small/');
+
+            $resize_image = Image::make($image);
+            $resize_image->resize(654, 295);
+            $resize_image->save($destinationPath . $imagename);
+
+            $resize_image_small = Image::make($image2);
+            $resize_image_small->resize(170, 170);
+            $resize_image_small->save($destinationPathsmall . $imagename);
+
+
             $category->update([
                 'image' => $imagename
             ]);
@@ -105,14 +131,16 @@ class AdminController extends Controller
         $validate = $this->validate($request, [
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|unique:subcategories,name',
-            'image' => 'required|image|mimes:jpg,png,jpeg',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/storage/subcategory/');
-            $image->move($destinationPath, $imagename);
+            $resize_image = Image::make($image);
+            $resize_image->resize(300, 300);
+            $resize_image->save($destinationPath . $imagename);
             $validate['image'] = $imagename;
         }
         Subcategory::create($validate);
@@ -167,7 +195,10 @@ class AdminController extends Controller
             $image = $request->file('file');
             $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/storage/subcategory/');
-            $image->move($destinationPath, $imagename);
+
+            $resize_image = Image::make($image);
+            $resize_image->resize(300, 300);
+            $resize_image->save($destinationPath . $imagename);
             $subcategory->update([
                 'image' => $imagename
             ]);
@@ -190,6 +221,91 @@ class AdminController extends Controller
         return  back();
     }
 
+
+    public function add_slider()
+    {
+        return view('admin.slider.create');
+    }
+
+    public function save_slider(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'name' => 'required|unique:sliders,name',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/slider/');
+            $resize_image = Image::make($image);
+            $resize_image->resize(2100, 430);
+            $resize_image->save($destinationPath . $imagename);
+            // $image->move($destinationPath, $imagename);
+            $validate['image'] = $imagename;
+        }
+        Slider::create($validate);
+        return back();
+    }
+    public function list_slider()
+    {
+        $sliders = Slider::latest()->paginate();
+        return view('admin.slider.lists', compact('sliders'));
+    }
+
+    public function delete_slider($id)
+    {
+        $Slider = Slider::where('id', $id)->first();
+        if ($Slider) {
+            $Slider->delete();
+            return back();
+        } else {
+            return back();
+        }
+    }
+
+
+    public function status_slider($id)
+    {
+        $Slider = Slider::where('id', $id)->first();
+        if ($Slider) {
+            $Slider->update([
+                'status' => ($Slider->status == 1) ? '0' : "1"
+            ]);
+            return back();
+        } else {
+            return back();
+        }
+    }
+    public function edit_slider($id)
+    {
+        $slider = Slider::where('id', $id)->first();
+
+        if ($slider) {
+            return view('admin.slider.edit', compact('slider'));
+        } else {
+            return back();
+        }
+    }
+    public function update_slider(Request $request)
+    {
+
+        $category = Slider::where('id', $request->id)->first();
+        $category->update($request->all());
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/slider/');
+            $resize_image = Image::make($image);
+            $resize_image->resize(2100, 430);
+            $resize_image->save($destinationPath . $imagename);
+            $category->update([
+                'image' => $imagename
+            ]);
+        }
+
+        return redirect()->route('list.slider');
+    }
     //-------------------merchant--------------
     public function list_merchant()
     {

@@ -1,5 +1,7 @@
 @extends('admin.master')
 @section('content')
+
+
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -22,7 +24,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Product Category</h2>
+                        <h2> Update Slider</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -43,35 +45,28 @@
                     </div>
                     <div class="x_content">
                         <br />
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form id="demo-form2" action="{{ route('save.category') }}" method="POST" data-parsley-validate
+                        <form id="demo-form2" action="{{ route('update.slider') }}" method="POST" data-parsley-validate
                             class="form-horizontal form-label-left" enctype="multipart/form-data">
                             @csrf
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Category Name
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">slider Name
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="first-name" required="required" name="name"
-                                        class="form-control ">
+                                    <input type="text" id="first-name" required="required" value="{{ $slider->name }}"
+                                        name="name" class="form-control ">
+                                    <input type="hidden" value="{{ $slider->id }}" name="id">
                                 </div>
                             </div>
 
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Category Image
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">slider Image
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="file" id="image" name="image" required="required"
-                                        class="form-control image file pb-34 ">
+                                    <input type="file" id="image" name="file" class="form-control image file pb-34 ">
+                                    <img src="{{ asset('storage/slider/') }}/{{ $slider->image }}">
+
                                 </div>
                             </div>
 
@@ -80,9 +75,9 @@
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <button class="btn btn-danger" type="reset">Cancel</button>
+                                    <a href="{{ route('list.slider') }}"> <button class="btn btn-danger">Back</button></a>
 
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </div>
 

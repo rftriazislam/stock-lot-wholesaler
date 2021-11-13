@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -303,6 +303,25 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="files">Main
+                                        Picture
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <div class="input-group hdtuto control-group ">
+                                            <input type="file" name="main_picture" class=" form-control" multiple
+                                                required>
+
+
+                                        </div>
+                                        <img src="{{ asset('public/storage') }}/merchant/product/main/big/{{ $product->main_picture }}"
+                                            style="height: 60px;width:60px">
+
+                                        <img src="{{ asset('public/storage') }}/merchant/product/main/small/{{ $product->main_picture }}"
+                                            style="height: 60px;width:60px">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
                                     <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="files">Product
                                         Picture
                                         <span class="required">*</span>
@@ -328,6 +347,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @foreach ($product->files as $item)
+
+                                        <img src="{{ asset('public/storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                            style="height: 40px;width:40px">
+                                    @endforeach
                                 </div>
 
                                 <div class="item form-group">

@@ -12,6 +12,7 @@ use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Image;
 
 class MerchantController extends Controller
 {
@@ -117,8 +118,9 @@ class MerchantController extends Controller
             'mini_order' => 'required',
             'order_note' => 'nullable',
             'price' => 'required',
-            'files.*' => 'required|image|mimes:jpeg,jpg,png',
+            'files.*' => 'required|image|mimes:jpeg,jpg,png,webp',
             'video_link' => 'nullable',
+            'main_picture' => 'required|image|mimes:jpeg,jpg,png,webp',
             'status' => 'required',
             'service_charge' => 'required'
 
@@ -130,7 +132,7 @@ class MerchantController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $count = $count + 1;
                 $imagename = Auth::user()->id . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
-                $destinationPath = public_path('/storage/merchant/product/');
+                $destinationPath = public_path('/storage/merchant/product/files');
                 $file->move($destinationPath, $imagename);
                 $images[] = array(
                     'id' => $count,
@@ -143,6 +145,26 @@ class MerchantController extends Controller
             }
             $validate['files'] =  $images;
         }
+        if ($request->file('main_picture')) {
+            $image = $request->file('main_picture');
+            $image2 = $request->file('main_picture');
+            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/merchant/product/main/big/');
+            $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
+
+            $resize_image = Image::make($image);
+            $resize_image->resize(1200, 1200);
+            $resize_image->save($destinationPath . $imagename);
+
+            $resize_image2 = Image::make($image2);
+            $resize_image2->resize(300, 300);
+            $resize_image2->save($destinationPath_2 . $imagename);
+
+            $validate['main_picture'] = $imagename;
+        }
+
+
+
         foreach ($request->color as $c) {
             $col[] = array('color' => $c);
         }
