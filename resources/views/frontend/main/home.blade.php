@@ -78,12 +78,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 "><a class="ps-collection"
-                            href="shop-default.html"><img src="{{ asset('frontend') }}/img/promotions/home-6/1.jpg"
-                                alt=""></a>
+                            href="shop-default.html"><img src="{{ asset('frontend') }}/img/b3.jpg" alt=""></a>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 "><a class="ps-collection"
-                            href="shop-default.html"><img src="{{ asset('frontend') }}/img/promotions/home-6/2.jpg"
-                                alt=""></a>
+                            href="shop-default.html"><img src="{{ asset('frontend') }}/img/b2.jpg" alt=""></a>
                     </div>
                 </div>
             </div>

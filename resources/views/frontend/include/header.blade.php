@@ -2,7 +2,7 @@
       <div class="header__top" style="color:white;background:black">
           <div class="container">
               <div class="header__left">
-                  <p>Welcome to Martfury Online Shopping Store !</p>
+                  <p style="color: white">Welcome to Martfury Online Shopping Store !</p>
               </div>
               <div class="header__right">
                   <ul class="header__top-links">
