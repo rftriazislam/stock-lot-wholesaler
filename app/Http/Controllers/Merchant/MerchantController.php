@@ -164,6 +164,7 @@ class MerchantController extends Controller
 
 
 
+
         foreach ($request->color as $c) {
             $col[] = array('color' => $c);
         }

@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -303,15 +303,29 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="discount">Product
-                                        Discount
-                                        <sup class="required" style="color: red">
-                                            %</sup>
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="discount1">Minimum
+                                        Retail Price
+
+                                        <sup class="required" style="color: red">{{ Auth::user()->currency }}
+                                        </sup>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="discount" required="required" min="0"
-                                            value="{{ $product->discount }}" name="discount" class="form-control "
-                                            placeholder="1%">
+                                        <input type="number" id="discount1" required="required" min="1"
+                                            name="min_retail_price" value="{{ $product->min_retail_price }}"
+                                            class="form-control " placeholder="8500">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="discount2">Maximum
+                                        Retail Price
+
+                                        <sup class="required" style="color: red">{{ Auth::user()->currency }}
+                                        </sup>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="number" id="discount2" required="required" min="1"
+                                            name="max_retail_price" value="{{ $product->max_retail_price }}"
+                                            class="form-control " placeholder="9990">
                                     </div>
                                 </div>
                                 <div class="item form-group">
