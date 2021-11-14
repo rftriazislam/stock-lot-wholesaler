@@ -118,12 +118,13 @@ class MerchantController extends Controller
             'mini_order' => 'required',
             'order_note' => 'nullable',
             'price' => 'required',
+            'min_retail_price' => 'required',
+            'max_retail_price' => 'required',
             'files.*' => 'required|image|mimes:jpeg,jpg,png,webp',
             'video_link' => 'nullable',
             'main_picture' => 'required|image|mimes:jpeg,jpg,png,webp',
             'status' => 'required',
-            'service_charge' => 'required'
-
+            'service_charge' => 'required',
         ]);
 
         if ($files = $request->file('files')) {
@@ -139,8 +140,6 @@ class MerchantController extends Controller
                     'extension' => $extension,
                     'image' => $imagename
                 );
-
-
                 // }
             }
             $validate['files'] =  $images;
@@ -171,7 +170,7 @@ class MerchantController extends Controller
         $validate['color'] =  $col;
         // dd($validate);
         $validate['user_id'] = Auth::user()->id;
-
+        $validate['slug'] =  str_replace(' ', '-', $request->product_name);
 
         $product_save = MerchantProduct::create($validate);
 

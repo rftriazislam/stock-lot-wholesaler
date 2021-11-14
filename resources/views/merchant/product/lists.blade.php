@@ -47,6 +47,9 @@
                                 <th class="column-title">Mini Order</th>
                                 <th class="column-title">Order Note</th>
                                 <th class="column-title">Price</th>
+                                <th class="column-title">S.charge</th>
+                                <th class="column-title">Min.Retail Price</th>
+                                <th class="column-title">Max.Retail Price</th>
                                 <th class="column-title">Image</th>
                                 <th class="column-title">Video Link</th>
                                 <th class="column-title">Status </th>
@@ -86,6 +89,9 @@
                                     <td class=" ">{{ $item->mini_order }}</td>
                                     <td class=" ">{{ $item->order_note }}</td>
                                     <td class=" ">{{ $item->price }}</td>
+                                    <td class=" ">{{ $item->service_charge }}</td>
+                                    <td class=" ">{{ $item->min_retail_price }}</td>
+                                    <td class=" ">{{ $item->max_retail_price }}</td>
                                     <td class=" "><a href="">Image </a></td>
                                     <td class=" ">{{ $item->video_link }}</td>
                                     <td class=" ">

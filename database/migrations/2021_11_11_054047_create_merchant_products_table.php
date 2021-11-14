@@ -19,6 +19,7 @@ class CreateMerchantProductsTable extends Migration
             $table->integer('category_id');
             $table->integer('subcategory_id');
             $table->string('product_name');
+            $table->string('slug');
             $table->string('product_id', 20);
             $table->text('description');
             $table->string('size', 50);
@@ -32,7 +33,11 @@ class CreateMerchantProductsTable extends Migration
             $table->string('video_link')->nullable();
             $table->double('price', 16, 3);
             $table->double('service_charge', 16, 3);
-
+            $table->double('min_retail_price', 16, 3)->default(0.0);
+            $table->double('max_retail_price', 16, 3)->default(0.0);
+            $table->integer('sell_count')->default(0);
+            $table->integer('views')->default(0);
+            $table->tinyInteger('offline')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
 
     </style>
 @endsection
@@ -300,6 +300,18 @@
                                             value="{{ $product->service_charge }} {{ Auth::user()->currency }}">
                                         <input type="hidden" id="prsice2" required="required" name="service_charge"
                                             value="{{ $product->service_charge }}" class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="discount">Product
+                                        Discount
+                                        <sup class="required" style="color: red">
+                                            %</sup>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="number" id="discount" required="required" min="0"
+                                            value="{{ $product->discount }}" name="discount" class="form-control "
+                                            placeholder="1%">
                                     </div>
                                 </div>
                                 <div class="item form-group">

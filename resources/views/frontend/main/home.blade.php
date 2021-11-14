@@ -523,9 +523,13 @@
                                                         <option value="2">5</option>
                                                     </select><span>02</span>
                                                 </div> --}}
-                                                <p class="ps-product__price sale">{{ $subitem->price }} <del>00.00
-                                                    </del></p>
+                                                <p class="ps-product__price sale">
+                                                    {{ $subitem->price + $subitem->service_charge }}
+                                                    {{-- <del>00.00
+                                                    </del> --}}
+                                                </p>
                                             </div>
+
                                             <div class="ps-product__content hover"><a class="ps-product__title"
                                                     href="product-default.html">Anderson Composites – Custom Hood</a>
                                                 <p class="ps-product__price sale">{{ $subitem->price }} <del>00.00
@@ -533,6 +537,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                 @endforeach
 
                             </div>
@@ -546,6 +552,6 @@
             </div>
         </div>
     </div>
-
+    @include('frontend.include.quickview')
 
 @endsection

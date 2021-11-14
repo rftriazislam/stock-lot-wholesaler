@@ -27,6 +27,12 @@ class MerchantProduct extends Model
         'video_link',
         'main_picture',
         'service_charge',
+        'slug',
+        'min_retail_price',
+        'max_retail_price',
+        'sell_count',
+        'views',
+        'offline',
         'status',
     ];
     protected $casts = [
