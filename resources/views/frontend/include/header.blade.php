@@ -138,7 +138,7 @@
           </div>
       </div>
   </header>
-  <header class="header header--mobile" data-sticky="true">
+  <header class="header header--mobile" data-sticky="true" style="background: #08dcd3">
       <div class="header__top">
           <div class="header__left">
               <p>Welcome to Martfury Online Shopping Store !</p>
@@ -271,7 +271,7 @@
                       </div>
                   </li>
               @endforeach
-              <li><a href="#">Vouchers &amp; Services</a>
+              <li><a href="#">Contact</a>
               </li>
 
           </ul>

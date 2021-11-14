@@ -495,7 +495,8 @@
 
                                 @foreach ($item->cateproduct as $subitem)
                                     <div class="ps-product">
-                                        <div class="ps-product__thumbnail"><a href="product-default.html"><img
+                                        <div class="ps-product__thumbnail"><a
+                                                href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}"><img
                                                     src="{{ asset('storage') }}/merchant/product/main/small/{{ $subitem->main_picture }}"
                                                     alt="" /></a>
                                             <ul class="ps-product__actions">
@@ -525,14 +526,15 @@
                                                 </div> --}}
                                                 <p class="ps-product__price sale">
                                                     {{ $subitem->price + $subitem->service_charge }}
-                                                    {{-- <del>00.00
-                                                    </del> --}}
+                                                    <del>{{ $subitem->min_retail_price }}
+                                                    </del>
                                                 </p>
                                             </div>
 
                                             <div class="ps-product__content hover"><a class="ps-product__title"
                                                     href="product-default.html">Anderson Composites – Custom Hood</a>
-                                                <p class="ps-product__price sale">{{ $subitem->price }} <del>00.00
+                                                <p class="ps-product__price sale">
+                                                    {{ $subitem->price }}<del>{{ $subitem->min_retail_price }}
                                                     </del></p>
                                             </div>
                                         </div>
@@ -553,5 +555,6 @@
         </div>
     </div>
     {{-- @include('frontend.include.quickview') --}}
+
 
 @endsection

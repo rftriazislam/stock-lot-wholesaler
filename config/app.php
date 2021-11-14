@@ -230,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'HelpCat' => App\Help\Category::class,
+        'Hel' => App\Help\Helper::class,
 
 
     ],

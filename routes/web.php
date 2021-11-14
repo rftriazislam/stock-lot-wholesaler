@@ -39,6 +39,7 @@ Route::get('/home', [FrontendController::class, 'index']);
 Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 
+Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_view'])->name('product.view');
 
 
 
