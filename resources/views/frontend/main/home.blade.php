@@ -552,6 +552,6 @@
             </div>
         </div>
     </div>
-    @include('frontend.include.quickview')
+    {{-- @include('frontend.include.quickview') --}}
 
 @endsection
