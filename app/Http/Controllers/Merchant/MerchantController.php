@@ -112,16 +112,16 @@ class MerchantController extends Controller
             'product_name' => 'required',
             'product_id' => 'required',
             'description' => 'required',
-            'size.*' => 'required',
+            'size.*' => 'nullable',
             'unit' => 'required',
-            'color.*' => 'required',
+            'color.*' => 'nullable',
             'stock' => 'required',
             'mini_order' => 'required',
             'order_note' => 'nullable',
             'price' => 'required',
             'min_retail_price' => 'required',
             'max_retail_price' => 'required',
-            'files.*' => 'required|image|mimes:jpeg,jpg,png,webp',
+            'files.*' => 'nullable|image|mimes:jpeg,jpg,png,webp',
             'video_link' => 'nullable',
             'main_picture' => 'required|image|mimes:jpeg,jpg,png,webp',
             'status' => 'required',
@@ -130,6 +130,7 @@ class MerchantController extends Controller
 
         if ($files = $request->file('files')) {
             $count = 0;
+            $images = [];
             foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $count = $count + 1;
@@ -162,20 +163,26 @@ class MerchantController extends Controller
 
             $validate['main_picture'] = $imagename;
         }
-
-        foreach ($request->color as $c) {
-            if ($c && $c != '#5367ce') {
-                $col[] = array('color' => $c);
+        if ($request->color) {
+            $col = [];
+            foreach ($request->color as $c) {
+                if ($c && $c != '#5367ce') {
+                    $col[] = array('color' => $c);
+                }
             }
+            $validate['color'] =  $col;
         }
-        foreach ($request->size as $s) {
-            if ($s) {
-                $size[] = array('size' => $s);
-            }
-        }
-        $validate['size'] =  $size;
 
-        $validate['color'] =  $col;
+
+        if ($request->size) {
+            $size = [];
+            foreach ($request->size as $s) {
+                if ($s) {
+                    $size[] = array('size' => $s);
+                }
+            }
+            $validate['size'] =  $size;
+        }
         // dd($validate);
         $validate['user_id'] = Auth::user()->id;
         $validate['slug'] =  str_replace(' ', '-', $request->product_name);

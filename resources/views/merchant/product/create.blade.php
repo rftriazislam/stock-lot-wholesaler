@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -162,7 +162,7 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment3">
                                             <input type="text" name="size[]" id="cor3" class=" demo3 form-control" multiple
-                                                placeholder="XL,L,ML,M,L,S,1000" required>
+                                                placeholder="XL,L,ML,M,L,S,1000">
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_color3" type="button"><i
@@ -228,7 +228,7 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment2">
                                             <input type="text" name="color[]" id="cor" class=" demo1 form-control" multiple
-                                                value="#5367ce" required>
+                                                value="#5367ce">
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_color" type="button"><i
@@ -241,7 +241,7 @@
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
                                                 <input type="text" name="color[]" id="cor2" class=" form-control" multiple
-                                                    required value="#5367ce">
+                                                    value="#5367ce">
                                                 <div class="input-group-btn">
                                                     <button id="button" class="btn btn-danger btn_danger" type="button"><i
                                                             class="fldemo glyphicon glyphicon-remove"></i>
@@ -363,7 +363,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment">
-                                            <input type="file" name="files[]" class="myfrm form-control" multiple required>
+                                            <input type="file" name="files[]" class="myfrm form-control" multiple>
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_success" type="button"><i
@@ -443,7 +443,6 @@
         $('.demo1').mouseenter(function() {
             $('#color').css('background', $(this).val());
         })
-
 
         $(document).ready(function() {
             $(".btn_success").click(function() {
