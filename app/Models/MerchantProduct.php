@@ -38,6 +38,7 @@ class MerchantProduct extends Model
     protected $casts = [
         'files' => 'array',
         'color' => 'array',
+        'size' => 'array',
     ];
     public function category()
     {

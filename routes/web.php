@@ -40,7 +40,8 @@ Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 
 
 
 Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_view'])->name('product.view');
-
+Route::get('/product-lists-{sid}', [FrontendController::class, 'product_list_subcategory'])->name('product.list.subcategory');
+Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_category'])->name('product.list.category');
 
 
 

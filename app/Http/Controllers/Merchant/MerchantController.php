@@ -105,13 +105,14 @@ class MerchantController extends Controller
     }
     public function save_product(Request $request)
     {
+
         $validate = $this->validate($request, [
             'category_id' => 'required|exists:categories,id',
             'subcategory_id' => 'required|exists:subcategories,id',
             'product_name' => 'required',
             'product_id' => 'required',
             'description' => 'required',
-            'size' => 'required',
+            'size.*' => 'required',
             'unit' => 'required',
             'color.*' => 'required',
             'stock' => 'required',
@@ -132,7 +133,7 @@ class MerchantController extends Controller
             foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $count = $count + 1;
-                $imagename = Auth::user()->id . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $imagename = uniqid() . '.' . $file->getClientOriginalExtension();
                 $destinationPath = public_path('/storage/merchant/product/files');
                 $file->move($destinationPath, $imagename);
                 $images[] = array(
@@ -147,7 +148,7 @@ class MerchantController extends Controller
         if ($request->file('main_picture')) {
             $image = $request->file('main_picture');
             $image2 = $request->file('main_picture');
-            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $imagename =  str_replace(' ', '-', $request->product_id) . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/storage/merchant/product/main/big/');
             $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
 
@@ -162,12 +163,18 @@ class MerchantController extends Controller
             $validate['main_picture'] = $imagename;
         }
 
-
-
-
         foreach ($request->color as $c) {
-            $col[] = array('color' => $c);
+            if ($c && $c != '#5367ce') {
+                $col[] = array('color' => $c);
+            }
         }
+        foreach ($request->size as $s) {
+            if ($s) {
+                $size[] = array('size' => $s);
+            }
+        }
+        $validate['size'] =  $size;
+
         $validate['color'] =  $col;
         // dd($validate);
         $validate['user_id'] = Auth::user()->id;

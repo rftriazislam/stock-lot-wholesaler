@@ -35,7 +35,7 @@
       <div class="header__content">
           <div class="container">
               <div class="header__content-left"><a class="ps-logo" href="index.html"><img
-                          src="{{ asset('frontend') }}/img/logo_light.png" alt=""></a>
+                          src="{{ asset('frontend') }}/img/logo/2h.png" alt=""></a>
                   <div class="menu--product-categories">
                       <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Department</span></div>
                       <div class="menu__content">
@@ -43,13 +43,15 @@
                               @foreach (HelpCat::category_list() as $item)
 
                                   <li class="menu-item-has-children has-mega-menu">
-                                      <a href="#">{{ $item->name }}</a>
+                                      <a
+                                          href="{{ route('product.list.category', [$item->id]) }}">{{ $item->name }}</a>
                                       <div class="mega-menu" style="width: 200px; min-width: 0;">
                                           <div class="mega-menu__column">
 
                                               <ul class="mega-menu__list" style="width: 200px;">
                                                   @forelse ($item->subcategory as $subcate)
-                                                      <li><a href="#">{{ $subcate->name }}</a>
+                                                      <li><a
+                                                              href="{{ route('product.list.subcategory', [$subcate->id]) }}">{{ $subcate->name }}</a>
                                                       </li>
                                                   @empty
                                                       <li><a>No subcategory</a>
@@ -171,7 +173,7 @@
       </div>
       <div class="navigation--mobile">
           <div class="navigation__left"><a class="ps-logo" href="index.html"><img
-                      src="{{ asset('frontend') }}/img/logo_light.png" alt=""></a></div>
+                      src="{{ asset('frontend') }}/img/logo/2h.png" alt=""></a></div>
           <div class="navigation__right">
               <div class="header__actions">
                   <div class="ps-cart--mini"><a class="header__extra" href="#"><i
@@ -255,14 +257,16 @@
 
               @foreach (HelpCat::category_list() as $item)
 
-                  <li class="menu-item-has-children has-mega-menu"><a href="#">{{ $item->name }}</a><span
+                  <li class="menu-item-has-children has-mega-menu"><a
+                          href="{{ route('product.list.category', [$item->id]) }}">{{ $item->name }}</a><span
                           class="sub-toggle"></span>
                       <div class="mega-menu">
                           <div class="mega-menu__column">
 
 
                               @forelse ($item->subcategory as $subcate)
-                                  <h4><a href="#">{{ $subcate->name }} </a> </h4>
+                                  <h4><a href="{{ route('product.list.subcategory', [$subcate->id]) }}">{{ $subcate->name }}
+                                      </a> </h4>
                               @empty
                                   <h4> No subcategory</h4>
                               @endforelse

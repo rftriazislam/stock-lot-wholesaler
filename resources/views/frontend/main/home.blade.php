@@ -474,9 +474,11 @@
 
                                     @if ($subitem->merchantproduct_count && $i < 8)
                                         <div @if ($i == 7) class="ps-block__item hidee" @else class="ps-block__item"  @endif><a class="ps-block__overlay"
-                                                href="shop-default.html"></a>
+                                                href="{{ route('product.list.subcategory', [$subitem->id]) }}"></a>
+
                                             <img src="{{ asset('storage') }}/subcategory/{{ $subitem->image }}"
                                                 alt="">
+
                                             <p>{{ $subitem->name }} </p><span>Item
                                                 {{ $subitem->merchantproduct_count }}</span>
                                         </div>
@@ -507,8 +509,7 @@
                                                 </li>
                                                 <li><a href="#" data-toggle="tooltip" data-placement="top"
                                                         title="Add to Whishlist"><i class="icon-heart"></i></a></li>
-                                                <li><a href="#" data-toggle="tooltip" data-placement="top"
-                                                        title="Compare"><i class="icon-chart-bars"></i></a></li>
+
                                             </ul>
                                         </div>
                                         <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>

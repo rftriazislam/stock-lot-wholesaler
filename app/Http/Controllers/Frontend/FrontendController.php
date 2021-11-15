@@ -31,4 +31,29 @@ class FrontendController extends Controller
             return back();
         }
     }
+
+    public function product_list_subcategory($id)
+    {
+        $products = MerchantProduct::where('subcategory_id', $id)->where('status', 2)->get();
+
+        if ($products) {
+
+            return view('frontend.product.lists', compact('products'));
+        } else {
+            $products = 0;
+            return view('frontend.product.lists', compact('products'));
+        }
+    }
+    public function product_list_category($id)
+    {
+        $products = MerchantProduct::where('category_id', $id)->where('status', 2)->get();
+
+        if ($products) {
+
+            return view('frontend.product.lists', compact('products'));
+        } else {
+            $products = 0;
+            return view('frontend.product.lists', compact('products'));
+        }
+    }
 }

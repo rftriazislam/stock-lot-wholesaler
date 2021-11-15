@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -151,15 +151,41 @@
                                 <h5 style="text-align: center;padding-top: 9px">Product Size & Color</h5>
                                 <hr>
 
+
+
+
                                 <div class="item form-group">
-                                    <label class="col-form-label  btn col-md-3 col-sm-3 label-align" for="size">Size
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="cor3">Product
+                                        Size
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="size" name="size" required="required"
-                                            placeholder="XL,L,ML,M,L,S,1000" class="form-control image file pb-34 ">
+                                        <div class="input-group hdtuto control-group lst increment3">
+                                            <input type="text" name="size[]" id="cor3" class=" demo3 form-control" multiple
+                                                placeholder="XL,L,ML,M,L,S,1000" required>
+
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-success btn_color3" type="button"><i
+                                                        class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clone3 hide" style="display:none">
+                                            <div class="hdtuto control-group lst input-group" id="remove"
+                                                style="margin-top:10px">
+                                                <input type="text" name="size[]" id="cor4" class=" form-control" multiple>
+                                                <div class="input-group-btn">
+                                                    <button id="button" class="btn btn-danger btn_danger3" type="button"><i
+                                                            class="fldemo glyphicon glyphicon-remove"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+
                                 <div class="form-group item">
                                     <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="unit">Unit
 
@@ -175,7 +201,11 @@
                                             <option value="GM">GM</option>
                                             <option value="ML">ML</option>
                                             <option value="INCH">INCH</option>
-
+                                            <option value="BOX">BOX</option>
+                                            <option value="DOZEN">DOZEN</option>
+                                            <option value="SET">SET</option>
+                                            <option value="PAIRS">PAIRS</option>
+                                            <option value="OTHERS">OTHERS</option>
                                         </select>
                                     </div>
                                 </div>
@@ -423,9 +453,11 @@
             $("body").on("click", ".btn-danger", function() {
                 $(this).parents("#remove").remove();
             });
+
         });
 
         $(document).ready(function() {
+            //--------------------------------------------color---------------
             $(".btn_color").click(function() {
                 var color = $('#cor').val();
                 $('#cor2').val(color);
@@ -438,9 +470,31 @@
 
 
             });
+
+
             $("body").on("click", ".btn_danger", function() {
                 $(this).parents("#remove").remove();
             });
+            //--------------------------------------------color---------------
+        });
+
+        $(document).ready(function() {
+            //--------------------------------------------size---------------
+            $(".btn_color3").click(function() {
+                var lsthmtl = $(".clone3").html();
+                $(".increment3").after(lsthmtl);
+
+            });
+
+
+            $("body").on("click", ".btn_danger3", function() {
+                $(this).parents("#remove").remove();
+            });
+        });
+
+        $(document).ready(function() {
+            //--------------------------------------------size---------------
+
             $("#price").keyup(function() {
                 var value = $('#price').val();
 
@@ -448,6 +502,7 @@
                 $('#prsice').val(p);
                 $('#prsice2').val(p);
             });
+
         });
 
 
