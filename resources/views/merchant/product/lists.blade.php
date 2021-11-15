@@ -75,7 +75,11 @@
                                     <td class=" ">{{ $item->product_name }}</td>
                                     <td class=" ">{{ $item->product_id }}</td>
                                     <td class=" ">{{ $item->description }}</td>
-                                    <td class=" ">#{{ $item->size }}</td>
+                                    <td class=" ">
+                                        @foreach ($item->size as $s)
+                                            <p> {{ $s }}</p>
+                                        @endforeach
+                                    </td>
                                     <td class=" ">{{ $item->unit }}</td>
                                     <td class=" ">
                                         @foreach ($item->color as $i)
