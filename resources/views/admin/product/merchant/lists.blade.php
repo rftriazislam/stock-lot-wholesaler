@@ -71,8 +71,16 @@
                                             class="success fa fa-long-arrow-up"></i></td>
                                     <td class=" ">{{ $item->product_name }}</td>
                                     <td class=" ">{{ $item->product_id }}</td>
-                                    <td class=" ">{{ $item->description }}</td>
-                                    <td class=" ">#{{ $item->size }}</td>
+                                    <td class=" ">{{ substr($item->description, 0, 28) }}</td>
+                                    <td class=" ">
+                                        @if ($item->size)
+                                            @foreach ($item->size as $s)
+                                                <p> {{ $s['size'] }}</p>
+                                            @endforeach
+                                        @else
+                                            <p>NULL</p>
+                                        @endif
+                                    </td>
                                     <td class=" ">{{ $item->unit }}</td>
                                     <td class=" ">
                                         @foreach ($item->color as $i)
@@ -84,7 +92,7 @@
                                     </td>
                                     <td class=" ">{{ $item->stock }}</td>
                                     <td class=" ">{{ $item->mini_order }}</td>
-                                    <td class=" ">{{ $item->order_note }}</td>
+                                    <td class=" ">{{ substr($item->order_note, 0, 28) }}</td>
                                     <td class=" ">{{ $item->price }}</td>
                                     <td class=" "><a href="">Image </a></td>
                                     <td class=" ">{{ $item->video_link }}</td>
