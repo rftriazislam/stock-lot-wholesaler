@@ -22,13 +22,13 @@ class CreateMerchantProductsTable extends Migration
             $table->string('slug');
             $table->string('product_id', 20);
             $table->text('description');
-            $table->string('size', 50);
+            $table->string('size', 50)->nullable();
             $table->string('unit');
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->string('stock');
             $table->string('mini_order');
             $table->text('order_note')->nullable();
-            $table->string('files');
+            $table->string('files')->nullable();
             $table->string('main_picture');
             $table->string('video_link')->nullable();
             $table->double('price', 16, 3);
