@@ -74,11 +74,16 @@
                                             class="success fa fa-long-arrow-up"></i></td>
                                     <td class=" ">{{ $item->product_name }}</td>
                                     <td class=" ">{{ $item->product_id }}</td>
-                                    <td class=" ">{{ $item->description }}</td>
+                                    <td class=" ">{{ substr($item->description, 0, 28) }}
+                                    </td>
                                     <td class=" ">
-                                        @foreach ($item->size as $s)
-                                            <p> {{ $s }}</p>
-                                        @endforeach
+                                        @if ($item->size)
+                                            @foreach ($item->size as $s)
+                                                <p> {{ $s['size'] }}</p>
+                                            @endforeach
+                                        @else
+                                            <p>NULL</p>
+                                        @endif
                                     </td>
                                     <td class=" ">{{ $item->unit }}</td>
                                     <td class=" ">
