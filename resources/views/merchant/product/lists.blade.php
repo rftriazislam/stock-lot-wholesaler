@@ -96,7 +96,7 @@
                                     </td>
                                     <td class=" ">{{ $item->stock }}</td>
                                     <td class=" ">{{ $item->mini_order }}</td>
-                                    <td class=" ">{{ $item->order_note }}</td>
+                                    <td class=" ">{{ substr($item->order_note, 0, 28) }}</td>
                                     <td class=" ">{{ $item->price }}</td>
                                     <td class=" ">{{ $item->service_charge }}</td>
                                     <td class=" ">{{ $item->min_retail_price }}</td>
