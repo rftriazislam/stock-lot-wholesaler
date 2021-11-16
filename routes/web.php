@@ -44,6 +44,7 @@ Route::get('/product-lists-{sid}', [FrontendController::class, 'product_list_sub
 Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_category'])->name('product.list.category');
 
 
+Route::get('/shop-view-{id}', [FrontendController::class, 'shop_view'])->name('shop.view');
 
 
 //------------------------------------------------------------Admin----------------------------------------------------------------------------------
@@ -116,6 +117,10 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
     Route::get('/dashboard/merchant/product/status/{id}', [MerchantController::class, 'status_product'])->name('merchant.status.product');
     Route::get('/dashboard/merchant/product/delete/{id}', [MerchantController::class, 'delete_product'])->name('merchant.delete.product');
     Route::get('/dashboard/merchant/product/edit/{id}', [MerchantController::class, 'edit_product'])->name('merchant.edit.product');
+    Route::post('/dashboard/merchant/product/update', [MerchantController::class, 'update_product'])->name('merchant.product.update');
+
+
+
 
     Route::get('/dashboard/merchant/payment/method/add', [MerchantController::class, 'payment_method_add'])->name('merchant.payment.method.add');
     Route::post('/dashboard/merchant/payment/method/save', [MerchantController::class, 'save_payment_method'])->name('merchant.payment.method.save');

@@ -16,6 +16,10 @@
             font-size: 35px;
         }
 
+        .zoom:hover {
+            transform: scale(1.05);
+        }
+
     </style>
 @endsection
 
@@ -473,11 +477,13 @@
                                 @foreach ($item->subcategory as $subitem)
 
                                     @if ($subitem->merchantproduct_count && $i < 8)
-                                        <div @if ($i == 7) class="ps-block__item hidee" @else class="ps-block__item"  @endif><a class="ps-block__overlay"
+                                        <div @if ($i == 7) class="ps-block__item hidee zoom" @else class="ps-block__item zoom"  @endif
+                                            style="position: relative;padding:3px;border: 1px solid transparent; box-shadow: 0 0 5px rgb(0 0 0 / 15%);">
+                                            <a class="ps-block__overlay "
                                                 href="{{ route('product.list.subcategory', [$subitem->id]) }}"></a>
 
-                                            <img src="{{ asset('storage') }}/subcategory/{{ $subitem->image }}"
-                                                alt="">
+                                            <img style="max-height:225px"
+                                                src="{{ asset('storage') }}/subcategory/{{ $subitem->image }}" alt="">
 
                                             <p>{{ $subitem->name }} </p><span>Item
                                                 {{ $subitem->merchantproduct_count }}</span>
@@ -499,6 +505,7 @@
                                     <div class="ps-product">
                                         <div class="ps-product__thumbnail"><a
                                                 href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}"><img
+                                                    class="zoomm"
                                                     src="{{ asset('storage') }}/merchant/product/main/small/{{ $subitem->main_picture }}"
                                                     alt="" /></a>
                                             <ul class="ps-product__actions">
@@ -513,10 +520,10 @@
                                             </ul>
                                         </div>
                                         <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>
-                                            <div class="ps-product__content"><a class="ps-product__title"
+                                            <div class="ps-product_g_content"><a class="ps-product__title"
                                                     href="product-default.html">{{ $subitem->product_name }}
                                                 </a>
-                                                {{-- <div class="ps-product__rating">
+                                                <div class="ps-product__rating">
                                                     <select class="ps-rating" data-read-only="true">
                                                         <option value="1">1</option>
                                                         <option value="1">2</option>
@@ -524,19 +531,12 @@
                                                         <option value="1">4</option>
                                                         <option value="2">5</option>
                                                     </select><span>02</span>
-                                                </div> --}}
+                                                </div>
                                                 <p class="ps-product__price sale">
                                                     {{ $subitem->price + $subitem->service_charge }}
                                                     <del>{{ $subitem->min_retail_price }}
                                                     </del>
                                                 </p>
-                                            </div>
-
-                                            <div class="ps-product__content hover"><a class="ps-product__title"
-                                                    href="product-default.html">Anderson Composites – Custom Hood</a>
-                                                <p class="ps-product__price sale">
-                                                    {{ $subitem->price }}<del>{{ $subitem->min_retail_price }}
-                                                    </del></p>
                                             </div>
                                         </div>
                                     </div>

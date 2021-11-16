@@ -112,7 +112,7 @@
                         <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }} BDT
                         </h4>
                         <div class="ps-product__desc">
-                            <p>Sold By:<a href="shop-default.html"><strong>
+                            <p>Sold By:<a href="{{ route('shop.view', [$single_product->user_id]) }}"><strong>
                                         {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
                             <ul class="ps-list--dot">
                                 <li>{{ $single_product->order_note }}</li>

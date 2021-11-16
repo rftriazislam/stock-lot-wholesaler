@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -62,15 +62,15 @@
                         @endif
 
                         <br />
-                        <form id="demo-form2" action=" " method="POST" data-parsley-validate
-                            class="form-horizontal form-label-left" enctype="multipart/form-data">
+                        <form id="demo-form2" action="{{ route('merchant.product.update') }}" method="POST"
+                            data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                             @csrf
 
                             <div class="borderr">
                                 <h5 style="text-align: center;padding-top: 9px">Select Category & SubCategory</h5>
                                 <hr>
                                 <div class="form-group item">
-
+                                    <input type="hidden" value="{{ $product->id }}" name="p_id">
                                     <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="category">Category
                                         Name
                                         <span class="required">*</span>
@@ -154,16 +154,54 @@
                                 <h5 style="text-align: center;padding-top: 9px">Product Size & Color</h5>
                                 <hr>
 
+
                                 <div class="item form-group">
-                                    <label class="col-form-label  btn col-md-3 col-sm-3 label-align" for="size">Size
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="cor3">Product
+                                        Size
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="size" name="size" required="required"
-                                            placeholder="XL,L,ML,M,L,S,1000" value="{{ $product->size }}"
-                                            class="form-control image file pb-34 ">
+                                        <div class="input-group hdtuto control-group lst increment3">
+                                            <input type="text" name="sizee[]" id="cor3" class=" demo3 form-control" multiple
+                                                placeholder="XL,L,ML,M,L,S,1000">
+
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-success btn_color3" type="button"><i
+                                                        class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                            </div>
+                                        </div>
+                                        @foreach ($product->size as $item)
+
+                                            <div class="hdtuto control-group lst input-group" id="remove"
+                                                style="margin-top:10px">
+
+                                                <input type="text" name="sizee[]" id="cor3" value="{{ $item['size'] }}"
+                                                    class=" demo3 form-control" multiple placeholder="XL,L,ML,M,L,S,1000">
+
+                                                <div class="input-group-btn">
+                                                    <button id="button" class="btn btn-danger btn_danger3" type="button"><i
+                                                            class="fldemo glyphicon glyphicon-remove"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        <div class="clone3 hide" style="display:none">
+                                            <div class="hdtuto control-group lst input-group" id="remove"
+                                                style="margin-top:10px">
+                                                <input type="text" name="sizee[]" id="cor4" class=" form-control" multiple>
+                                                <div class="input-group-btn">
+                                                    <button id="button" class="btn btn-danger btn_danger3" type="button"><i
+                                                            class="fldemo glyphicon glyphicon-remove"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+
+
                                 <div class="form-group item">
                                     <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="unit">Unit
 
@@ -201,19 +239,20 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment2">
-                                            <input type="text" name="color[]" id="cor" class=" demo1 form-control"
-                                                value="white" multiple>
+                                            <input type="text" name="colorr[]" id="cor" class=" demo1 form-control"
+                                                multiple>
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_color" type="button"><i
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
+
                                         @foreach ($product->color as $item)
 
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
-                                                <input type="text" name="color[]" class=" form-control" multiple required
+                                                <input type="text" name="colorr[]" class=" form-control" multiple
                                                     value="{{ $item['color'] }}"
                                                     style="background: {{ $item['color'] }}">
                                                 <div class="input-group-btn">
@@ -226,8 +265,8 @@
                                         <div class="clone2 hide" style="display:none">
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
-                                                <input type="text" name="color[]" id="cor2" class=" form-control" multiple
-                                                    required value="#5367ce">
+                                                <input type="text" name="colorr[]" id="cor2" class=" form-control"
+                                                    multiple>
                                                 <div class="input-group-btn">
                                                     <button id="button" class="btn btn-danger btn_danger" type="button"><i
                                                             class="fldemo glyphicon glyphicon-remove"></i>
@@ -250,7 +289,8 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="mini_order">Minimum
+                                    <label class="col-form-label btn col-md-3 col-sm-3 label-align"
+                                        for="mini_order">Minimum
                                         Orders
 
                                         <span class="required">*</span>
@@ -335,8 +375,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group ">
-                                            <input type="file" name="main_picture" class=" form-control" multiple
-                                                required>
+                                            <input type="file" name="main_picturee" class=" form-control" multiple>
 
 
                                         </div>
@@ -354,17 +393,38 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment">
-                                            <input type="file" name="files[]" class="myfrm form-control" multiple required>
+                                            <input type="file" name="filess[]" class="myfrm form-control" multiple>
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_success" type="button"><i
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
+
+                                        @foreach ($product->files as $item)
+
+                                            <div class="hdtuto control-group lst input-group" id="remove"
+                                                style="margin-top:10px">
+                                                <img src="{{ asset('public/storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                    style="height: 40px;width:40px">
+                                                <input type="text" name="oldfiles[]" class="myfrm form-control"
+                                                    value="{{ $item['image'] }}" readonly multiple>
+                                                <div class="input-group-btn">
+                                                    <button id="button" class="btn btn-danger " type="button"><i
+                                                            class="fldemo glyphicon glyphicon-remove"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+
+                                        @endforeach
+
+
+
+
                                         <div class="clone hide" style="display:none">
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
-                                                <input type="file" name="files[]" class="myfrm form-control">
+                                                <input type="file" name="filess[]" class="myfrm form-control">
                                                 <div class="input-group-btn">
                                                     <button id="button" class="btn btn-danger" type="button"><i
                                                             class="fldemo glyphicon glyphicon-remove"></i>
@@ -373,11 +433,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @foreach ($product->files as $item)
+                                    {{-- @foreach ($product->files as $item)
 
-                                        <img src="{{ asset('public/storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                        <img src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
                                             style="height: 40px;width:40px">
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
 
                                 <div class="item form-group">
@@ -393,7 +453,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group item">
+                                {{-- <div class="form-group item">
                                     <label class="col-form-label btn col-md-3 col-sm-3 label-align" for="status">Status
 
                                         <span class="required">*</span>
@@ -407,7 +467,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
                             </div>
@@ -452,6 +512,22 @@
                 $(this).parents("#remove").remove();
             });
         });
+
+
+        $(document).ready(function() {
+            //--------------------------------------------size---------------
+            $(".btn_color3").click(function() {
+                var lsthmtl = $(".clone3").html();
+                $(".increment3").after(lsthmtl);
+
+            });
+
+
+            $("body").on("click", ".btn_danger3", function() {
+                $(this).parents("#remove").remove();
+            });
+        });
+
 
         $(document).ready(function() {
             $(".btn_color").click(function() {

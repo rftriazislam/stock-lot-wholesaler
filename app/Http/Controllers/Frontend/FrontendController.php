@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\MerchantProduct;
+use App\Models\MerchantShop;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -55,5 +57,28 @@ class FrontendController extends Controller
             $products = 0;
             return view('frontend.product.lists', compact('products'));
         }
+    }
+
+    public function shop_view($id)
+    {
+
+        $shop = MerchantShop::with('marchantproduct')->where('user_id', $id)->first();
+        $sub = Subcategory::where('status', 1)->get();
+
+        foreach ($sub as $i) {
+            $product = MerchantProduct::where('subcategory_id', $i->id)->where('user_id', $id)->count();
+            if ($product) {
+                $miniproduct[] = array(
+                    'sid' => $i->id,
+                    'image' => $i->image,
+                    'name' => $i->name,
+                    'product' => $product
+                );
+            } else {
+                $miniproduct = [];
+            }
+        }
+
+        return view('frontend.shop.view', compact('shop', 'miniproduct'));
     }
 }

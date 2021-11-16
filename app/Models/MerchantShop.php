@@ -21,4 +21,9 @@ class MerchantShop extends Model
         'nid_back',
         'status'
     ];
+
+    public function marchantproduct()
+    {
+        return $this->hasMany('App\Models\MerchantProduct', 'user_id', 'user_id')->where('status', 2);
+    }
 }

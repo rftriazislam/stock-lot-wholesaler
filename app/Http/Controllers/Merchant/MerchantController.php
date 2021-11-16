@@ -235,6 +235,125 @@ class MerchantController extends Controller
         }
     }
 
+    public function update_product(Request $request)
+    {
+
+
+
+        // oldfiles
+
+
+
+        $product_id = $request->p_id;
+        $product = MerchantProduct::where('id', $product_id)->first();
+
+        if ($product) {
+            $product->update($request->all());
+
+            if ($request->colorr) {
+                $col = [];
+                foreach ($request->colorr as $c) {
+                    if ($c && $c != '#5367ce') {
+                        $col[] = array('color' => $c);
+                    }
+                }
+                $product->update(['color' => $col]);
+            }
+            if ($request->sizee) {
+                $size = [];
+                foreach ($request->sizee as $s) {
+                    if ($s) {
+                        $size[] = array('size' => $s);
+                    }
+                }
+                $product->update(['size' => $size]);
+            }
+
+            if ($request->file('main_picturee')) {
+                $image = $request->file('main_picturee');
+                $image2 = $request->file('main_picturee');
+                $imagename =  str_replace(' ', '-', $request->product_id) . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('/storage/merchant/product/main/big/');
+                $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
+
+                $resize_image = Image::make($image);
+                $resize_image->resize(1200, 1200);
+                $resize_image->save($destinationPath . $imagename);
+
+                $resize_image2 = Image::make($image2);
+                $resize_image2->resize(300, 300);
+                $resize_image2->save($destinationPath_2 . $imagename);
+
+                $product->update(['main_picture' => $imagename]);
+            }
+
+
+            if ($files = $request->file('filess')) {
+                $count = 0;
+                $images = [];
+                foreach ($files as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $count = $count + 1;
+                    $imagename = uniqid() . '.' . $file->getClientOriginalExtension();
+                    $destinationPath = public_path('/storage/merchant/product/files');
+                    $file->move($destinationPath, $imagename);
+                    $images[] = array(
+                        'id' => $count,
+                        'extension' => $extension,
+                        'image' => $imagename
+                    );
+                    // }
+                }
+                $images;
+
+                $imagesss = [];
+                if ($request->oldfiles) {
+                    foreach ($request->oldfiles  as $i) {
+                        foreach ($product->files  as $j) {
+                            if ($j['image'] == $i) {
+                                $imagesss[] = array(
+                                    'id' => $j['id'],
+                                    'extension' => $j['extension'],
+                                    'image' => $j['image']
+                                );
+                            }
+                        }
+                    }
+
+                    $output = array_merge($images, $imagesss);
+                } else {
+                    $output = $images;
+                }
+            } else {
+                $imagesss = [];
+                if ($request->oldfiles) {
+                    foreach ($request->oldfiles  as $i) {
+                        foreach ($product->files  as $j) {
+                            if ($j['image'] == $i) {
+                                $imagesss[] = array(
+                                    'id' => $j['id'],
+                                    'extension' => $j['extension'],
+                                    'image' => $j['image']
+                                );
+                            }
+                        }
+                    }
+
+                    $output =  $imagesss;
+                } else {
+                    $output = $product->files;
+                }
+            }
+
+            $product->update(['files' => $output]);
+        }
+
+        return back();
+    }
+
+
+
+
     public function payment_method_add()
     {
         return view('merchant.payment.create');

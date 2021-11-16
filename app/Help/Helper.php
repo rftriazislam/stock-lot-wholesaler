@@ -29,4 +29,15 @@ class Helper
             ->get();
         return $products;
     }
+
+    public static function discount_percent($p_id, $user_id)
+    {
+        $products = MerchantProduct::where('id', $p_id)
+            ->where('user_id', $user_id)
+            ->where('status', 2)
+            ->first();
+        $tage = (($products->price + $products->service_charge) * 100) / $products->min_retail_price;
+        $persentage = round((100 - $tage), 2);
+        return $persentage;
+    }
 }

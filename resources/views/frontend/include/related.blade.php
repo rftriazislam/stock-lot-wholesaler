@@ -11,7 +11,7 @@
              @foreach (Hel::subcategory_related($subcategory_id) as $item)
                  <div class="ps-product">
                      <div class="ps-product__thumbnail"><a
-                             href="{{ route('product.view', [$item->id, $item->slug]) }}"><img
+                             href="{{ route('product.view', [$item->id, $item->slug]) }}"><img class="zoomm"
                                  src="{{ asset('storage') }}/merchant/product/main/small/{{ $single_product->main_picture }}"
                                  alt=""></a>
                          <ul class="ps-product__actions">
@@ -25,7 +25,7 @@
                          </ul>
                      </div>
                      <div class="ps-product__container"><a class="ps-product__vendor" href="#">SHOP NAME</a>
-                         <div class="ps-product__content"><a class="ps-product__title" href="product-default.html">
+                         <div class="ps-product_g_content"><a class="ps-product__title" href="product-default.html">
                                  {{ $item->product_name }}</a>
                              <div class="ps-product__rating">
                                  <select class="ps-rating" data-read-only="true">
@@ -38,10 +38,7 @@
                              </div>
                              <p class="ps-product__price">{{ $item->price + $item->service_charge }}</p>
                          </div>
-                         <div class="ps-product__content hover"><a class="ps-product__title"
-                                 href="product-default.html"> {{ $item->product_name }}</a>
-                             <p class="ps-product__price">{{ $item->price + $item->service_charge }}</p>
-                         </div>
+
                      </div>
                  </div>
              @endforeach
