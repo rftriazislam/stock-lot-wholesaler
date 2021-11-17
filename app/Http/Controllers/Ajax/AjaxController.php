@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MerchantProduct;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Auth;
 
 class AjaxController extends Controller
 {
@@ -19,19 +21,74 @@ class AjaxController extends Controller
     public function add_to_cart(Request $request)
     {
 
+        $product_one = MerchantProduct::where('id', $request->product_id)->first();
+
+        // $product = session()->forget('cart')->first();
+        // exit();
         $cart = session()->get('cart', []);
 
-
-        $cart[$request->product_id] = [
-            "id" => $request->product_id,
-            "quantity" => $request->qty,
-            "details" => array(
+        $cart =  session()->get('cart');
+        $uid = uniqid();
+        if (empty($cart)) {
+            $cart[$uid] = [
+                'uid' => $uid,
+                "product_id" => $request->product_id,
+                'seller_id' => '1',
+                "vendor_id" => $product_one->user_id,
+                "quantity" => $request->qty,
                 'color' => $request->color,
                 'size' => $request->size,
-            ),
-        ];
+            ];
+        } else {
+            foreach ($cart as $p) {
+                if ($p['product_id'] == $request->product_id) {
+                    if ($request->color) {
+                        if ($p['color'] = $request->color) {
+                            $cart[$p['uid']] = [
+                                'uid' => $p['uid'],
+                                "product_id" => $p['product_id'],
+                                'seller_id' => '1',
+                                "vendor_id" => $p['vendor_id'],
+                                "quantity" => $p['quantity'] + $request->qty,
+                                'color' => $p['color'],
+                                'size' => $p['size'],
+                            ];
+                        } else {
+                            $cart[$uid] = [
+                                'uid' => $uid,
+                                "product_id" => $request->product_id,
+                                'seller_id' => '1',
+                                "vendor_id" => $product_one->user_id,
+                                "quantity" => $request->qty,
+                                'color' => $request->color,
+                                'size' => $request->size,
+                            ];
+                        }
+                    } else {
 
-
+                        $cart[$p['uid']] = [
+                            'uid' => $p['uid'],
+                            "product_id" => $p['product_id'],
+                            'seller_id' => '1',
+                            "vendor_id" => $p['vendor_id'],
+                            "quantity" => $p['quantity'] + $request->qty,
+                            'color' => $p['color'],
+                            'size' => $p['size'],
+                        ];
+                    }
+                } else {
+                    $cart[$uid] = [
+                        'uid' => $uid,
+                        "product_id" => $request->product_id,
+                        'seller_id' => '1',
+                        "vendor_id" => $product_one->user_id,
+                        "quantity" => $request->qty,
+                        'color' => $request->color,
+                        'size' => $request->size,
+                    ];
+                }
+            }
+        }
 
 
 
@@ -48,7 +105,7 @@ class AjaxController extends Controller
         // }
 
         session()->put('cart', $cart);
-        $cartt =  session()->get('cart');
-        return response()->json($cartt);
+        $cart =  session()->get('cart');
+        return response()->json($cart);
     }
 }

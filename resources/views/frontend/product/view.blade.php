@@ -366,6 +366,8 @@
                 var color = $('.color_r').attr('pc');
                 var qty = $('#price').val();
                 var product_id = $('#product_id').val();
+
+                // console.log(size, color, qty, product_id);
                 $.ajax({
 
                     url: "{{ route('add-to-cart') }}",
@@ -377,9 +379,14 @@
                         product_id: product_id,
                         _token: "{{ csrf_token() }}"
                     },
+
+                    dataType: "json",
                     success: function(res) {
                         console.log(res);
 
+                    },
+                    error: function(data) {
+                        alert("fail");
                     }
                 });
 
