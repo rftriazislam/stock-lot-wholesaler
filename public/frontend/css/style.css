@@ -242,6 +242,15 @@
 .masonry-wrapper[data-col-xs="10"] .grid-item.extra-large {
     width: 100%;
 }
+.size1 {
+    border-radius: 0%;
+    text-align: center;
+    padding-top: 4px;
+}
+.size2 {
+    border-radius: 50%;
+    background: #fcb800;
+}
 
 @media (min-width: 768px) {
     .masonry-wrapper[data-col-sm="1"] .grid-item,

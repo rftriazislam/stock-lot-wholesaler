@@ -15,4 +15,40 @@ class AjaxController extends Controller
             ->pluck("name", "id");
         return response()->json($subcategory);
     }
+
+    public function add_to_cart(Request $request)
+    {
+
+        $cart = session()->get('cart', []);
+
+
+        $cart[$request->product_id] = [
+            "id" => $request->product_id,
+            "quantity" => $request->qty,
+            "details" => array(
+                'color' => $request->color,
+                'size' => $request->size,
+            ),
+        ];
+
+
+
+
+
+
+        // if(isset($cart[$id])) {
+        //     $cart[$id]['quantity']++;
+        // } else {
+        //     $cart[$id] = [
+        //         "name" => $product->name,
+        //         "quantity" => 1,
+        //         "price" => $product->price,
+        //         "image" => $product->image
+        //     ];
+        // }
+
+        session()->put('cart', $cart);
+        $cartt =  session()->get('cart');
+        return response()->json($cartt);
+    }
 }

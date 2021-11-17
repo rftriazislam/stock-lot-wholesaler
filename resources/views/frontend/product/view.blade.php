@@ -106,7 +106,8 @@
                                     <option value="1">3</option>
                                     <option value="1">4</option>
                                     <option value="2">5</option>
-                                </select><span>(1 review)</span>
+                                </select><span>(1 review)</span><span>({{ $single_product->sell_count }}
+                                    Sold)</span><span>({{ $single_product->views }} view)</span>
                             </div>
                         </div>
                         <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }} BDT
@@ -120,25 +121,54 @@
                             </ul>
                         </div>
                         <div class="ps-product__variations">
-                            <figure>
-                                <figcaption>Color</figcaption>
-                                @foreach ($single_product->color as $item)
+                            @if ($single_product->color)
+                                <figure>
+                                    <figcaption>Color</figcaption>
+                                    @foreach ($single_product->color as $item)
 
-                                    <div class="ps-variant ps-variant--color " style="background: {{ $item['color'] }}">
-                                        <span class="ps-variant__tooltip">{{ $item['color'] }}</span>
-                                    </div>
-                                @endforeach
-                            </figure>
+                                        <div class="ps-variant ps-variant--color colorr  @if ($loop->iteration == 1) color_r @endif "
+                                            id="color{{ $loop->iteration }}"
+                                            onclick="colorSelect({{ $loop->iteration }})" pc="{{ $item['color'] }}"
+                                            style="background: {{ $item['color'] }};@if ($loop->iteration == 1)border-radius:0%;border: 4px solid #fcb800 @endif">
+                                            <span class="ps-variant__tooltip">{{ $item['color'] }}</span>
+                                        </div>
+
+                                    @endforeach
+
+
+
+                                </figure>
+                            @endif
+                            @if ($single_product->size)
+                                <figure>
+
+                                    <figcaption>Size</figcaption>
+                                    @foreach ($single_product->size as $item)
+
+                                        <div class="ps-variant sizee ps-variangdt--color @if ($loop->iteration == 1) size_r @endif "
+                                            id="size{{ $loop->iteration }}"
+                                            onclick="sizeSelect({{ $loop->iteration }})" ps="{{ $item['size'] }}"
+                                            style="border-radius: 0%;text-align:center;padding-top: 4px ;@if ($loop->iteration == 1)border-radius:50%;background:#fcb800 @endif">
+                                            <span>{{ $item['size'] }}</span>
+                                        </div>
+                                    @endforeach
+                                </figure>
+                            @endif
                         </div>
                         <div class="ps-product__shopping">
                             <figure>
                                 <figcaption>Quantity</figcaption>
+
                                 <div class="form-group--number">
-                                    <button class="up"><i class="fa fa-plus"></i></button>
-                                    <button class="down"><i class="fa fa-minus"></i></button>
-                                    <input class="form-control" type="text" placeholder="1">
+                                    <button class="up" onclick="plus()"><i class="fa fa-plus"></i></button>
+                                    <button class="down" onclick="minus()"><i class="fa fa-minus"></i></button>
+                                    <input class="form-control" type="text" id="price"
+                                        min="{{ $single_product->mini_order }}" max="{{ $single_product->stock }}"
+                                        placeholder="1" value="{{ $single_product->mini_order }}">
+                                    <input value="{{ $single_product->id }}" type="hidden" id="product_id">
                                 </div>
-                            </figure><a class="ps-btn ps-btn--black" href="#">Add to cart</a><a class="ps-btn"
+
+                            </figure><a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a><a class="ps-btn"
                                 href="#">Buy Now</a>
                             <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i></a><a href="#"><i
                                         class="icon-chart-bars"></i></a></div>
@@ -281,5 +311,80 @@
 
         </div>
     </div>
+@section('js')
+    <script>
+        function plus() {
+            const price = $('#price').val();
+            const maxprice = $('#price').attr('max');
+            const tprice = +price + 1;
+            if (maxprice > tprice) {
+                $('#price').val(tprice);
+            }
+        }
 
+        function minus() {
+            const price = $('#price').val();
+            const minprice = $('#price').attr('min');
+            const tprice = +price - 1;
+            if (tprice >= minprice) {
+                $('#price').val(tprice);
+            }
+        }
+
+        function colorSelect(id) {
+            $('.colorr').css({
+                'border-radius': '50%',
+                'border': '0px solid #fcb800',
+
+            });
+            $('.colorr').removeClass('color_r');
+            // console.log(id);
+            $('#color' + id).css({
+                'border-radius': '0%',
+                'border': '4px solid #fcb800',
+            });
+            $('#color' + id).addClass('color_r');
+        }
+
+        function sizeSelect(id) {
+            $('.sizee').css({
+                'border-radius': '0%',
+                'background': 'white',
+            });
+            $('.sizee').removeClass('size_r');
+            // console.log(id);
+            $('#size' + id).css({
+                'border-radius': '50%',
+                'background': '#fcb800',
+            });
+            $('#size' + id).addClass('size_r');
+        }
+        $(document).ready(function() {
+
+            $("#addTocart").click(function() {
+                var size = $('.size_r').attr('ps');
+                var color = $('.color_r').attr('pc');
+                var qty = $('#price').val();
+                var product_id = $('#product_id').val();
+                $.ajax({
+
+                    url: "{{ route('add-to-cart') }}",
+                    type: "POST",
+                    data: {
+                        size: size,
+                        color: color,
+                        qty: qty,
+                        product_id: product_id,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(res) {
+                        console.log(res);
+
+                    }
+                });
+
+            });
+        });
+    </script>
+@endsection
 @endsection

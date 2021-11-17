@@ -28,6 +28,7 @@ class FrontendController extends Controller
 
         $single_product = MerchantProduct::where('id', $id)->where('slug', $slug)->where('status', 2)->first();
         if ($single_product) {
+            $single_product->update(['views' => $single_product->views + 1,]);
             return view('frontend.product.view', compact('single_product'));
         } else {
             return back();

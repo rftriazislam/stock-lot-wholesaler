@@ -47,6 +47,7 @@ Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_
 Route::get('/shop-view-{id}', [FrontendController::class, 'shop_view'])->name('shop.view');
 
 
+
 //------------------------------------------------------------Admin----------------------------------------------------------------------------------
 Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('admin');
@@ -143,3 +144,4 @@ Route::group(['middleware' => ['auth', 'reseller'],], function () {
 });
 //------------------------------------------------------------Reseller----------------------------------------------------------------------------------
 Route::get('get-subcategory-list', [AjaxController::class, 'subcategory_list'])->name('get-subcategory-list');
+Route::post('/add-to-cart-view', [AjaxController::class, 'add_to_cart'])->name('add-to-cart');
