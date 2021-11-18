@@ -155,6 +155,7 @@
                                 </figure>
                             @endif
                         </div>
+                        <h4 class="add_cart_item" style="color:rgb(11, 180, 180)"></h4>
                         <div class="ps-product__shopping">
                             <figure>
                                 <figcaption>Quantity</figcaption>
@@ -169,6 +170,7 @@
                                 </div>
 
                             </figure>
+
                             @auth
                                 <a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a>
                                 <a class="ps-btn" href="{{ route('product.cart') }}">Buy Now</a>
@@ -183,6 +185,7 @@
                                 <a href="#"><i class="icon-heart"></i></a>
                                 <a href="#"><i class="icon-chart-bars"></i></a>
                             </div>
+
                         </div>
 
                     </div>
@@ -398,6 +401,16 @@
                     dataType: "json",
                     success: function(res) {
                         console.log(res);
+                        if (res.msg == 'add') {
+                            $('.add_cart_item').text('Successfully add Product');
+                            $('.add_cart_item').css('color', 'red');
+
+                        } else {
+                            $('.add_cart_item').text('Successfully Update Product Quantity');
+                            $('.add_cart_item').css('color', 'blue');
+                        }
+
+
 
                     },
                     error: function(data) {

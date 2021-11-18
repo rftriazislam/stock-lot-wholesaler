@@ -21,11 +21,13 @@ class AjaxController extends Controller
     public function sessionforget()
     {
         session()->forget('cart');
+        return true;
     }
 
 
     public function sessioncart()
     {
+        $cart = session()->get('cart', []);
         $products = CartAdd::where('user_id', Auth::user()->id)->get();
         foreach ($products as $product) {
             $cart[$product->id] = [
@@ -33,6 +35,7 @@ class AjaxController extends Controller
             ];
             session()->put('cart', $cart);
         }
+        return true;
     }
     public function add_to_cart(Request $request)
     {
@@ -47,6 +50,7 @@ class AjaxController extends Controller
 
             if ($cartcheck) {
                 $cartadd = $cartcheck->update(['qty' => $cartcheck->qty + $request->qty]);
+                $msg = 'update';
             } else {
                 $cartcheck2 = CartAdd::where('user_id', Auth::user()->id)
                     ->where('product_id', $request->product_id)
@@ -55,6 +59,7 @@ class AjaxController extends Controller
                     ->first();
                 if ($cartcheck2) {
                     $cartadd = $cartcheck2->update(['qty' => $cartcheck->qty + $request->qty]);
+                    $msg = 'update';
                 } else {
                     $cartcheck3 = CartAdd::where('user_id', Auth::user()->id)
                         ->where('product_id', $request->product_id)
@@ -63,6 +68,7 @@ class AjaxController extends Controller
                         ->first();
                     if ($cartcheck3) {
                         $cartadd = $cartcheck3->update(['qty' => $cartcheck->qty + $request->qty]);
+                        $msg = 'update';
                     } else {
                         $cartadd = new CartAdd();
                         $cartadd->product_id = $request->product_id;
@@ -72,6 +78,7 @@ class AjaxController extends Controller
                         $cartadd->size = $request->size;
                         $cartadd->color = $request->color;
                         $cartadd->save();
+                        $msg = 'add';
                     }
                 }
             }
@@ -90,7 +97,12 @@ class AjaxController extends Controller
 
 
         $cart =  session()->get('cart');
-        return response()->json($cart);
+
+        $data = array(
+            'msg'  => $msg,
+        );
+
+        echo json_encode($data);
     }
 
     public function cart_update(Request $request)
@@ -105,8 +117,8 @@ class AjaxController extends Controller
         $data = array(
             'message'  => true,
         );
-        // $this->sessionforget()
-        // $this->sessioncart();
+        $this->sessionforget();
+        $this->sessioncart();
 
         echo json_encode($data);
     }
@@ -119,8 +131,8 @@ class AjaxController extends Controller
         $data = array(
             'message'  => true,
         );
-        // $this->sessionforget()
-        // $this->sessioncart();
+        $this->sessionforget();
+        $this->sessioncart();
 
         echo json_encode($data);
     }
@@ -154,7 +166,7 @@ class AjaxController extends Controller
                     <tr>
                         <td>
                             <div class="ps-product--cart">
-                                <div class="ps-product__thumbnail"><a href="product-default.html"><img
+                                <div class="ps-product__thumbnail"><a href="' . route('product.view', [$item->product->id, $item->product->slug]) . '"><img
                                             src="' . asset('storage') . '/merchant/product/main/small/' . $item->product->main_picture . '"
                                             alt=""></a></div>
                                 <div class="ps-product__content"><a
