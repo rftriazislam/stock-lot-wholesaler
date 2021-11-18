@@ -42,9 +42,9 @@ Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 
 Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_view'])->name('product.view');
 Route::get('/product-lists-{sid}', [FrontendController::class, 'product_list_subcategory'])->name('product.list.subcategory');
 Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_category'])->name('product.list.category');
-
-
 Route::get('/shop-view-{id}', [FrontendController::class, 'shop_view'])->name('shop.view');
+
+Route::get('/product-cart-page', [FrontendController::class, 'cart_page'])->name('product.cart');
 
 
 
@@ -145,3 +145,6 @@ Route::group(['middleware' => ['auth', 'reseller'],], function () {
 //------------------------------------------------------------Reseller----------------------------------------------------------------------------------
 Route::get('get-subcategory-list', [AjaxController::class, 'subcategory_list'])->name('get-subcategory-list');
 Route::post('/add-to-cart-view', [AjaxController::class, 'add_to_cart'])->name('add-to-cart');
+Route::post('/show-cart', [AjaxController::class, 'show_cart'])->name('show.cart');
+Route::post('/show--update-cart', [AjaxController::class, 'cart_update'])->name('cart_update');
+Route::post('/show--removed-cart', [AjaxController::class, 'removed_cart'])->name('removed.cart');

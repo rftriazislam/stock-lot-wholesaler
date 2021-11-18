@@ -168,10 +168,21 @@
                                     <input value="{{ $single_product->id }}" type="hidden" id="product_id">
                                 </div>
 
-                            </figure><a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a><a class="ps-btn"
-                                href="#">Buy Now</a>
-                            <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i></a><a href="#"><i
-                                        class="icon-chart-bars"></i></a></div>
+                            </figure>
+                            @auth
+                                <a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a>
+                                <a class="ps-btn" href="{{ route('product.cart') }}">Buy Now</a>
+                            @else
+                                <a class="ps-btn ps-btn--black" style="cursor: pointer;color:white" data-toggle="modal"
+                                    data-target="#loginModal">Add to cart</a>
+                                <a class="ps-btn" href="#">Buy Now</a>
+                            @endauth
+
+
+                            <div class="ps-product__actions">
+                                <a href="#"><i class="icon-heart"></i></a>
+                                <a href="#"><i class="icon-chart-bars"></i></a>
+                            </div>
                         </div>
 
                     </div>
@@ -311,6 +322,10 @@
 
         </div>
     </div>
+    @include('frontend.include.login')
+
+
+
 @section('js')
     <script>
         function plus() {
