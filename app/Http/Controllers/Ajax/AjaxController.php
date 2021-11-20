@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ajax;
 
+use App\Help\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CartAdd;
 use App\Models\Category;
@@ -9,6 +10,7 @@ use App\Models\MerchantProduct;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Auth;
+use PHPUnit\TextUI\Help;
 
 class AjaxController extends Controller
 {
@@ -161,6 +163,7 @@ class AjaxController extends Controller
                 </tr>
             </thead>
             <tbody>';
+        $total = 0;
         foreach ($carts as $item) {
             $output .= '
                     <tr>
@@ -170,7 +173,7 @@ class AjaxController extends Controller
                                             src="' . asset('storage') . '/merchant/product/main/small/' . $item->product->main_picture . '"
                                             alt=""></a></div>
                                 <div class="ps-product__content"><a
-                                        href="product-default.html">' . $item->product->product_name  . '</a>
+                                        href="' . route('product.view', [$item->product->id, $item->product->slug]) . '">' . $item->product->product_name  . '</a>
                                     <br>
                                     <div class="ps-variant ps-variant--color colorr "
                                         style="background:' . $item->color . ';width: 21px; height: 21px;">
@@ -206,6 +209,8 @@ class AjaxController extends Controller
                         <td><a href="#" class="btn btn-danger" onclick="removed(' . $item->id . ')"><i class="icon-cross"></i></a></td>
                     </tr>
              ';
+
+            $total = $total + round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1);
         }
         $output .= '
 
@@ -220,8 +225,30 @@ class AjaxController extends Controller
         //  <a class="ps-btn ps-btn--outline"
         //     href="shop-default.html"><i class="icon-sync"></i>Payment</a> 
 
+        $total_page = '            <div class="ps-block--shopping-total">
+       
+        <div class="ps-block__content">
+        <h3>CashOn(90%) <span>' . Helper::percentage($total, 90) . '</span>
+                Delivery
+            </h3>
+        <br>
+            <h3>Advanced(10%)<span>' . Helper::percentage($total, 10)  . '</span></h3>
+           
+           
+            <br>
+            <br>
+            <h3>Total <span>' . $total . '</span></h3>
+        </div>
+    </div>
+    
+    <a class="ps-btn ps-btn--fullwidth " style="background: rgb(8 220 211);color: white;"
+        href="' . route('cart.checkout') . '">Proceed to checkout</a>';
+
+
         $data = array(
             'output'  => $output,
+            'total'  => $total_page,
+
         );
 
         echo json_encode($data);

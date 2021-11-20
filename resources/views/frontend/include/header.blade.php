@@ -34,7 +34,7 @@
       </div>
       <div class="header__content">
           <div class="container">
-              <div class="header__content-left"><a class="ps-logo" href="index.html"><img
+              <div class="header__content-left"><a class="ps-logo" href="{{ route('home') }}"><img
                           src="{{ asset('frontend') }}/img/logo/2h.png" alt=""></a>
                   <div class="menu--product-categories">
                       <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Department</span></div>
@@ -94,7 +94,7 @@
               <div class="header__content-right">
                   <div class="header__actions"><a class="header__extra" href="#"><i
                               class="icon-heart"></i><span><i>0</i></span></a>
-                      <div class="ps-cart--mini"><a class="header__extra" href="#"><i
+                      <div class="ps-cart--mini"><a class="header__extra" href="{{ route('product.cart') }}"><i
                                   class="icon-bag2"></i><span><i>@auth
                                           {{ count(session('cart', [])) }}
                                       @endauth</i></span></a>
@@ -126,17 +126,26 @@
                               </div>
                               <div class="ps-cart__footer">
                                   <h3>Sub Total:<strong>$59.99</strong></h3>
-                                  <figure><a class="ps-btn" href="shopping-cart.html">View Cart</a><a
-                                          class="ps-btn" href="checkout.html">Checkout</a></figure>
+                                  <figure><a class="ps-btn" href="{{ route('product.cart') }}">View
+                                          Cart</a><a class="ps-btn" href="checkout.html">Checkout</a></figure>
                               </div>
                           </div>
                       </div>
                       <div class="ps-block--user-header">
+
                           <div class="ps-block__left"><a href="{{ route('login') }}"><i
                                       class="icon-user"></i></a>
                           </div>
-                          <div class="ps-block__right"><a href="{{ route('login') }}">Login</a><a
-                                  href="{{ route('register') }}">Register</a></div>
+                          <div class="ps-block__right " style="padding-top: 8px">
+                              @auth
+                                  <a href="{{ route('login') }}">{{ Auth::user()->name }}</a>
+
+                              @else
+                                  <a href="{{ route('login') }}">Login</a>
+                                  <a href="{{ route('register') }}">Register</a>
+                              @endauth
+                          </div>
+
                       </div>
                   </div>
               </div>

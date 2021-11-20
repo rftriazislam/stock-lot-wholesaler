@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\CartAdd;
 use App\Models\Category;
+use App\Models\DeliveryDetail;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
 
 class FrontendController extends Controller
 {
@@ -90,5 +92,30 @@ class FrontendController extends Controller
     {
         $carts =  CartAdd::with('vendor', 'product')->where('user_id', Auth::user()->id)->get();
         return view('frontend.product.cart', compact('carts'));
+    }
+
+
+    public function cart_checkout()
+    {
+        $carts =  CartAdd::with('vendor', 'product')->where('user_id', Auth::user()->id)->get();
+        if (count($carts) > 0) {
+            return view('frontend.product.checkout', compact('carts'));
+        } else {
+            return back();
+        }
+    }
+
+    public function payment_message(Request $request)
+    {
+        $message = $request->message;
+        if ($message) {
+            return view('frontend.payment.message', compact('message'));
+        } else {
+            return redirect()->route('error');
+        }
+    }
+    public function error()
+    {
+        return view('frontend.main.error');
     }
 }

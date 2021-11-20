@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Merchant\MerchantController;
+use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Reseller\ResellerController;
 
 /*
@@ -44,8 +45,13 @@ Route::get('/product-lists-{sid}', [FrontendController::class, 'product_list_sub
 Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_category'])->name('product.list.category');
 Route::get('/shop-view-{id}', [FrontendController::class, 'shop_view'])->name('shop.view');
 
-Route::get('/product-cart-page', [FrontendController::class, 'cart_page'])->name('product.cart');
+Route::group(['middleware' => ['auth'],], function () {
 
+    Route::get('/product-cart-page', [FrontendController::class, 'cart_page'])->name('product.cart');
+    Route::get('/product-cart-checkout', [FrontendController::class, 'cart_checkout'])->name('cart.checkout');
+    Route::post('/payment-product', [PaymentController::class, 'payment'])->name('payment');
+    Route::get('/payment-message', [FrontendController::class, 'payment_message'])->name('payment_message');
+});
 
 
 //------------------------------------------------------------Admin----------------------------------------------------------------------------------
@@ -148,3 +154,8 @@ Route::post('/add-to-cart-view', [AjaxController::class, 'add_to_cart'])->name('
 Route::post('/show-cart', [AjaxController::class, 'show_cart'])->name('show.cart');
 Route::post('/show--update-cart', [AjaxController::class, 'cart_update'])->name('cart_update');
 Route::post('/show--removed-cart', [AjaxController::class, 'removed_cart'])->name('removed.cart');
+
+
+
+
+Route::any('{slug}', [FrontendController::class, 'error'])->name('error');

@@ -2,6 +2,7 @@
 
 namespace App\Help;
 
+use App\Models\DeliveryDetail;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 
@@ -37,7 +38,19 @@ class Helper
             ->where('status', 2)
             ->first();
         $tage = (($products->price + $products->service_charge) * 100) / $products->min_retail_price;
-        $persentage = round((100 - $tage), 2);
-        return $persentage;
+        $percentage = round((100 - $tage), 2);
+        return $percentage;
+    }
+
+    public static function  percentage($price, $percentage)
+    {
+        $total = round(($price * $percentage) / 100, 1);
+        return $total;
+    }
+    public static function deliveryDetails($id)
+    {
+
+        $details = DeliveryDetail::where('user_id', $id)->first();
+        return $details;
     }
 }
