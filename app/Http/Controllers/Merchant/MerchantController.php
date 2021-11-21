@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MerchantOrder;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\PaymentMethod;
@@ -404,5 +405,17 @@ class MerchantController extends Controller
         $withdraws =  Withdraw::where('user_id', Auth::user()->id)->get();
 
         return view('merchant.withdraw.lists', compact('withdraws'));
+    }
+
+    public function order_list()
+    {
+        $orders =  MerchantOrder::where('vendor_id', Auth::user()->id)->latest()->paginate(10);
+
+        return view('merchant.order.lists', compact('orders'));
+    }
+    public function order_single($id)
+    {
+        $order =  MerchantOrder::where('vendor_id', Auth::user()->id)->where('id', $id)->first();
+        return view('merchant.order.products', compact('order'));
     }
 }

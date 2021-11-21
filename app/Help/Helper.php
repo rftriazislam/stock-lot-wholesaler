@@ -66,4 +66,12 @@ class Helper
         $trans->save();
         return true;
     }
+
+
+    public static function product($id)
+    {
+        $product = MerchantProduct::where('id', $id)
+            ->first();
+        return $product;
+    }
 }

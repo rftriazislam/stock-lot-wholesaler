@@ -136,6 +136,9 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
     Route::get('/dashboard/merchant/withdraw/add', [MerchantController::class, 'merchant_withdraw_add'])->name('merchant.withdraw.add');
     Route::post('/dashboard/merchant/withdraw/save', [MerchantController::class, 'save_withdraw'])->name('merchant.withdraw.save');
     Route::get('/dashboard/merchant/withdraw/list', [MerchantController::class, 'list_withdraw'])->name('merchant.withdraw.list');
+
+    Route::get('/dashboard/merchant/order/list', [MerchantController::class, 'order_list'])->name('merchant.income.order');
+    Route::get('/dashboard/merchant/order/single/{id}', [MerchantController::class, 'order_single'])->name('merchant.order.single');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 

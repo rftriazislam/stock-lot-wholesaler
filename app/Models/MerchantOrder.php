@@ -25,4 +25,9 @@ class MerchantOrder extends Model
         'order_list' => 'array',
         'delivery_details' => 'array'
     ];
+
+    public function user_info()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'buyer_id');
+    }
 }

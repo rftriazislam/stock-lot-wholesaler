@@ -71,13 +71,16 @@
                                             href="{{ asset('storage') }}/merchant/product/main/big/{{ $single_product->main_picture }}"><img
                                                 src="{{ asset('storage') }}/merchant/product/main/big/{{ $single_product->main_picture }}"
                                                 alt=""></a></div>
-                                    @foreach ($single_product->files as $item)
+                                    @if ($single_product->files)
+                                        @foreach ($single_product->files as $item)
 
-                                        <div class="item"><a
-                                                href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
-                                                    src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
-                                                    alt=""></a></div>
-                                    @endforeach
+                                            <div class="item"><a
+                                                    href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
+                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                        alt=""></a></div>
+                                        @endforeach
+                                    @endif
+
 
                                 </div>
                             </div>
@@ -86,13 +89,15 @@
                             <div class="item"><img
                                     src="{{ asset('storage') }}/merchant/product/main/big/{{ $single_product->main_picture }}"
                                     alt=""></div>
-                            @foreach ($single_product->files as $item)
+                            @if ($single_product->files)
+                                @foreach ($single_product->files as $item)
 
-                                <div class="item"><a
-                                        href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
-                                            src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
-                                            alt=""></a></div>
-                            @endforeach
+                                    <div class="item"><a
+                                            href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
+                                                src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                alt=""></a></div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="ps-product__info">
