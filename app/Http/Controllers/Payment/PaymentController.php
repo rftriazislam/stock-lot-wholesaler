@@ -305,7 +305,7 @@ class PaymentController extends Controller
             // $success_route = 'paymentissue' . ',' . $tx_id;
             // $success_route =   route('paymentissue', $tx_id);
             // $p =  $shurjopay_service->sendPayment($price, $success_route);
-            $return_url = 'http://127.0.0.1:8000/api/payment-response';
+            $return_url = 'https://stocklot.xyz/api/payment-response';
             $xml_data = 'spdata=
         <?xml version="1.0" encoding="utf-8"?>
 <shurjoPay>
