@@ -65,7 +65,9 @@
                                     <td class=" "><a
                                             href="{{ route('merchant.order.single', [$item->id]) }}">Product
                                             Lists</a></td>
-                                    <td class=" "><a href="#">Delivery Details</a></td>
+                                    <td class=" "><a style="color: blueviolet"
+                                            href="{{ route('merchant.order.single', [$item->id]) }}">Delivery Details</a>
+                                    </td>
 
                                     <td class=" ">{{ $item->total_amount - $item->total_service_charge }}
                                     </td>
