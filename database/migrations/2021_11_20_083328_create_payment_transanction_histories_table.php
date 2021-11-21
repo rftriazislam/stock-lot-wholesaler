@@ -20,6 +20,8 @@ class CreatePaymentTransanctionHistoriesTable extends Migration
             $table->string('tx_id');
             $table->text('order_list');
             $table->double('amount', 16, 3);
+            $table->double('total_amount', 16, 3);
+            $table->double('total_service_charge', 16, 3);
             $table->string('transaction_status')->default('init');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

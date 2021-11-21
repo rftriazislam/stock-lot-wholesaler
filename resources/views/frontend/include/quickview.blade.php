@@ -6,18 +6,16 @@
                 <div class="ps-product__header">
                     <div class="ps-product__thumbnail" data-vertical="false">
                         <div class="ps-product__images" data-arrow="true">
-                            @foreach ($subitem->files as $file)
+                            {{-- @foreach ($subitem->files as $file) --}}
 
 
-                                <div class="item"><img
-                                        src="{{ asset('storage') }}/merchant/product/files{{ $file['image'] }}"
-                                        alt="">
-                                </div>
-                            @endforeach
+                            <div class="item"><img {{-- src="{{ asset('storage') }}/merchant/product/files{{ $file['image'] }}" --}} alt="">
+                            </div>
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                     <div class="ps-product__info">
-                        <h1>{{ $subitem->product_name }}</h1>
+                        {{-- <h1>{{ $subitem->product_name }}</h1> --}}
                         <div class="ps-product__meta">
                             <p>Brand:<a href="shop-default.html">Sony</a></p>
                             <div class="ps-product__rating">

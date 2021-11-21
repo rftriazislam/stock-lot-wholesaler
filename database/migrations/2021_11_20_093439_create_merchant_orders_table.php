@@ -20,7 +20,10 @@ class CreateMerchantOrdersTable extends Migration
             $table->integer('transanction_id');
             $table->string('tx_id');
             $table->text('order_list');
+            $table->text('delivery_details');
             $table->double('amount', 16, 3);
+            $table->double('total_amount', 16, 3);
+            $table->double('total_service_charge', 16, 3);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

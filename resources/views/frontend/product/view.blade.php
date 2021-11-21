@@ -96,97 +96,107 @@
                         </div>
                     </div>
                     <div class="ps-product__info">
-                        <h1>{{ $single_product->product_name }}</h1>
-                        <div class="ps-product__meta">
+                        <h1>{{ $single_product->product_name }}
 
-                            <div class="ps-product__rating">
-                                <select class="ps-rating" data-read-only="true">
-                                    <option value="1">1</option>
-                                    <option value="1">2</option>
-                                    <option value="1">3</option>
-                                    <option value="1">4</option>
-                                    <option value="2">5</option>
-                                </select><span>(1 review)</span><span>({{ $single_product->sell_count }}
-                                    Sold)</span><span>({{ $single_product->views }} view)</span>
+                            <div class="ps-product__meta">
+
+                                <div class="ps-product__rating">
+                                    <select class="ps-rating" data-read-only="true">
+                                        <option value="1">1</option>
+                                        <option value="1">2</option>
+                                        <option value="1">3</option>
+                                        <option value="1">4</option>
+                                        <option value="2">5</option>
+                                    </select>
+                                    <span>(1 review)</span>
+                                    <span>({{ $single_product->sell_count }}
+                                        Sold)</span>
+                                    <span>({{ $single_product->views }} view)</span>
+
+                                </div>
                             </div>
-                        </div>
-                        <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }} BDT
-                        </h4>
-                        <div class="ps-product__desc">
-                            <p>Sold By:<a href="{{ route('shop.view', [$single_product->user_id]) }}"><strong>
-                                        {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
-                            <ul class="ps-list--dot">
-                                <li>{{ $single_product->order_note }}</li>
+                            <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }}
+                                BDT
+                            </h4>
+                            <div class="ps-product__desc">
+                                <p>Sold By:<a href="{{ route('shop.view', [$single_product->user_id]) }}"><strong>
+                                            {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
+                                <ul class="ps-list--dot">
+                                    <li>{{ $single_product->order_note }}</li>
 
-                            </ul>
-                        </div>
-                        <div class="ps-product__variations">
-                            @if ($single_product->color)
+                                </ul>
+                            </div>
+                            <div class="ps-product__variations">
+                                @if ($single_product->color)
+                                    <figure>
+                                        <figcaption>Color</figcaption>
+                                        @foreach ($single_product->color as $item)
+
+                                            <div class="ps-variant ps-variant--color colorr  @if ($loop->iteration == 1) color_r @endif "
+                                                id="color{{ $loop->iteration }}"
+                                                onclick="colorSelect({{ $loop->iteration }})"
+                                                pc="{{ $item['color'] }}"
+                                                style="background: {{ $item['color'] }};@if ($loop->iteration == 1)border-radius:0%;border: 4px solid #fcb800 @endif">
+                                                <span class="ps-variant__tooltip">{{ $item['color'] }}</span>
+                                            </div>
+
+                                        @endforeach
+
+
+
+                                    </figure>
+                                @endif
+                                @if ($single_product->size)
+                                    <figure>
+
+                                        <figcaption>Size</figcaption>
+                                        @foreach ($single_product->size as $item)
+
+                                            <div class="ps-variant sizee ps-variangdt--color @if ($loop->iteration == 1) size_r @endif "
+                                                id="size{{ $loop->iteration }}"
+                                                onclick="sizeSelect({{ $loop->iteration }})" ps="{{ $item['size'] }}"
+                                                style="border-radius: 0%;text-align:center;padding-top: 4px ;@if ($loop->iteration == 1)border-radius:50%;background:#fcb800 @endif">
+                                                <span>{{ $item['size'] }}</span>
+                                            </div>
+                                        @endforeach
+                                    </figure>
+                                @endif
+                            </div>
+                            <h4 class="add_cart_item" style="color:rgb(11, 180, 180)"></h4>
+
+                            <div class="ps-product__shopping">
                                 <figure>
-                                    <figcaption>Color</figcaption>
-                                    @foreach ($single_product->color as $item)
+                                    <figcaption>Quantity</figcaption>
 
-                                        <div class="ps-variant ps-variant--color colorr  @if ($loop->iteration == 1) color_r @endif "
-                                            id="color{{ $loop->iteration }}"
-                                            onclick="colorSelect({{ $loop->iteration }})" pc="{{ $item['color'] }}"
-                                            style="background: {{ $item['color'] }};@if ($loop->iteration == 1)border-radius:0%;border: 4px solid #fcb800 @endif">
-                                            <span class="ps-variant__tooltip">{{ $item['color'] }}</span>
-                                        </div>
-
-                                    @endforeach
-
-
+                                    <div class="form-group--number">
+                                        <button class="up" onclick="plus()"><i
+                                                class="fa fa-plus"></i></button>
+                                        <button class="down" onclick="minus()"><i
+                                                class="fa fa-minus"></i></button>
+                                        <input class="form-control" type="text" id="price"
+                                            min="{{ $single_product->mini_order }}" max="{{ $single_product->stock }}"
+                                            placeholder="1" value="{{ $single_product->mini_order }}">
+                                        <input value="{{ $single_product->id }}" type="hidden" id="product_id">
+                                    </div>
 
                                 </figure>
-                            @endif
-                            @if ($single_product->size)
-                                <figure>
 
-                                    <figcaption>Size</figcaption>
-                                    @foreach ($single_product->size as $item)
+                                @auth
+                                    <a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a>
+                                    <a class="ps-btn" href="{{ route('product.cart') }}">Buy Now</a>
+                                @else
+                                    <a class="ps-btn ps-btn--black" style="cursor: pointer;color:white" data-toggle="modal"
+                                        data-target="#loginModal">Add to cart</a>
+                                    <a class="ps-btn" href="#">Buy Now</a>
+                                @endauth
 
-                                        <div class="ps-variant sizee ps-variangdt--color @if ($loop->iteration == 1) size_r @endif "
-                                            id="size{{ $loop->iteration }}"
-                                            onclick="sizeSelect({{ $loop->iteration }})" ps="{{ $item['size'] }}"
-                                            style="border-radius: 0%;text-align:center;padding-top: 4px ;@if ($loop->iteration == 1)border-radius:50%;background:#fcb800 @endif">
-                                            <span>{{ $item['size'] }}</span>
-                                        </div>
-                                    @endforeach
-                                </figure>
-                            @endif
-                        </div>
-                        <h4 class="add_cart_item" style="color:rgb(11, 180, 180)"></h4>
-                        <div class="ps-product__shopping">
-                            <figure>
-                                <figcaption>Quantity</figcaption>
 
-                                <div class="form-group--number">
-                                    <button class="up" onclick="plus()"><i class="fa fa-plus"></i></button>
-                                    <button class="down" onclick="minus()"><i class="fa fa-minus"></i></button>
-                                    <input class="form-control" type="text" id="price"
-                                        min="{{ $single_product->mini_order }}" max="{{ $single_product->stock }}"
-                                        placeholder="1" value="{{ $single_product->mini_order }}">
-                                    <input value="{{ $single_product->id }}" type="hidden" id="product_id">
+                                <div class="ps-product__actions">
+                                    <a href="#"><i class="icon-heart"></i></a>
+
                                 </div>
 
-                            </figure>
-
-                            @auth
-                                <a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a>
-                                <a class="ps-btn" href="{{ route('product.cart') }}">Buy Now</a>
-                            @else
-                                <a class="ps-btn ps-btn--black" style="cursor: pointer;color:white" data-toggle="modal"
-                                    data-target="#loginModal">Add to cart</a>
-                                <a class="ps-btn" href="#">Buy Now</a>
-                            @endauth
-
-
-                            <div class="ps-product__actions">
-                                <a href="#"><i class="icon-heart"></i></a>
-                                <a href="#"><i class="icon-chart-bars"></i></a>
                             </div>
-
-                        </div>
 
                     </div>
                 </div>
@@ -322,7 +332,6 @@
             </div>
             @include('frontend.include.related')
 
-
         </div>
     </div>
     @include('frontend.include.login')
@@ -330,6 +339,8 @@
 
 
 @section('js')
+
+
     <script>
         function plus() {
             const price = $('#price').val();
@@ -410,11 +421,10 @@
                             $('.add_cart_item').css('color', 'blue');
                         } else {
                             $('.add_cart_item').text(
-                                'You can not add product in different Vendor or shop');
+                                'You can not add product in two different Vendor or shop ! Please remove other product than add'
+                            );
                             $('.add_cart_item').css('color', 'red');
                         }
-
-
 
                     },
                     error: function(data) {

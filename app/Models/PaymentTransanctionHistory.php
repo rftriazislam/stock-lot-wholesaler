@@ -16,6 +16,8 @@ class PaymentTransanctionHistory extends Model
         'order_list',
         'amount',
         'transaction_status',
+        'total_amount',
+        'total_service_charge',
         'status'
     ];
     protected $casts = [

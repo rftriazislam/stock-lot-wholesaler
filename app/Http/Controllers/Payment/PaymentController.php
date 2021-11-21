@@ -59,7 +59,7 @@ class PaymentController extends Controller
     public function generateTxId($unique_id = null)
     {
         if ($unique_id) {
-            $tx_id = $this->merchant_key_prefix . $unique_id . 'US' . uniqid();
+            $tx_id = $this->merchant_key_prefix . $unique_id  . uniqid() . 'US';
         } else {
             $tx_id = $this->merchant_key_prefix . uniqid();
         }
@@ -83,27 +83,30 @@ class PaymentController extends Controller
 
         $trans_info = PaymentTransanctionHistory::where('tx_id', $tx_id)->first();
 
-
         $trans_info->update([
             'transaction_status' => ($response_data->spCode == '000') ? 'Success' : 'Fail'
         ]);
 
-
-
         if ($response_data->spCode == '000') {
+            $deliverydetails = DeliveryDetail::where('user_id', $trans_info->buyer_id)->first();
             $merchant_order = new MerchantOrder();
             $merchant_order->tx_id = $trans_info->tx_id;
             $merchant_order->transanction_id = $trans_info->id;
             $merchant_order->buyer_id = $trans_info->buyer_id;
             $merchant_order->vendor_id = $trans_info->vendor_id;
             $merchant_order->order_list = $trans_info->order_list;
+            $merchant_order->delivery_details = array($deliverydetails);
             $merchant_order->amount = $trans_info->amount;
+            $merchant_order->total_amount = $trans_info->total_amount;
+            $merchant_order->total_service_charge = $trans_info->total_service_charge;
             if ($merchant_order->save()) {
+                // $transtion_history = Helper::transtion_history($trans_info->buyer_id, $trans_info->amount, 'out', 'buy');
                 return redirect()->route('payment_message', ['message' => 'success']);
             } else {
                 return redirect()->route('payment_message', ['message' => 'success']);
             }
         } else {
+            PaymentTransanctionHistory::where('buyer_id', $trans_info->buyer_id)->where('transaction_status', 'init')->delete();
             return redirect()->route('payment_message', ['message' => 'Fail']);
         }
     }
@@ -279,6 +282,7 @@ class PaymentController extends Controller
         } else {
             $order = [];
             $total = 0;
+            $service_charge = 0;
             foreach ($carts as $cart) {
                 $order[] = array(
                     'product_id' => $cart->product->id,
@@ -290,15 +294,18 @@ class PaymentController extends Controller
                 );
                 $vendor_id = $cart->user_id;
                 $total = $total + round($cart->qty * round($cart->product->price + $cart->product->service_charge, 1), 1);
+                $service_charge = $service_charge + round($cart->qty * $cart->product->service_charge, 1);
             }
             // dd($vendor_id);
             $advance_pay = Helper::percentage($total, 10);
             $price =  round($advance_pay, 2);
-            $tx_id = $this->generateTxId($deliverydetails->user_id);
+            $total_amount = $total;
+            $total_service_charge = $service_charge;
+            $tx_id = $this->generateTxId(2);
             // $success_route = 'paymentissue' . ',' . $tx_id;
             // $success_route =   route('paymentissue', $tx_id);
             // $p =  $shurjopay_service->sendPayment($price, $success_route);
-            $return_url = 'http://stocklot.xyz/api/payment-response';
+            $return_url = 'http://127.0.0.1:8000/api/payment-response';
             $xml_data = 'spdata=
         <?xml version="1.0" encoding="utf-8"?>
 <shurjoPay>
@@ -333,6 +340,8 @@ $trans_order->tx_id = $tx_id;
 $trans_order->vendor_id = $vendor_id;
 $trans_order->order_list = $order;
 $trans_order->amount = $price;
+$trans_order->total_amount = $total_amount;
+$trans_order->total_service_charge = $total_service_charge;
 $trans_order->transaction_status = 'init';
 
 if ($trans_order->save()) {

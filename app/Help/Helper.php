@@ -5,6 +5,8 @@ namespace App\Help;
 use App\Models\DeliveryDetail;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
+use App\Models\TransanctionHistory;
+use GrahamCampbell\ResultType\Success;
 
 class Helper
 {
@@ -49,8 +51,19 @@ class Helper
     }
     public static function deliveryDetails($id)
     {
-
         $details = DeliveryDetail::where('user_id', $id)->first();
         return $details;
+    }
+
+    public static function transtion_history($id, $amount, $status, $type)
+    {
+
+        $trans = new TransanctionHistory();
+        $trans->amount = $amount;
+        $trans->user_id = $id;
+        $trans->pyment_status = $status;
+        $trans->payment_type = $type;
+        $trans->save();
+        return true;
     }
 }

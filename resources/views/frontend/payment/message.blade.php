@@ -19,7 +19,7 @@
                         was given to youon your receipt and in the confirmation email you should have received.</p>
                 </div>
                 <div class="ps-section__content">
-                    <form class="ps-form--order-tracking">
+                    <div class="ps-form--order-tracking">
 
                         <div class="form-group">
                             <a href="{{ route('home') }}"> <button class="ps-btn ps-btn--fullwidth"
@@ -27,7 +27,7 @@
                                         class="icon-arrow-left"></i> Back to
                                     Shop</button></a>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
