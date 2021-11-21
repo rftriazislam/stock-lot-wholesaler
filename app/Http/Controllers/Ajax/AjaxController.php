@@ -42,8 +42,10 @@ class AjaxController extends Controller
     public function add_to_cart(Request $request)
     {
         $product_one = MerchantProduct::where('id', $request->product_id)->first();
-
         if ($product_one) {
+
+
+
             $cartcheck = CartAdd::where('user_id', Auth::user()->id)
                 ->where('product_id', $request->product_id)
                 ->where('color', $request->color)
@@ -72,15 +74,32 @@ class AjaxController extends Controller
                         $cartadd = $cartcheck3->update(['qty' => $cartcheck->qty + $request->qty]);
                         $msg = 'update';
                     } else {
-                        $cartadd = new CartAdd();
-                        $cartadd->product_id = $request->product_id;
-                        $cartadd->vendor_id = $product_one->user_id;
-                        $cartadd->user_id = Auth::user()->id;
-                        $cartadd->qty = $request->qty;
-                        $cartadd->size = $request->size;
-                        $cartadd->color = $request->color;
-                        $cartadd->save();
-                        $msg = 'add';
+                        $vendorcheck = CartAdd::where('user_id', Auth::user()->id)->first();
+                        if ($vendorcheck) {
+                            if ($product_one->user_id == $vendorcheck->vendor_id) {
+                                $cartadd = new CartAdd();
+                                $cartadd->product_id = $request->product_id;
+                                $cartadd->vendor_id = $product_one->user_id;
+                                $cartadd->user_id = Auth::user()->id;
+                                $cartadd->qty = $request->qty;
+                                $cartadd->size = $request->size;
+                                $cartadd->color = $request->color;
+                                $cartadd->save();
+                                $msg = 'add';
+                            } else {
+                                $msg = 'different';
+                            }
+                        } else {
+                            $cartadd = new CartAdd();
+                            $cartadd->product_id = $request->product_id;
+                            $cartadd->vendor_id = $product_one->user_id;
+                            $cartadd->user_id = Auth::user()->id;
+                            $cartadd->qty = $request->qty;
+                            $cartadd->size = $request->size;
+                            $cartadd->color = $request->color;
+                            $cartadd->save();
+                            $msg = 'add';
+                        }
                     }
                 }
             }

@@ -403,11 +403,15 @@
                         console.log(res);
                         if (res.msg == 'add') {
                             $('.add_cart_item').text('Successfully add Product');
-                            $('.add_cart_item').css('color', 'red');
+                            $('.add_cart_item').css('color', 'green');
 
-                        } else {
+                        } else if (res.msg == 'update') {
                             $('.add_cart_item').text('Successfully Update Product Quantity');
                             $('.add_cart_item').css('color', 'blue');
+                        } else {
+                            $('.add_cart_item').text(
+                                'You can not add product in different Vendor or shop');
+                            $('.add_cart_item').css('color', 'red');
                         }
 
 
