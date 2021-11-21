@@ -72,6 +72,7 @@ class FrontendController extends Controller
             return view('frontend.main.error');
         }
         $sub = Subcategory::where('status', 1)->get();
+        $miniproduct = [];
         foreach ($sub as $i) {
             $product = MerchantProduct::where('subcategory_id', $i->id)->where('user_id', $id)->count();
             if ($product) {
@@ -84,7 +85,6 @@ class FrontendController extends Controller
             }
         }
 
-        $miniproduct = ($miniproduct) ? $miniproduct : [];
         return view('frontend.shop.view', compact('shop', 'miniproduct'));
     }
 
