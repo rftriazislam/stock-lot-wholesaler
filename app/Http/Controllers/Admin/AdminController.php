@@ -11,6 +11,7 @@ use App\Models\Subcategory;
 use App\Models\User;
 use CreateSlidersTable;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Image;
 
 class AdminController extends Controller
@@ -130,7 +131,11 @@ class AdminController extends Controller
     {
         $validate = $this->validate($request, [
             'category_id' => 'required|exists:categories,id',
-            'name' => 'required|unique:subcategories,name',
+            'name' => [
+                'required', Rule::unique('subcategories', 'name', 'category_id')
+                    ->where('name', $request->name)
+                    ->where('category_id', $request->category_id)
+            ],
             'image' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
 
