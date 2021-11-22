@@ -6,6 +6,7 @@ use App\Models\DeliveryDetail;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\TransanctionHistory;
+use App\Models\User;
 use GrahamCampbell\ResultType\Success;
 
 class Helper
@@ -73,5 +74,11 @@ class Helper
         $product = MerchantProduct::where('id', $id)
             ->first();
         return $product;
+    }
+    public static function vendor_balance($id, $amount)
+    {
+        $user = User::where('id', $id)->first();
+        $user->update(['balance' => $user->balance + $amount]);
+        return true;
     }
 }

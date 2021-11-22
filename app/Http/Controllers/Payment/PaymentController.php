@@ -87,7 +87,7 @@ class PaymentController extends Controller
             'transaction_status' => ($response_data->spCode == '000') ? 'Success' : 'Fail'
         ]);
 
-        if ($response_data->spCode == '000') {
+        if ($response_data->spCode != '000') {
             $deliverydetails = DeliveryDetail::where('user_id', $trans_info->buyer_id)->first();
             $merchant_order = new MerchantOrder();
             $merchant_order->tx_id = $trans_info->tx_id;
@@ -100,6 +100,9 @@ class PaymentController extends Controller
             $merchant_order->total_amount = $trans_info->total_amount;
             $merchant_order->total_service_charge = $trans_info->total_service_charge;
             if ($merchant_order->save()) {
+                $balance = $trans_info->amount - $trans_info->total_service_charge;
+                Helper::vendor_balance($trans_info->vendor_id, $balance);
+
                 // $transtion_history = Helper::transtion_history($trans_info->buyer_id, $trans_info->amount, 'out', 'buy');
                 return redirect()->route('payment_message', ['message' => 'success']);
             } else {
