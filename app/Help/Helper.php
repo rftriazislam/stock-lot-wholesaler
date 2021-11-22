@@ -81,4 +81,15 @@ class Helper
         $user->update(['balance' => $user->balance + $amount]);
         return true;
     }
+    public static function vendor_affiliate($id, $amount)
+    {
+        $user = User::where('id', $id)->first();
+        $comission = ($amount * 20) / 100;
+        if ($user->refered_id) {
+            $user = User::where('id', $user->refered_id)->first();
+            $user->update(['balance' => $user->balance + $comission]);
+        }
+
+        return true;
+    }
 }
