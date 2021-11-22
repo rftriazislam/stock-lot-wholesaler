@@ -291,13 +291,13 @@ class PaymentController extends Controller
             foreach ($carts as $cart) {
                 $order[] = array(
                     'product_id' => $cart->product->id,
-                    'vendor_id' => $cart->user_id,
+                    'vendor_id' => $cart->vendor_id,
                     'product_name' => $cart->product->product_name,
                     'qty' => $cart->qty,
                     'size' => $cart->size,
                     'color' => $cart->color
                 );
-                $vendor_id = $cart->user_id;
+                $vendor_id = $cart->vendor_id;
                 $total = $total + round($cart->qty * round($cart->product->price + $cart->product->service_charge, 1), 1);
                 $service_charge = $service_charge + round($cart->qty * $cart->product->service_charge, 1);
             }
