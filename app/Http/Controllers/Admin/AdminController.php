@@ -62,7 +62,7 @@ class AdminController extends Controller
     {
         $category = Category::where('id', $id)->first();
         if ($category) {
-            $category->delete();
+            // $category->delete();
             return back();
         } else {
             return back();
@@ -161,7 +161,7 @@ class AdminController extends Controller
     {
         $subcategory = Subcategory::where('id', $id)->first();
         if ($subcategory) {
-            $subcategory->delete();
+            // $subcategory->delete();
             return back();
         } else {
             return back();

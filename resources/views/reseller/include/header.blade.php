@@ -67,6 +67,8 @@
                             <li><a href="tables_dynamic.html">Withdraw Lists</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{ route('affiliate') }}"><i class="fa fa-square"></i> Affiliate Link </a></li>
+
                 </ul>
             </div>
 

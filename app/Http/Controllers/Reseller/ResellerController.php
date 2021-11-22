@@ -64,4 +64,10 @@ class ResellerController extends Controller
             return back();
         }
     }
+
+    public function affiliate()
+    {
+        $affiliate = url('pro-rft-') . 'link-' . Auth::user()->id . '?' . 'happy-affiliate';
+        return view('reseller.main.affiliate', compact('affiliate'));
+    }
 }

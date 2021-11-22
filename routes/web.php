@@ -41,6 +41,7 @@ Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 
 
 Route::post('/login-cart', [App\Http\Controllers\Auth\LoginController::class, 'logincart'])->name('logincart');
 
+Route::get('/pro-rft-link-{id}', [App\Http\Controllers\Auth\LoginController::class, 'affiliate_link']);
 
 
 Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_view'])->name('product.view');
@@ -159,6 +160,8 @@ Route::group(['middleware' => ['auth', 'reseller'],], function () {
     Route::get('/dashboard/reseller/order/lists', [ResellerController::class, 'order_lists'])->name('reseller.order.list');
     Route::get('/dashboard/reseller/order/single/{id}', [ResellerController::class, 'order_single'])->name('reseller.order.single');
     Route::get('/dashboard/reseller/order/accept/{id}', [ResellerController::class, 'order_complete'])->name('order.accept');
+
+    Route::get('/dashboard/reseller/affiliate', [ResellerController::class, 'affiliate'])->name('affiliate');
 });
 //------------------------------------------------------------Reseller----------------------------------------------------------------------------------
 Route::get('get-subcategory-list', [AjaxController::class, 'subcategory_list'])->name('get-subcategory-list');

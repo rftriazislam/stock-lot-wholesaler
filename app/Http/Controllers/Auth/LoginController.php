@@ -70,4 +70,14 @@ class LoginController extends Controller
         }
         return back()->with('message', 'success');
     }
+
+    public function affiliate_link(Request $request, $id)
+    {
+        $request['id'] = $id;
+        $validate = $this->validate($request, [
+            'id' => 'required|exists:users,id',
+        ]);
+        $id = $id;
+        return view('auth.register', compact('id'));
+    }
 }
