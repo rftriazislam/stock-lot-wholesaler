@@ -79,6 +79,7 @@ class Helper
     {
         $user = User::where('id', $id)->first();
         $user->update(['balance' => $user->balance + $amount]);
+        Helper::transtion_history($id, $amount, 'in', 'sell');
         return true;
     }
     public static function vendor_affiliate($id, $amount)
@@ -86,9 +87,9 @@ class Helper
         $user = User::where('id', $id)->first();
         $comission = ($amount * 20) / 100;
         if ($user->refered_id) {
-            $user = User::where('id', $user->refered_id)->first();
-            $user->update(['balance' => $user->balance + $comission]);
-            Helper::transtion_history($user->refered_id, $comission, 'Merchant', 'Affiliate');
+            $userr = User::where('id', $user->refered_id)->first();
+            $userr->update(['balance' => $userr->balance + $comission]);
+            Helper::transtion_history($user->refered_id, $comission, 'in', 'Affiliate');
         }
 
         return true;
