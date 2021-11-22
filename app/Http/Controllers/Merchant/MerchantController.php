@@ -467,4 +467,9 @@ class MerchantController extends Controller
             return back();
         }
     }
+    public function affiliate()
+    {
+        $affiliate = url('pro-rft-') . 'link-' . Auth::user()->id . '?' . 'happy-affiliate';
+        return view('merchant.main.affiliate', compact('affiliate'));
+    }
 }

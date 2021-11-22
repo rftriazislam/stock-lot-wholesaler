@@ -64,6 +64,9 @@
                             <li><a href="{{ route('merchant.withdraw.list') }}">Withdraw Lists</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{ route('merchant.affiliate') }}"><i class="fa fa-square"></i> Affiliate Link
+                        </a></li>
+
                 </ul>
             </div>
 
