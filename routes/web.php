@@ -147,6 +147,10 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
     Route::get('/dashboard/merchant/order/shipping/{id}', [MerchantController::class, 'order_shipping_charge'])->name('order.shipping.charge');
     Route::post('/dashboard/merchant/shipping/save', [MerchantController::class, 'save_shipping'])->name('merchant.save.shipping');
     Route::get('/dashboard/merchant/affiliate', [MerchantController::class, 'affiliate'])->name('merchant.affiliate');
+
+    Route::get('/dashboard/merchant/buy/order/lists', [MerchantController::class, 'buy_order_lists'])->name('merchant.buy.order.list');
+    Route::get('/dashboard/merchant/buy/order/single/{id}', [MerchantController::class, 'buy_order_single'])->name('merchant.buy.order.single');
+    Route::get('/dashboard/merchant/buy/order/accept/{id}', [MerchantController::class, 'buy_order_complete'])->name('order.buy.accept');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 

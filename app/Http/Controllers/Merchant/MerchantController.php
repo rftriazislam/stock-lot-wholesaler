@@ -467,6 +467,32 @@ class MerchantController extends Controller
             return back();
         }
     }
+    public function buy_order_lists()
+    {
+        $orders = MerchantOrder::where('buyer_id', Auth::user()->id)->latest()->paginate(10);
+        return view('merchant.orderbuy.lists', compact('orders'));
+    }
+
+    public function buy_order_single($id)
+    {
+        $order =  MerchantOrder::with('ship_details')->where('buyer_id', Auth::user()->id)->where('id', $id)->first();
+        if ($order) {
+            return view('merchant.orderbuy.products', compact('order'));
+        } else {
+            return back();
+        }
+    }
+    public function buy_order_complete($id)
+    {
+        $order =  MerchantOrder::where('buyer_id', Auth::user()->id)->where('id', $id)->first();
+        if ($order) {
+            $order->update(['status' => 3]);
+            return redirect()->route('merchant.orderbuy.list');
+        } else {
+            return back();
+        }
+    }
+
     public function affiliate()
     {
         $affiliate = url('pro-rft-') . 'link-' . Auth::user()->id . '?' . 'happy-affiliate';

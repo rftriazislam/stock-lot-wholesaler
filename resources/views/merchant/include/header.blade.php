@@ -40,10 +40,16 @@
                             <li><a href="{{ route('merchant.list.product') }}">List Product</a></li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-desktop"></i> Order <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-desktop"></i> Sale Order <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('merchant.income.order') }}">Order inComming</a></li>
                             <li><a href="{{ route('merchant.list.product') }}">Order Complete</a></li>
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-desktop"></i> Buy Order <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('merchant.buy.order.list') }}">Order list</a></li>
+                            <li><a>Order Complete</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-bar-chart-o"></i>My Profile<span class="fa fa-chevron-down"></span></a>
