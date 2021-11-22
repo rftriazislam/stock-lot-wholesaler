@@ -88,6 +88,7 @@ class Helper
         if ($user->refered_id) {
             $user = User::where('id', $user->refered_id)->first();
             $user->update(['balance' => $user->balance + $comission]);
+            Helper::transtion_history($user->refered_id, $comission, 'Merchant', 'Affiliate');
         }
 
         return true;

@@ -15,6 +15,10 @@ class CreateTransanctionHistoriesTable extends Migration
     {
         Schema::create('transanction_histories', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('amount');
+            $table->string('pyment_status');
+            $table->string('payment_type');
             $table->timestamps();
         });
     }
