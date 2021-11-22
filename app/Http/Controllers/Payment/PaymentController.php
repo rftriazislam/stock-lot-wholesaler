@@ -87,7 +87,7 @@ class PaymentController extends Controller
             'transaction_status' => ($response_data->spCode == '000') ? 'Success' : 'Fail'
         ]);
 
-        if ($response_data->spCode == '000') {
+        if ($response_data->spCode != '000') {
             $deliverydetails = DeliveryDetail::where('user_id', $trans_info->buyer_id)->first();
             $merchant_order = new MerchantOrder();
             $merchant_order->tx_id = $trans_info->tx_id;
