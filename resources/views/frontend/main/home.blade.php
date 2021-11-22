@@ -485,8 +485,8 @@
                                             <img style="max-height:225px"
                                                 src="{{ asset('storage') }}/subcategory/{{ $subitem->image }}" alt="">
 
-                                            <p>{{ $subitem->name }} </p><span>Item
-                                                {{ $subitem->merchantproduct_count }}</span>
+                                            <p class="ti">{{ $subitem->name }}<br><span>Item
+                                                    {{ $subitem->merchantproduct_count }}</span> </p>
                                         </div>
                                         @php
                                             $i = $i + 1;
@@ -520,7 +520,7 @@
                                             </ul>
                                         </div>
                                         <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>
-                                            <div class="ps-product_g_content"><a class="ps-product__title"
+                                            <div class="ps-product_g_content ti"><a class="ps-product__title"
                                                     href="product-default.html">{{ $subitem->product_name }}
                                                 </a>
                                                 <div class="ps-product__rating">

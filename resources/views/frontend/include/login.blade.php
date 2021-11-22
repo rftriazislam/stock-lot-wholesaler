@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('logincart') }}">
                     @if (session('errors'))
                         <p style="text-align: center;color:red"><b>{{ $errors }}</b></p>
                     @endif

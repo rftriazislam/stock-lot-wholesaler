@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
     /*
@@ -50,8 +52,22 @@ class LoginController extends Controller
             return route('admin');
         } elseif (Auth::user()->role == 'merchant') {
             return route('merchant');
-        }elseif (Auth::user()->role == 'reseller') {
+        } elseif (Auth::user()->role == 'reseller') {
             return route('reseller');
         }
+    }
+
+
+    public function logincart(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'email' => 'required|exists:users,email',
+            'password' => 'required'
+        ]);
+
+        if (!auth()->attempt($validate)) {
+            return back()->with('message', 'error');
+        }
+        return back()->with('message', 'success');
     }
 }

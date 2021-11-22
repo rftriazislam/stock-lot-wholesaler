@@ -8,6 +8,7 @@ use App\Models\MerchantOrder;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\PaymentMethod;
+use App\Models\ShippingDetail;
 use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
@@ -415,7 +416,55 @@ class MerchantController extends Controller
     }
     public function order_single($id)
     {
+        $order =  MerchantOrder::with('ship_details')->where('vendor_id', Auth::user()->id)->where('id', $id)->first();
+        if ($order) {
+            return view('merchant.order.products', compact('order'));
+        } else {
+            return back();
+        }
+    }
+
+    public function order_shipping_charge($id)
+    {
+
+        $order =  MerchantOrder::with('ship_details')->where('vendor_id', Auth::user()->id)->where('id', $id)->first();
+        if ($order && $order->ship_details == null) {
+            return view('merchant.order.shipping', compact('order'));
+        } else {
+            return back();
+        }
+    }
+
+    public function save_shipping(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'order_id' => 'required|exists:merchant_orders,id',
+            'ship_to' => 'required|unique:shipping_details,order_id',
+            'ship_from' => 'required',
+            'ship_cost' => 'required',
+            'ship_media_way' => 'required',
+            'ship_delay' => 'required',
+            'details' => 'required',
+        ]);
+
+        $save = ShippingDetail::create($validate);
+        if ($save) {
+            $order =  MerchantOrder::where('id', $request->order_id)->first();
+            $order->update(['status' => 1]);
+            return redirect()->route('merchant.income.order');
+        } else {
+            return back();
+        }
+    }
+
+    public function order_complete($id)
+    {
         $order =  MerchantOrder::where('vendor_id', Auth::user()->id)->where('id', $id)->first();
-        return view('merchant.order.products', compact('order'));
+        if ($order) {
+            $order->update(['status' => 2]);
+            return redirect()->route('merchant.income.order');
+        } else {
+            return back();
+        }
     }
 }

@@ -109,6 +109,7 @@
                 dataType: "json",
                 success: function(data) {
                     showcart();
+                    totalitem();
                 },
                 error: function(data) {
                     alert("fail");

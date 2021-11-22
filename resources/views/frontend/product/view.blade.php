@@ -416,7 +416,7 @@
 
                     dataType: "json",
                     success: function(res) {
-                        console.log(res);
+
                         if (res.msg == 'add') {
                             $('.add_cart_item').text('Successfully add Product');
                             $('.add_cart_item').css('color', 'green');
@@ -430,6 +430,7 @@
                             );
                             $('.add_cart_item').css('color', 'red');
                         }
+                        totalitem();
 
                     },
                     error: function(data) {

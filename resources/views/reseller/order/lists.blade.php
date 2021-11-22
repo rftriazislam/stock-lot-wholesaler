@@ -1,4 +1,4 @@
-@extends('merchant.master')
+@extends('reseller.master')
 @section('content')
 
     <div class="col-md-12 col-sm-12  ">
@@ -35,12 +35,13 @@
                                 </th>
                                 <th class="column-title">Sri No </th>
                                 <th class="column-title">#TxID</th>
-                                <th class="column-title">Reseller info </th>
-                                <th class="column-title">Name </th>
+                                <th class="column-title">Vendor info </th>
+                                <th class="column-title">Shop Name </th>
                                 <th class="column-title">Product List</th>
-                                <th class="column-title">Delivery Details</th>
+                                <th class="column-title">Shipping Details</th>
                                 <th class="column-title">Total Amount</th>
                                 <th class="column-title">Advanced Pay </th>
+                                <th class="column-title">Shipping Charge </th>
                                 <th class="column-title">COD Amount</th>
                                 <th class="column-title">Status </th>
                                 <th class="column-title no-link last"><span class="nobr">Action</span>
@@ -60,34 +61,42 @@
                                     <td class=" ">{{ $loop->iteration }}</td>
                                     <td class=" ">#{{ $item->tx_id }}</td>
                                     <td class=" "><a href="#">More Details</a></td>
-                                    <td class=" ">{{ $item->user_info->name }}<i
+                                    <td class=" ">{{ Hel::shop_info($item->vendor_id)->name }}<i
                                             class="success fa fa-long-arrow-up"></i></td>
                                     <td class=" "><a
-                                            href="{{ route('merchant.order.single', [$item->id]) }}">Product
+                                            href="{{ route('reseller.order.single', [$item->id]) }}">Product
                                             Lists</a></td>
                                     <td class=" "><a style="color: blueviolet"
-                                            href="{{ route('merchant.order.single', [$item->id]) }}">Delivery Details</a>
+                                            href="{{ route('reseller.order.single', [$item->id]) }}">Shipping Details</a>
                                     </td>
 
-                                    <td class=" ">{{ $item->total_amount - $item->total_service_charge }}
+                                    <td class=" ">{{ $item->total_amount }}
                                     </td>
-                                    <td class=" ">{{ $item->amount - $item->total_service_charge }}</td>
-                                    <td class=" ">{{ $item->total_amount - $item->amount }}</td>
+                                    <td class=" ">{{ $item->amount }}</td>
+                                    <td class=" ">@if ($item->ship_details){{ $item->ship_details->ship_cost }}@endif</td>
+                                    <td class=" ">
+                                        @php
+                                            $amount = $item->total_amount - $item->amount;
+                                            if ($item->ship_details) {
+                                                $amount = $item->ship_details->ship_cost + $amount;
+                                            }
+                                        @endphp
+                                        {{ $amount }}
+
+
+                                    </td>
+
 
 
                                     <td class=" ">
 
                                         @if ($item->status == 0)
-                                            <a class="btn btn-success" style="color: white"
-                                                href="{{ route('order.shipping.charge', [$item->id]) }}">Add Shipping
-                                                Charge</a>
-
-
+                                            <a class="btn btn-info" style="color: white">Wait For Shipping Charge</a>
                                         @elseif($item->status == 1)
-                                            <a class="btn btn-info" style="color: white"
-                                                href="{{ route('order.submit', [$item->id]) }}">Panding</a>
+                                            <a class="btn btn-primary" style="color: white">Delivery Processing</a>
                                         @elseif($item->status == 2)
-                                            <a href="" class="btn btn-success" style="color: white">Delivery Checking</a>
+                                            <a href="{{ route('order.accept', [$item->id]) }}" class="btn btn-success"
+                                                style="color: white">Delivery Checking</a>
                                         @else
                                             <a class="btn btn-danger" style="color: white">Complete</a>
                                         @endif

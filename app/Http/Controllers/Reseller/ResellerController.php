@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reseller;
 
 use App\Http\Controllers\Controller;
+use App\Models\MerchantOrder;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -36,5 +37,31 @@ class ResellerController extends Controller
             }
         }
         return back();
+    }
+
+    public function order_lists()
+    {
+        $orders = MerchantOrder::where('buyer_id', Auth::user()->id)->latest()->paginate(10);
+        return view('reseller.order.lists', compact('orders'));
+    }
+
+    public function order_single($id)
+    {
+        $order =  MerchantOrder::with('ship_details')->where('buyer_id', Auth::user()->id)->where('id', $id)->first();
+        if ($order) {
+            return view('reseller.order.products', compact('order'));
+        } else {
+            return back();
+        }
+    }
+    public function order_complete($id)
+    {
+        $order =  MerchantOrder::where('buyer_id', Auth::user()->id)->where('id', $id)->first();
+        if ($order) {
+            $order->update(['status' => 3]);
+            return redirect()->route('reseller.order.list');
+        } else {
+            return back();
+        }
     }
 }

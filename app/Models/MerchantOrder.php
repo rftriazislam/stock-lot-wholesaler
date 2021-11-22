@@ -30,4 +30,8 @@ class MerchantOrder extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'buyer_id');
     }
+    public function ship_details()
+    {
+        return $this->hasOne('App\Models\ShippingDetail', 'order_id', 'id');
+    }
 }

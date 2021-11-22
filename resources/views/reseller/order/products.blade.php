@@ -1,4 +1,4 @@
-@extends('merchant.master')
+@extends('reseller.master')
 @section('content')
 
     <div class="col-md-8 col-sm-8  ">
@@ -89,6 +89,73 @@
                 <div class="x_content">
                     <div class="row">
                         <div class="col-sm-12 mail_list_column">
+                            @if ($order->ship_details)
+                                <button id="compose" class="btn btn-sm btn-success btn-block" type="button">Shipping
+                                    Details</button>
+
+                                <a href="#">
+                                    <div class="mail_list">
+                                        <div class="left">
+                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
+                                        </div>
+                                        <div class="right">
+                                            <h3>From</h3>
+                                            </h3>
+                                            <p>{{ $order->ship_details->ship_from }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="mail_list">
+                                        <div class="left">
+                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
+                                        </div>
+                                        <div class="right">
+                                            <h3>TO</h3>
+                                            </h3>
+                                            <p>{{ $order->ship_details->ship_to }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="mail_list">
+                                        <div class="left">
+                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
+                                        </div>
+                                        <div class="right">
+                                            <h3>Way</h3>
+                                            </h3>
+                                            <p>{{ $order->ship_details->ship_media_way }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a href="#">
+                                    <div class="mail_list">
+                                        <div class="left">
+                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
+                                        </div>
+                                        <div class="right">
+                                            <h3>Delay</h3>
+                                            </h3>
+                                            <p>{{ $order->ship_details->ship_delay }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="mail_list">
+                                        <div class="left">
+                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
+                                        </div>
+                                        <div class="right">
+                                            <h3>Details</h3>
+                                            </h3>
+                                            <p>{{ $order->ship_details->details }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            @endif
                             <button id="compose" class="btn btn-sm btn-success btn-block" type="button">Reseller Delivery
                                 Details</button>
                             @foreach ($order->delivery_details as $item)
@@ -165,73 +232,7 @@
 
                             @endforeach
 
-                            @if ($order->ship_details)
-                                <button id="compose" class="btn btn-sm btn-success btn-block" type="button">Shipping
-                                    Details</button>
 
-                                <a href="#">
-                                    <div class="mail_list">
-                                        <div class="left">
-                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                                        </div>
-                                        <div class="right">
-                                            <h3>From</h3>
-                                            </h3>
-                                            <p>{{ $order->ship_details->ship_from }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="mail_list">
-                                        <div class="left">
-                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                                        </div>
-                                        <div class="right">
-                                            <h3>TO</h3>
-                                            </h3>
-                                            <p>{{ $order->ship_details->ship_to }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="mail_list">
-                                        <div class="left">
-                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                                        </div>
-                                        <div class="right">
-                                            <h3>Way</h3>
-                                            </h3>
-                                            <p>{{ $order->ship_details->ship_media_way }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="#">
-                                    <div class="mail_list">
-                                        <div class="left">
-                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                                        </div>
-                                        <div class="right">
-                                            <h3>Delay</h3>
-                                            </h3>
-                                            <p>{{ $order->ship_details->ship_delay }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="mail_list">
-                                        <div class="left">
-                                            <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                                        </div>
-                                        <div class="right">
-                                            <h3>Details</h3>
-                                            </h3>
-                                            <p>{{ $order->ship_details->details }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            @endif
 
                         </div>
                         <!-- /MAIL LIST -->

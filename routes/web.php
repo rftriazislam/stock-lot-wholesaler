@@ -39,6 +39,9 @@ Route::get('/home', [FrontendController::class, 'index']);
 
 Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
+Route::post('/login-cart', [App\Http\Controllers\Auth\LoginController::class, 'logincart'])->name('logincart');
+
+
 
 Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_view'])->name('product.view');
 Route::get('/product-lists-{sid}', [FrontendController::class, 'product_list_subcategory'])->name('product.list.subcategory');
@@ -139,6 +142,9 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
 
     Route::get('/dashboard/merchant/order/list', [MerchantController::class, 'order_list'])->name('merchant.income.order');
     Route::get('/dashboard/merchant/order/single/{id}', [MerchantController::class, 'order_single'])->name('merchant.order.single');
+    Route::get('/dashboard/merchant/order/submit/{id}', [MerchantController::class, 'order_complete'])->name('order.submit');
+    Route::get('/dashboard/merchant/order/shipping/{id}', [MerchantController::class, 'order_shipping_charge'])->name('order.shipping.charge');
+    Route::post('/dashboard/merchant/shipping/save', [MerchantController::class, 'save_shipping'])->name('merchant.save.shipping');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 
@@ -150,6 +156,9 @@ Route::group(['middleware' => ['auth', 'reseller'],], function () {
 
     Route::get('/dashboard/reseller/myprofile', [ResellerController::class, 'myprofile'])->name('reseller.profile');
     Route::post('/dashboard/reseller/profile/update', [MerchantController::class, 'update_profile'])->name('reseller.update.profile');
+    Route::get('/dashboard/reseller/order/lists', [ResellerController::class, 'order_lists'])->name('reseller.order.list');
+    Route::get('/dashboard/reseller/order/single/{id}', [ResellerController::class, 'order_single'])->name('reseller.order.single');
+    Route::get('/dashboard/reseller/order/accept/{id}', [ResellerController::class, 'order_complete'])->name('order.accept');
 });
 //------------------------------------------------------------Reseller----------------------------------------------------------------------------------
 Route::get('get-subcategory-list', [AjaxController::class, 'subcategory_list'])->name('get-subcategory-list');
@@ -157,6 +166,7 @@ Route::post('/add-to-cart-view', [AjaxController::class, 'add_to_cart'])->name('
 Route::post('/show-cart', [AjaxController::class, 'show_cart'])->name('show.cart');
 Route::post('/show--update-cart', [AjaxController::class, 'cart_update'])->name('cart_update');
 Route::post('/show--removed-cart', [AjaxController::class, 'removed_cart'])->name('removed.cart');
+Route::post('/total-item', [AjaxController::class, 'total_item'])->name('total-item');
 
 
 

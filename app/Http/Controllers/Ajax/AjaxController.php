@@ -272,4 +272,48 @@ class AjaxController extends Controller
 
         echo json_encode($data);
     }
+
+    public function total_item(Request $request)
+    {
+
+        if (Auth::check()) {
+            $item_count = CartAdd::where('user_id', Auth::user()->id)->count();
+            $carts =  CartAdd::with('vendor', 'product')->where('user_id', Auth::user()->id)->get();
+            $output = ' <div class="ps-cart__items" style="overflow: scroll;height: 300px;">';
+            $total = 0;
+            foreach ($carts as $item) {
+                $output .= '  <div class="ps-product--cart-mobile">
+            <div class="ps-product__thumbnail"><a href="' . route('product.view', [$item->product->id, $item->product->slug]) . '"><img
+                        src="' . asset('storage') . '/merchant/product/main/small/' . $item->product->main_picture . '"
+                        alt=""></a>
+            </div>
+            <div class="ps-product__content"><a class="ps-product__remove" href="#" onclick="removed(' . $item->id . ')"><i
+                        class="icon-cross"></i></a><a href="' . route('product.view', [$item->product->id, $item->product->slug]) . '">' . $item->product->product_name . '</a>
+                <p><strong>Sold by:</strong>  ' . $item->vendor->name  . '<br>size: ' . $item->size . '&nbsp; color : <span style="height:2px;width:2px;background:' . $item->color . ';color:' . $item->color . '">xx</span></p>
+                <small>' . $item->qty . ' x ' . ($item->product->price + $item->product->service_charge) . '</small>
+            </div>
+        </div>';
+                $total = $total + round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1);
+            }
+            $output .= '
+    </div>';
+            $output .= '
+    <div class="ps-cart__footer">
+        <h3>Sub Total:<strong>' . $total . '</strong></h3>
+        <figure><a class="ps-btn" href="' . route('product.cart') . '">View
+                Cart</a><a class="ps-btn" href="' . route('cart.checkout') . '">Checkout</a></figure>
+    </div>';
+        } else {
+            $item_count = 0;
+            $output = '';
+        }
+        $data = array(
+            'item'  => $item_count,
+            'minicart' => ($item_count == 0) ? ' ' : $output
+
+        );
+
+
+        echo json_encode($data);
+    }
 }
