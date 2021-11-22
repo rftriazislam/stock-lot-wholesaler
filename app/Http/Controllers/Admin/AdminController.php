@@ -148,7 +148,7 @@ class AdminController extends Controller
     }
     public function list_subcategory()
     {
-        $subcategories = Subcategory::with('category')->latest()->paginate();
+        $subcategories = Subcategory::with('category')->latest()->paginate(15);
         return view('admin.subcategory.lists', compact('subcategories'));
     }
 
