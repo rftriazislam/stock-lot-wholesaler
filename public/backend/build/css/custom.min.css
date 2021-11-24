@@ -1239,9 +1239,21 @@ table.no-margin .progress {
 }
 @media (min-width: 320px) {
     .borderr {
-        /* border: 1px solid rgb(82, 80, 80); */
+        border: 1px solid rgb(82, 80, 80);
         margin: 17px 0% 29px 0%;
         border-radius: 15px;
+    }
+    .pb_179 {
+        padding-bottom: 179px;
+    }
+    .pb_288 {
+        padding-bottom: 288px;
+    }
+    .pb_564 {
+        padding-bottom: 564px;
+    }
+    .pb_695 {
+        padding-bottom: 695px;
     }
 }
 @media (min-width: 416px) {
@@ -1249,6 +1261,7 @@ table.no-margin .progress {
         border: 1px solid rgb(82, 80, 80);
         margin: 17px 0% 29px 0%;
         border-radius: 15px;
+        padding-bottom: 0px;
     }
 }
 
@@ -1260,6 +1273,7 @@ table.no-margin .progress {
         border: 1px solid rgb(82, 80, 80);
         margin: 17px 19% 29px 19%;
         border-radius: 15px;
+        padding-bottom: 0px;
     }
 }
 @media (min-width: 992px) {
@@ -1270,6 +1284,7 @@ table.no-margin .progress {
         border: 1px solid rgb(82, 80, 80);
         margin: 17px 25% 29px 25%;
         border-radius: 15px;
+        padding-bottom: 0px;
     }
 }
 @media (min-width: 1200px) {

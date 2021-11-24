@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
 
     </style>
 @endsection
@@ -66,7 +66,7 @@
                             data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="borderr">
+                            <div class="borderr pb_179">
                                 <h5 style="text-align: center;padding-top: 9px">Select Category & SubCategory</h5>
                                 <hr>
                                 <div class="form-group item">
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
 
-                            <div class="borderr">
+                            <div class="borderr pb_288">
                                 <h5 style="text-align: center;padding-top: 9px">Product Details</h5>
                                 <hr>
                                 <div class="item form-group">
@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="borderr">
+                            <div class="borderr pb_564">
                                 <h5 style="text-align: center;padding-top: 9px">Product Size & Color</h5>
                                 <hr>
 
@@ -314,7 +314,7 @@
                                 </div>
 
                             </div>
-                            <div class="borderr">
+                            <div class="borderr pb_695">
                                 <h5 style="text-align: center;padding-top: 9px">Product Price & Picture,Video</h5>
                                 <hr>
                                 <div class="item form-group">
