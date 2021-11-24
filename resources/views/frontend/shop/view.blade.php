@@ -43,7 +43,7 @@
                                     </figure>
                                 </div>
                                 <div class="ps-block__footer">
-                                    <p>Call us directly<strong>(+053) 77-637-3300</strong></p>
+                                    {{-- <p>Call us directly<strong>(+053) 77-637-3300</strong></p> --}}
                                     <p>or Or if you have any question</p><a class="ps-btn ps-btn--fullwidth" href="">Contact
                                         Seller</a>
                                 </div>

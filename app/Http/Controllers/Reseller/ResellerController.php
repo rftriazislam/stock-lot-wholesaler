@@ -70,4 +70,11 @@ class ResellerController extends Controller
         $affiliate = url('pro-rft-') . 'link-' . Auth::user()->id . '?' . 'happy-affiliate';
         return view('reseller.main.affiliate', compact('affiliate'));
     }
+    public function affiliate_member()
+    {
+
+        $members = User::where('refered_id', Auth::user()->id)->get();
+
+        return view('reseller.main.my_member', compact('members'));
+    }
 }

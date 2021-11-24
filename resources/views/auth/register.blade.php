@@ -58,8 +58,8 @@
                                                 value="{{ old('role') }}" required autocomplete="role" autofocus
                                                 type="text" placeholder="Merchant or Reseller">
                                                 <option selected value=''>Select Role</option>
-                                                <option value="merchant">Be a Merchant</option>
-                                                <option value="reseller">Be a Reseller/Showroom/Facebook/Whatsapp</option>
+                                                <option value="merchant">Be a Merchant/Wholesaler</option>
+                                                <option value="reseller">Be a Reseller/Showroom Owner</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -191,7 +191,7 @@
                                 <li><i class="icon-bag2"></i><span>KEEP A RECORD OF ALL YOUR PURCHASES</span></li>
                             </ul>
                         </figure>
-                        <div class="ps-section__coupon"><span>$25</span>
+                        <div class="ps-section__coupon"><span></span>
                             <aside>
                                 <h5>A small gift for your first purchase</h5>
                                 <p>Martfury give $25 as a small gift for your first purchase. Welcome to Martfury!</p>

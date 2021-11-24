@@ -68,6 +68,12 @@
                         </ul>
                     </li>
                     <li><a href="{{ route('affiliate') }}"><i class="fa fa-square"></i> Affiliate Link </a></li>
+                    <li><a><i class="fa fa-user"></i> My Affiliate Member <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{ route('reseller.affiliate.member') }}">Lists</a></li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

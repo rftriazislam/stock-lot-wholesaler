@@ -97,12 +97,12 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/merchant/products', [AdminController::class, 'list_merchant_products'])->name('admin.merchant.products');
     Route::get('/dashboard/merchant/product/permission/{id}', [AdminController::class, 'status_merchant_product'])->name('admin.merchant.status.product');
 
-    
+
     Route::get('/dashboard/merchant/product/hot-add/{id}', [AdminController::class, 'hot_addproduct'])->name('admin.merchant.hot.addproduct');
     Route::post('/dashboard/merchant/product/hot', [AdminController::class, 'merchant_hot_saveproduct'])->name('admin.merchant.hot.saveproduct');
     Route::get('/dashboard/merchant/product/hot-remove/{id}', [AdminController::class, 'hot_removeproduct'])->name('admin.merchant.hot.removeproduct');
 
-    
+
 
     //----------merchant----------
 
@@ -151,11 +151,13 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
     Route::get('/dashboard/merchant/order/submit/{id}', [MerchantController::class, 'order_complete'])->name('order.submit');
     Route::get('/dashboard/merchant/order/shipping/{id}', [MerchantController::class, 'order_shipping_charge'])->name('order.shipping.charge');
     Route::post('/dashboard/merchant/shipping/save', [MerchantController::class, 'save_shipping'])->name('merchant.save.shipping');
-    Route::get('/dashboard/merchant/affiliate', [MerchantController::class, 'affiliate'])->name('merchant.affiliate');
 
     Route::get('/dashboard/merchant/buy/order/lists', [MerchantController::class, 'buy_order_lists'])->name('merchant.buy.order.list');
     Route::get('/dashboard/merchant/buy/order/single/{id}', [MerchantController::class, 'buy_order_single'])->name('merchant.buy.order.single');
     Route::get('/dashboard/merchant/buy/order/accept/{id}', [MerchantController::class, 'buy_order_complete'])->name('order.buy.accept');
+
+    Route::get('/dashboard/merchant/affiliate', [MerchantController::class, 'affiliate'])->name('merchant.affiliate');
+    Route::get('/dashboard/merchant/affiliate/member', [MerchantController::class, 'affiliate_member'])->name('merchant.affiliate.member');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 
@@ -172,6 +174,8 @@ Route::group(['middleware' => ['auth', 'reseller'],], function () {
     Route::get('/dashboard/reseller/order/accept/{id}', [ResellerController::class, 'order_complete'])->name('order.accept');
 
     Route::get('/dashboard/reseller/affiliate', [ResellerController::class, 'affiliate'])->name('affiliate');
+
+    Route::get('/dashboard/reseller/affiliate/member', [ResellerController::class, 'affiliate_member'])->name('reseller.affiliate.member');
 });
 //------------------------------------------------------------Reseller----------------------------------------------------------------------------------
 Route::get('get-subcategory-list', [AjaxController::class, 'subcategory_list'])->name('get-subcategory-list');
