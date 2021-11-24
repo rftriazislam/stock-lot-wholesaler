@@ -89,7 +89,7 @@
                       <button>Search</button>
                   </form>
                   <p><a href="#">Product</a><a href="#">Best Shop</a><a href="#">Best Product</a><a href="#">Top
-                          Sale</a><a href="#">Most Rates</a><a href="#">Quality</a><a href="#">Wholesale Marketplace</a>
+                          Sale</a><a href="#">Quality</a><a href="#">Wholesale Marketplace</a>
                   </p>
               </div>
               <div class="header__content-right">
