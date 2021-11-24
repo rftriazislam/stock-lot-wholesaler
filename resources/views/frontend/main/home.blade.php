@@ -108,97 +108,107 @@
                                     data-owl-dots="false" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1"
                                     data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000"
                                     data-owl-mousedrag="on">
-                                  @foreach($hotdeals as $hot_item)
-                                    <div class="ps-product--detail ps-product--hot-deal">
-                                        <div class="ps-product__header">
-                                            <div class="ps-product__thumbnail" data-vertical="true">
-                                                <figure>
-                                                    <div class="ps-wrapper">
-                                                        <div class="ps-product__gallery" data-arrow="true">
-                                                                    <div class="item">
-                                                                    <a href="{{ asset('storage') }}/merchant/product/main/big/{{ $hot_item->product->main_picture }}"><img
-                                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
-                                                                        alt="">
-                                                                        </a>
-                                                                        </div>
+                                    @foreach ($hotdeals as $hot_item)
+                                        <div class="ps-product--detail ps-product--hot-deal">
+                                            <div class="ps-product__header">
+                                                <div class="ps-product__thumbnail" data-vertical="true">
+                                                    <figure>
+                                                        <div class="ps-wrapper">
+                                                            <div class="ps-product__gallery" data-arrow="true">
+                                                                <div class="item">
+                                                                    <a
+                                                                        href="{{ asset('storage') }}/merchant/product/main/big/{{ $hot_item->product->main_picture }}"><img
+                                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
+                                                                            alt="">
+                                                                    </a>
+                                                                </div>
 
-                                                                    @if ($hot_item->product->files)
-                                                                        @foreach ($hot_item->product->files as $item)
-
-                                                                            <div class="item"><a
-                                                                                    href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
-                                                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
-                                                                                        alt=""></a></div>
-                                                                        @endforeach
-                                                                    @endif 
-                                                                
-                                                        </div>
-                                                        <div class="ps-product__badge"><span>Save <br> $280.000</span></div>
-                                                    </div>
-                                                </figure>
-                                                <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3"
-                                                    data-arrow="false">
-                                                    <div class="item"><img
-                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
-                                                            alt=""></div>
                                                                 @if ($hot_item->product->files)
-                                                                        @foreach ($hot_item->product->files as $item)
+                                                                    @foreach ($hot_item->product->files as $item)
 
-                                                                            <div class="item"><img
-                                                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
-                                                                                        alt=""></div>
-                                                                        @endforeach
-                                                                    @endif 
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="ps-product__info">
-                                               <a href="{{ route('product.view', [$hot_item->product->id, $hot_item->product->slug]) }}"> <h5>{{$hot_item->product->subcategory->name}}</h5>
-                                                <h3 class="ps-product__name"> {{$hot_item->product->product_name}}</h3></a>
-                                                <div class="ps-product__meta">
-                                                    <h4 class="ps-product__price sale">  {{ $hot_item->product->price + $hot_item->product->service_charge }}
-                                                    <del>{{ $hot_item->product->min_retail_price }}
-                                                    </del></h4>
-                                                    <div class="ps-product__rating">
-                                                        <select class="ps-rating" data-read-only="true">
-                                                            <option value="1">1</option>
-                                                            <option value="1">2</option>
-                                                            <option value="1">3</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">5</option>
-                                                        </select><span>(1 review)</span>
+                                                                        <div class="item"><a
+                                                                                href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
+                                                                                    src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                                                    alt=""></a></div>
+                                                                    @endforeach
+                                                                @endif
+
+                                                            </div>
+                                                            {{-- <div class="ps-product__badge"><span>Save <br> $280.000</span></div> --}}
+                                                        </div>
+                                                    </figure>
+                                                    <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3"
+                                                        data-arrow="false">
+                                                        <div class="item"><img
+                                                                src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
+                                                                alt=""></div>
+                                                        @if ($hot_item->product->files)
+                                                            @foreach ($hot_item->product->files as $item)
+
+                                                                <div class="item"><img
+                                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                                        alt=""></div>
+                                                            @endforeach
+                                                        @endif
+
                                                     </div>
-                                                    <div class="ps-product__specification">
-                                                        <p>Status:<strong class="in-stock"> In Stock</strong></p>
+                                                </div>
+                                                <div class="ps-product__info">
+                                                    <a
+                                                        href="{{ route('product.view', [$hot_item->product->id, $hot_item->product->slug]) }}">
+                                                        <h5>{{ $hot_item->product->subcategory->name }}</h5>
+                                                        <h3 class="ps-product__name">
+                                                            {{ $hot_item->product->product_name }}</h3>
+                                                    </a>
+                                                    <div class="ps-product__meta">
+                                                        <h4 class="ps-product__price sale">
+                                                            {{ $hot_item->product->price + $hot_item->product->service_charge }}
+                                                            <del>{{ $hot_item->product->min_retail_price }}
+                                                            </del>
+                                                        </h4>
+                                                        <div class="ps-product__rating">
+                                                            <select class="ps-rating" data-read-only="true">
+                                                                <option value="1">1</option>
+                                                                <option value="1">2</option>
+                                                                <option value="1">3</option>
+                                                                <option value="1">4</option>
+                                                                <option value="2">5</option>
+                                                            </select><span>(1 review)</span>
+                                                        </div>
+                                                        <div class="ps-product__specification">
+                                                            <p>Status:<strong class="in-stock"> In Stock</strong></p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="ps-product__expires">
-                                                    <p>Expires In</p>
-                                                    {{-- December 21, 2021 23:00:00 --}}
-                                                    <ul class="ps-countdown" data-time="{{$hot_item->expried_time}}">
-                                                        <li><span class="days"></span>
-                                                            <p>Days</p>
-                                                        </li>
-                                                        <li><span class="hours"></span>
-                                                            <p>Hours</p>
-                                                        </li>
-                                                        <li><span class="minutes"></span>
-                                                            <p>Minutes</p>
-                                                        </li>
-                                                        <li><span class="seconds"></span>
-                                                            <p>Seconds</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ps-product__processs-bar">
-                                                    <div class="ps-progress" data-value="{{($hot_item->product->sell_count*100)/($hot_item->product->sell_count+$hot_item->product->stock)}}"><span
-                                                            class="ps-progress__value"></span></div>
-                                                    <p><strong>{{$hot_item->product->sell_count}}/{{$hot_item->product->stock}}</strong> Sold</p>
+                                                    <div class="ps-product__expires">
+                                                        <p>Expires In</p>
+                                                        {{-- December 21, 2021 23:00:00 --}}
+                                                        <ul class="ps-countdown"
+                                                            data-time="{{ $hot_item->expried_time }}">
+                                                            <li><span class="days"></span>
+                                                                <p>Days</p>
+                                                            </li>
+                                                            <li><span class="hours"></span>
+                                                                <p>Hours</p>
+                                                            </li>
+                                                            <li><span class="minutes"></span>
+                                                                <p>Minutes</p>
+                                                            </li>
+                                                            <li><span class="seconds"></span>
+                                                                <p>Seconds</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="ps-product__processs-bar">
+                                                        <div class="ps-progress"
+                                                            data-value="{{ ($hot_item->product->sell_count * 100) / ($hot_item->product->sell_count + $hot_item->product->stock) }}">
+                                                            <span class="ps-progress__value"></span></div>
+                                                        <p><strong>{{ $hot_item->product->sell_count }}/{{ $hot_item->product->stock }}</strong>
+                                                            Sold</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                  @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -211,52 +221,56 @@
                                     data-owl-gap="0" data-owl-nav="false" data-owl-dots="false" data-owl-item="1"
                                     data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1"
                                     data-owl-duration="1000" data-owl-mousedrag="on">
-                                    
+
                                     <div class="ps-product-group">
-                                    @foreach($top_sells->take(6) as $topsell)
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="{{ route('product.view', [$topsell->id, $topsell->slug]) }}"><img
-                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell->main_picture }}"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="{{ route('product.view', [$topsell->id, $topsell->slug]) }}">{{ substr($topsell->product_name, 0, 15)}}...</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>01</span>
+                                        @foreach ($top_sells->take(6) as $topsell)
+                                            <div class="ps-product--horizontal">
+                                                <div class="ps-product__thumbnail"><a
+                                                        href="{{ route('product.view', [$topsell->id, $topsell->slug]) }}"><img
+                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell->main_picture }}"
+                                                            alt=""></a></div>
+                                                <div class="ps-product__content"><a class="ps-product__title"
+                                                        href="{{ route('product.view', [$topsell->id, $topsell->slug]) }}">{{ substr($topsell->product_name, 0, 15) }}...</a>
+                                                    <div class="ps-product__rating">
+                                                        <select class="ps-rating" data-read-only="true">
+                                                            <option value="1">1</option>
+                                                            <option value="1">2</option>
+                                                            <option value="1">3</option>
+                                                            <option value="1">4</option>
+                                                            <option value="2">5</option>
+                                                        </select><span>01</span>
+                                                    </div>
+                                                    <p class="ps-product__price sale">
+                                                        {{ $topsell->price + $topsell->service_charge }}</p>
                                                 </div>
-                                                <p class="ps-product__price sale">   {{ $topsell->price + $topsell->service_charge }}</p>
                                             </div>
-                                        </div>
-                                       @endforeach
+                                        @endforeach
                                     </div>
 
                                     <div class="ps-product-group">
-                                             @foreach($top_sells->skip(6)->take(6) as $topsell2)
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}"><img
-                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell2->main_picture }}"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}">{{ substr($topsell2->product_name, 0, 15)}}...</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>02</span>
+                                        @foreach ($top_sells->skip(6)->take(6) as $topsell2)
+                                            <div class="ps-product--horizontal">
+                                                <div class="ps-product__thumbnail"><a
+                                                        href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}"><img
+                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell2->main_picture }}"
+                                                            alt=""></a></div>
+                                                <div class="ps-product__content"><a class="ps-product__title"
+                                                        href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}">{{ substr($topsell2->product_name, 0, 15) }}...</a>
+                                                    <div class="ps-product__rating">
+                                                        <select class="ps-rating" data-read-only="true">
+                                                            <option value="1">1</option>
+                                                            <option value="1">2</option>
+                                                            <option value="1">3</option>
+                                                            <option value="1">4</option>
+                                                            <option value="2">5</option>
+                                                        </select><span>02</span>
+                                                    </div>
+                                                    <p class="ps-product__price sale">
+                                                        {{ $topsell2->price + $topsell2->service_charge }}</p>
                                                 </div>
-                                                <p class="ps-product__price sale">{{ $topsell2->price + $topsell2->service_charge }}</p>
                                             </div>
-                                        </div>
-                                       @endforeach
-                                     
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
