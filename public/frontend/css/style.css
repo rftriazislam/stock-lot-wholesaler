@@ -3881,7 +3881,7 @@ textarea.form-control {
 
 .ps-block--site-features.ps-block--site-features-2 .ps-block__item {
     max-width: 25%;
-    padding: 10px 30px;
+    padding: 6px 6px;
 }
 
 @media (max-width: 1440px) {
@@ -3964,7 +3964,7 @@ textarea.form-control {
         padding-left: 20px;
     }
     .ps-block--site-features.ps-block--site-features-2 .ps-block__item {
-        max-width: 100%;
+        max-width: 50%;
     }
 }
 

@@ -88,8 +88,9 @@
                       <input class="form-control" type="text" placeholder="I'm shopping for...">
                       <button>Search</button>
                   </form>
-                  <p><a href="#">iphone x</a><a href="#">virtual</a><a href="#">apple</a><a href="#">wireless</a><a
-                          href="#">simple chair</a><a href="#">classic watch</a><a href="#">macbook</a></p>
+                  <p><a href="#">Product</a><a href="#">Best Shop</a><a href="#">Best Product</a><a href="#">Top
+                          Sale</a><a href="#">Most Rates</a><a href="#">Quality</a><a href="#">Wholesale Marketplace</a>
+                  </p>
               </div>
               <div class="header__content-right">
                   <div class="header__actions"><a class="header__extra" href="#"><i

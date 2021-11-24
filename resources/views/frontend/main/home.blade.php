@@ -50,32 +50,33 @@
                     <div class="ps-block__item">
                         <div class="ps-block__left"><i class="icon-rocket"></i></div>
                         <div class="ps-block__right">
-                            <h4>Free Delivery</h4>
-                            <p>For all oders over $99</p>
+                            <h4>Live Sell</h4>
+
                         </div>
                     </div>
                     <div class="ps-block__item">
                         <div class="ps-block__left"><i class="icon-sync"></i></div>
                         <div class="ps-block__right">
-                            <h4>90 Days Return</h4>
-                            <p>If goods have problems</p>
+                            <h4>Pre Order</h4>
+
                         </div>
                     </div>
                     <div class="ps-block__item">
                         <div class="ps-block__left"><i class="icon-credit-card"></i></div>
                         <div class="ps-block__right">
-                            <h4>Secure Payment</h4>
-                            <p>100% secure payment</p>
+                            <h4>On-Demand Product</h4>
+
                         </div>
                     </div>
                     <div class="ps-block__item">
-                        <div class="ps-block__left"><i class="icon-bubbles"></i></div>
+                        <div class="ps-block__left"><i class="icon-rocket"></i></div>
                         <div class="ps-block__right">
-                            <h4>24/7 Support</h4>
-                            <p>Dedicated support</p>
+                            <h4>10% Advance Payment 90% Cash on Delivery</h4>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="ps-promotions">
@@ -176,7 +177,8 @@
                                                             </select><span>(1 review)</span>
                                                         </div>
                                                         <div class="ps-product__specification">
-                                                            <p>Status:<strong class="in-stock"> In Stock</strong></p>
+                                                            <p>Status:<strong class="in-stock"> In
+                                                                    Stock</strong></p>
                                                         </div>
                                                     </div>
                                                     <div class="ps-product__expires">
@@ -201,7 +203,8 @@
                                                     <div class="ps-product__processs-bar">
                                                         <div class="ps-progress"
                                                             data-value="{{ ($hot_item->product->sell_count * 100) / ($hot_item->product->sell_count + $hot_item->product->stock) }}">
-                                                            <span class="ps-progress__value"></span></div>
+                                                            <span class="ps-progress__value"></span>
+                                                        </div>
                                                         <p><strong>{{ $hot_item->product->sell_count }}/{{ $hot_item->product->stock }}</strong>
                                                             Sold</p>
                                                     </div>
@@ -355,7 +358,8 @@
                                                         data-target="#product-quickview"><i class="icon-eye"></i></a>
                                                 </li>
                                                 <li><a href="#" data-toggle="tooltip" data-placement="top"
-                                                        title="Add to Whishlist"><i class="icon-heart"></i></a></li>
+                                                        title="Add to Whishlist"><i class="icon-heart"></i></a>
+                                                </li>
 
                                             </ul>
                                         </div>

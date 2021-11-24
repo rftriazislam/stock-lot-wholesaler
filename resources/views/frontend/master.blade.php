@@ -8,7 +8,19 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="author" content="">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="stocklot meaning, branded stocklot,
+    stocklots europe,
+    stocklot garments uttara,
+    stocklot garments,
+    stocklot haven,
+    stocklots germany,
+    stocklot electronics,
+    Garments stocklot,
+    Bangladesh - Stocklots and Traders,
+    Garment Stocklot - Exporters India,
+    BD Stock Lot Buyer & Seller,
+    Garments stocklot Business in Bangladesh,
+    Garment Stocklot from Bangladesh - Stocklot Landed USA">
     <meta name="description" content="">
     <title>Stock-Lot</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext"
