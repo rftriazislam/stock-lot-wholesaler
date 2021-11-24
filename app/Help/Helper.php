@@ -94,4 +94,16 @@ class Helper
 
         return true;
     }
+    public function productsell($order_list){
+
+        foreach($order_list as $item){
+            $product = MerchantProduct::where('id', $item['product_id'])->first();
+            $product->update([
+                'stock'=>$product->stock-$item['qty'],
+                'sell_count'=>$product->sell_count+$item['qty'],
+            ]);
+        }
+        return true;
+
+    }
 }

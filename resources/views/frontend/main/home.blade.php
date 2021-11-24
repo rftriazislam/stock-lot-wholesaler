@@ -108,24 +108,30 @@
                                     data-owl-dots="false" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1"
                                     data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000"
                                     data-owl-mousedrag="on">
+                                  @foreach($hotdeals as $hot_item)
                                     <div class="ps-product--detail ps-product--hot-deal">
                                         <div class="ps-product__header">
                                             <div class="ps-product__thumbnail" data-vertical="true">
                                                 <figure>
                                                     <div class="ps-wrapper">
                                                         <div class="ps-product__gallery" data-arrow="true">
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-1.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-1.jpg"
-                                                                        alt=""></a></div>
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-2.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-2.jpg"
-                                                                        alt=""></a></div>
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-3.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-3.jpg"
-                                                                        alt=""></a></div>
+                                                                    <div class="item">
+                                                                    <a href="{{ asset('storage') }}/merchant/product/main/big/{{ $hot_item->product->main_picture }}"><img
+                                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
+                                                                        alt="">
+                                                                        </a>
+                                                                        </div>
+
+                                                                    @if ($hot_item->product->files)
+                                                                        @foreach ($hot_item->product->files as $item)
+
+                                                                            <div class="item"><a
+                                                                                    href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
+                                                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                                                        alt=""></a></div>
+                                                                        @endforeach
+                                                                    @endif 
+                                                                
                                                         </div>
                                                         <div class="ps-product__badge"><span>Save <br> $280.000</span></div>
                                                     </div>
@@ -133,21 +139,26 @@
                                                 <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3"
                                                     data-arrow="false">
                                                     <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-1.jpg"
+                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
                                                             alt=""></div>
-                                                    <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-2.jpg"
-                                                            alt=""></div>
-                                                    <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/a-3.jpg"
-                                                            alt=""></div>
+                                                                @if ($hot_item->product->files)
+                                                                        @foreach ($hot_item->product->files as $item)
+
+                                                                            <div class="item"><img
+                                                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                                                        alt=""></div>
+                                                                        @endforeach
+                                                                    @endif 
+                                                    
                                                 </div>
                                             </div>
                                             <div class="ps-product__info">
-                                                <h5>Clothing & Apparel</h5>
-                                                <h3 class="ps-product__name">Herschel Leather Duffle Bag In Brown Color</h3>
+                                               <a href="{{ route('product.view', [$hot_item->product->id, $hot_item->product->slug]) }}"> <h5>{{$hot_item->product->subcategory->name}}</h5>
+                                                <h3 class="ps-product__name"> {{$hot_item->product->product_name}}</h3></a>
                                                 <div class="ps-product__meta">
-                                                    <h4 class="ps-product__price sale">$36.78 <del> $56.99</del></h4>
+                                                    <h4 class="ps-product__price sale">  {{ $hot_item->product->price + $hot_item->product->service_charge }}
+                                                    <del>{{ $hot_item->product->min_retail_price }}
+                                                    </del></h4>
                                                     <div class="ps-product__rating">
                                                         <select class="ps-rating" data-read-only="true">
                                                             <option value="1">1</option>
@@ -163,7 +174,8 @@
                                                 </div>
                                                 <div class="ps-product__expires">
                                                     <p>Expires In</p>
-                                                    <ul class="ps-countdown" data-time="July 21, 2021 23:00:00">
+                                                    {{-- December 21, 2021 23:00:00 --}}
+                                                    <ul class="ps-countdown" data-time="{{$hot_item->expried_time}}">
                                                         <li><span class="days"></span>
                                                             <p>Days</p>
                                                         </li>
@@ -179,118 +191,35 @@
                                                     </ul>
                                                 </div>
                                                 <div class="ps-product__processs-bar">
-                                                    <div class="ps-progress" data-value="10"><span
+                                                    <div class="ps-progress" data-value="{{($hot_item->product->sell_count*100)/($hot_item->product->sell_count+$hot_item->product->stock)}}"><span
                                                             class="ps-progress__value"></span></div>
-                                                    <p><strong>4/79</strong> Sold</p>
+                                                    <p><strong>{{$hot_item->product->sell_count}}/{{$hot_item->product->stock}}</strong> Sold</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ps-product--detail ps-product--hot-deal">
-                                        <div class="ps-product__header">
-                                            <div class="ps-product__thumbnail" data-vertical="true">
-                                                <figure>
-                                                    <div class="ps-wrapper">
-                                                        <div class="ps-product__gallery" data-arrow="true">
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-1.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-1.jpg"
-                                                                        alt=""></a></div>
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-2.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-2.jpg"
-                                                                        alt=""></a></div>
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-3.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-3.jpg"
-                                                                        alt=""></a></div>
-                                                            <div class="item"><a
-                                                                    href="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-4.jpg"><img
-                                                                        src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-4.jpg"
-                                                                        alt=""></a></div>
-                                                        </div>
-                                                        <div class="ps-product__badge"><span>Save <br> $9.000</span></div>
-                                                    </div>
-                                                </figure>
-                                                <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3"
-                                                    data-arrow="false">
-                                                    <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-1.jpg"
-                                                            alt=""></div>
-                                                    <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-2.jpg"
-                                                            alt=""></div>
-                                                    <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-3.jpg"
-                                                            alt=""></div>
-                                                    <div class="item"><img
-                                                            src="{{ asset('frontend') }}/img/products/home-6/deal-hot/b-4.jpg"
-                                                            alt=""></div>
-                                                </div>
-                                            </div>
-                                            <div class="ps-product__info">
-                                                <h5>Consumer Electrics</h5>
-                                                <h3 class="ps-product__name">Evolution Sport Drilled and Slotted Brake Kit
-                                                </h3>
-                                                <div class="ps-product__meta">
-                                                    <h4 class="ps-product__price sale">$97.78 <del> $156.99</del></h4>
-                                                    <div class="ps-product__rating">
-                                                        <select class="ps-rating" data-read-only="true">
-                                                            <option value="1">1</option>
-                                                            <option value="1">2</option>
-                                                            <option value="1">3</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">5</option>
-                                                        </select><span>(1 review)</span>
-                                                    </div>
-                                                    <div class="ps-product__specification">
-                                                        <p>Status:<strong class="in-stock"> In Stock</strong></p>
-                                                    </div>
-                                                </div>
-                                                <div class="ps-product__expires">
-                                                    <p>Expires In</p>
-                                                    <ul class="ps-countdown" data-time="July 21, 2021 23:00:00">
-                                                        <li><span class="days"></span>
-                                                            <p>Days</p>
-                                                        </li>
-                                                        <li><span class="hours"></span>
-                                                            <p>Hours</p>
-                                                        </li>
-                                                        <li><span class="minutes"></span>
-                                                            <p>Minutes</p>
-                                                        </li>
-                                                        <li><span class="seconds"></span>
-                                                            <p>Seconds</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="ps-product__processs-bar">
-                                                    <div class="ps-progress" data-value="60"><span
-                                                            class="ps-progress__value"></span></div>
-                                                    <p><strong>30/50</strong> Sold</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 ">
                         <aside class="widget widget_best-sale" data-mh="dealhot">
-                            <h3 class="widget-title">Top 20 Best Seller</h3>
+                            <h3 class="widget-title" style="margin-bottom:0px">Top 20 Best Seller</h3>
                             <div class="widget__content">
                                 <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000"
                                     data-owl-gap="0" data-owl-nav="false" data-owl-dots="false" data-owl-item="1"
                                     data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1"
                                     data-owl-duration="1000" data-owl-mousedrag="on">
+                                    
                                     <div class="ps-product-group">
+                                    @foreach($top_sells->take(6) as $topsell)
                                         <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/1.jpg"
+                                            <div class="ps-product__thumbnail"><a href="{{ route('product.view', [$topsell->id, $topsell->slug]) }}"><img
+                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell->main_picture }}"
                                                         alt=""></a></div>
                                             <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">Sound Intone I65 Earphone White Version</a>
+                                                    href="{{ route('product.view', [$topsell->id, $topsell->slug]) }}">{{ substr($topsell->product_name, 0, 15)}}...</a>
                                                 <div class="ps-product__rating">
                                                     <select class="ps-rating" data-read-only="true">
                                                         <option value="1">1</option>
@@ -300,71 +229,20 @@
                                                         <option value="2">5</option>
                                                     </select><span>01</span>
                                                 </div>
-                                                <p class="ps-product__price">105.30</p>
+                                                <p class="ps-product__price sale">   {{ $topsell->price + $topsell->service_charge }}</p>
                                             </div>
                                         </div>
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/2.jpg"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">Beat Spill 2.0 Wireless Speaker – White</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>01</span>
-                                                </div>
-                                                <p class="ps-product__price">$125.00 <del>$135.00 </del></p>
-                                            </div>
-                                        </div>
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/3.jpg"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">ASUS Chromebook Flip – 10.2 Inch</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>02</span>
-                                                </div>
-                                                <p class="ps-product__price sale">$990.00 <del>$1250.00 </del></p>
-                                            </div>
-                                        </div>
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/4.jpg"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">Apple Macbook Retina Display 12”</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>04</span>
-                                                </div>
-                                                <p class="ps-product__price">$1090.00 <del>$1550.00 </del></p>
-                                            </div>
-                                        </div>
+                                       @endforeach
                                     </div>
+
                                     <div class="ps-product-group">
+                                             @foreach($top_sells->skip(6)->take(6) as $topsell2)
                                         <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/3.jpg"
+                                            <div class="ps-product__thumbnail"><a href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}"><img
+                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell2->main_picture }}"
                                                         alt=""></a></div>
                                             <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">ASUS Chromebook Flip – 10.2 Inch</a>
+                                                    href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}">{{ substr($topsell2->product_name, 0, 15)}}...</a>
                                                 <div class="ps-product__rating">
                                                     <select class="ps-rating" data-read-only="true">
                                                         <option value="1">1</option>
@@ -374,63 +252,11 @@
                                                         <option value="2">5</option>
                                                     </select><span>02</span>
                                                 </div>
-                                                <p class="ps-product__price sale">$990.00 <del>$1250.00 </del></p>
+                                                <p class="ps-product__price sale">{{ $topsell2->price + $topsell2->service_charge }}</p>
                                             </div>
                                         </div>
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/4.jpg"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">Apple Macbook Retina Display 12”</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>04</span>
-                                                </div>
-                                                <p class="ps-product__price">$1090.00 <del>$1550.00 </del></p>
-                                            </div>
-                                        </div>
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/5.jpg"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">Samsung Gear VR Virtual Reality Headset</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>01</span>
-                                                </div>
-                                                <p class="ps-product__price">$85.00</p>
-                                            </div>
-                                        </div>
-                                        <div class="ps-product--horizontal">
-                                            <div class="ps-product__thumbnail"><a href="product-default.html"><img
-                                                        src="{{ asset('frontend') }}/img/products/home-3/technology/6.jpg"
-                                                        alt=""></a></div>
-                                            <div class="ps-product__content"><a class="ps-product__title"
-                                                    href="product-default.html">Apple iPhone Retina 6s Plus 64GB</a>
-                                                <div class="ps-product__rating">
-                                                    <select class="ps-rating" data-read-only="true">
-                                                        <option value="1">1</option>
-                                                        <option value="1">2</option>
-                                                        <option value="1">3</option>
-                                                        <option value="1">4</option>
-                                                        <option value="2">5</option>
-                                                    </select><span>01</span>
-                                                </div>
-                                                <p class="ps-product__price">$950.60</p>
-                                            </div>
-                                        </div>
+                                       @endforeach
+                                     
                                     </div>
                                 </div>
                             </div>

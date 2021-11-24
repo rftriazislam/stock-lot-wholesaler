@@ -33,6 +33,7 @@ class MerchantProduct extends Model
         'sell_count',
         'views',
         'offline',
+        'hot_product',
         'status',
     ];
     protected $casts = [

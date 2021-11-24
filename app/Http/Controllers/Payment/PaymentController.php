@@ -103,8 +103,8 @@ class PaymentController extends Controller
                 $balance = $trans_info->amount - $trans_info->total_service_charge;
                 Helper::vendor_balance($trans_info->vendor_id, $balance);
                 Helper::vendor_affiliate($trans_info->vendor_id, $trans_info->total_service_charge);
-
-
+                Helper::productsell($trans_info->order_list);
+   
                 // $transtion_history = Helper::transtion_history($trans_info->buyer_id, $trans_info->amount, 'out', 'buy');
                 return redirect()->route('payment_message', ['message' => 'success']);
             } else {
@@ -310,6 +310,7 @@ class PaymentController extends Controller
             // $success_route = 'paymentissue' . ',' . $tx_id;
             // $success_route =   route('paymentissue', $tx_id);
             // $p =  $shurjopay_service->sendPayment($price, $success_route);
+            //local=http://127.0.0.1:8000/
             $return_url = 'https://stocklot.xyz/api/payment-response';
             $xml_data = 'spdata=
         <?xml version="1.0" encoding="utf-8"?>

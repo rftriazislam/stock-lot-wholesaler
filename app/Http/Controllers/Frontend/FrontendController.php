@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\DeliveryDetail;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
+use App\Models\HotDealProduct;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,11 @@ class FrontendController extends Controller
         }])->where('status', 1)->get();
         // return $product;
         // exit();
-        return view('frontend.main.home', compact('product'));
+       $hotdeals=HotDealProduct::with('product')->where('status',1)->get();
+
+       $top_sells=MerchantProduct::orderBy('stock','desc')->take(12)->get();
+
+        return view('frontend.main.home', compact('product','hotdeals','top_sells'));
     }
 
     public function product_view($id, $slug)

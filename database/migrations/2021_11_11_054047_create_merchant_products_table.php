@@ -25,8 +25,8 @@ class CreateMerchantProductsTable extends Migration
             $table->string('size', 50)->nullable();
             $table->string('unit');
             $table->string('color')->nullable();
-            $table->string('stock');
-            $table->string('mini_order');
+            $table->integer('stock');
+            $table->integer('mini_order');
             $table->text('order_note')->nullable();
             $table->string('files')->nullable();
             $table->string('main_picture');
@@ -37,6 +37,7 @@ class CreateMerchantProductsTable extends Migration
             $table->double('max_retail_price', 16, 3)->default(0.0);
             $table->integer('sell_count')->default(0);
             $table->integer('views')->default(0);
+            $table->tinyInteger('hot_product')->default(0);
             $table->tinyInteger('offline')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

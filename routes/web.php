@@ -97,7 +97,12 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/merchant/products', [AdminController::class, 'list_merchant_products'])->name('admin.merchant.products');
     Route::get('/dashboard/merchant/product/permission/{id}', [AdminController::class, 'status_merchant_product'])->name('admin.merchant.status.product');
 
+    
+    Route::get('/dashboard/merchant/product/hot-add/{id}', [AdminController::class, 'hot_addproduct'])->name('admin.merchant.hot.addproduct');
+    Route::post('/dashboard/merchant/product/hot', [AdminController::class, 'merchant_hot_saveproduct'])->name('admin.merchant.hot.saveproduct');
+    Route::get('/dashboard/merchant/product/hot-remove/{id}', [AdminController::class, 'hot_removeproduct'])->name('admin.merchant.hot.removeproduct');
 
+    
 
     //----------merchant----------
 

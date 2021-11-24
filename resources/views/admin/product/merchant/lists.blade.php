@@ -50,6 +50,7 @@
                                 <th class="column-title">Image</th>
                                 <th class="column-title">Video Link</th>
                                 <th class="column-title">Status </th>
+                                 <th class="column-title">Hot Product </th>
                                 <th class="column-title no-link last"><span class="nobr">Action</span>
                                 </th>
 
@@ -108,6 +109,16 @@
                                         @else
                                             <a href="{{ route('merchant.status.product', $item->id) }}"
                                                 class="btn btn-danger">Unpublished</a>
+                                        @endif
+
+                                    </td>
+                                     <td class=" ">
+                                        @if ($item->hot_product == 0)
+                                            <a href="{{ route('admin.merchant.hot.addproduct', $item->id) }}"
+                                                class="btn btn-success" style="background:#4209a9">Add Hot</a>
+                                        @else
+                                            <a href="{{ route('admin.merchant.hot.removeproduct', $item->id) }}"
+                                                class="btn btn-danger" style="background:#f34c07">Selected.Re</a>
                                         @endif
 
                                     </td>

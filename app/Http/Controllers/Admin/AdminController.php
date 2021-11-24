@@ -8,6 +8,8 @@ use App\Models\MerchantProduct;
 use App\Models\Method;
 use App\Models\Slider;
 use App\Models\Subcategory;
+use App\Models\HotDealProduct;
+
 use App\Models\User;
 use CreateSlidersTable;
 use Illuminate\Http\Request;
@@ -341,6 +343,43 @@ class AdminController extends Controller
             return back();
         }
     }
+public function hot_addproduct(Request $request,$id)
+{
+    
+    $product = MerchantProduct::where('id', $id)->first();
+    if ($product) {
+        $request['product_id']=$id;
+       $this->validate($request,['product_id'=>'required|unique:hot_deal_products,product_id']);
+        return view('admin.product.merchant.hotproduct',['id'=>$id]);
+    } else {
+        return back();
+    }
+}
+
+    public function merchant_hot_saveproduct (Request $request){
+
+        $product = MerchantProduct::where('id', $request->product_id)->first();
+        if ($product) {
+           $up= $product->update(['hot_product' => 1]);
+           
+           $hot=new HotDealProduct();
+           $hot->product_id=$request->product_id;
+           $hot->expried_time=$request->date;
+           $hot->save();
+        } 
+        return redirect()->route('admin.merchant.products');
+
+    }
+    public function hot_removeproduct($id)
+    {
+        $product = MerchantProduct::where('id', $id)->first();
+        if ($product) {
+           $up= $product->update(['hot_product' => 0]);
+           HotDealProduct::where('product_id', $id)->delete();
+        } 
+        return redirect()->route('admin.merchant.products');
+    }
+    
     //-------------------merchant--------------
 
     //-------------------reseller--------------
