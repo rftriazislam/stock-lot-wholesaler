@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
 
     </style>
 @endsection
@@ -170,22 +170,24 @@
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
-                                        @foreach ($product->size as $item)
+                                        @if ($product->size)
+                                            @foreach ($product->size as $item)
 
-                                            <div class="hdtuto control-group lst input-group" id="remove"
-                                                style="margin-top:10px">
+                                                <div class="hdtuto control-group lst input-group" id="remove"
+                                                    style="margin-top:10px">
 
-                                                <input type="text" name="sizee[]" id="cor3" value="{{ $item['size'] }}"
-                                                    class=" demo3 form-control" multiple placeholder="XL">
+                                                    <input type="text" name="sizee[]" id="cor3"
+                                                        value="{{ $item['size'] }}" class=" demo3 form-control" multiple
+                                                        placeholder="XL">
 
-                                                <div class="input-group-btn">
-                                                    <button id="button" class="btn btn-danger btn_danger3" type="button"><i
-                                                            class="fldemo glyphicon glyphicon-remove"></i>
-                                                        Remove</button>
+                                                    <div class="input-group-btn">
+                                                        <button id="button" class="btn btn-danger btn_danger3"
+                                                            type="button"><i class="fldemo glyphicon glyphicon-remove"></i>
+                                                            Remove</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
-
+                                            @endforeach
+                                        @endif
                                         <div class="clone3 hide" style="display:none">
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
@@ -247,21 +249,22 @@
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
+                                        @if ($product->color)
+                                            @foreach ($product->color as $item)
 
-                                        @foreach ($product->color as $item)
-
-                                            <div class="hdtuto control-group lst input-group" id="remove"
-                                                style="margin-top:10px">
-                                                <input type="text" name="colorr[]" class=" form-control" multiple
-                                                    value="{{ $item['color'] }}"
-                                                    style="background: {{ $item['color'] }}">
-                                                <div class="input-group-btn">
-                                                    <button id="button" class="btn btn-danger btn_danger" type="button"><i
-                                                            class="fldemo glyphicon glyphicon-remove"></i>
-                                                        Remove</button>
+                                                <div class="hdtuto control-group lst input-group" id="remove"
+                                                    style="margin-top:10px">
+                                                    <input type="text" name="colorr[]" class=" form-control" multiple
+                                                        value="{{ $item['color'] }}"
+                                                        style="background: {{ $item['color'] }}">
+                                                    <div class="input-group-btn">
+                                                        <button id="button" class="btn btn-danger btn_danger"
+                                                            type="button"><i class="fldemo glyphicon glyphicon-remove"></i>
+                                                            Remove</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                         <div class="clone2 hide" style="display:none">
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
@@ -402,25 +405,26 @@
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
+                                        @if ($product->color)
 
-                                        @foreach ($product->files as $item)
+                                            @foreach ($product->files as $item)
 
-                                            <div class="hdtuto control-group lst input-group" id="remove"
-                                                style="margin-top:10px">
-                                                <img src="{{ asset('public/storage') }}/merchant/product/files/small/{{ $item['image'] }}"
-                                                    style="height: 40px;width:40px">
-                                                <input type="text" name="oldfiles[]" class="myfrm form-control"
-                                                    value="{{ $item['image'] }}" readonly multiple>
-                                                <div class="input-group-btn">
-                                                    <button id="button" class="btn btn-danger " type="button"><i
-                                                            class="fldemo glyphicon glyphicon-remove"></i>
-                                                        Remove</button>
+                                                <div class="hdtuto control-group lst input-group" id="remove"
+                                                    style="margin-top:10px">
+                                                    <img src="{{ asset('public/storage') }}/merchant/product/files/small/{{ $item['image'] }}"
+                                                        style="height: 40px;width:40px">
+                                                    <input type="text" name="oldfiles[]" class="myfrm form-control"
+                                                        value="{{ $item['image'] }}" readonly multiple>
+                                                    <div class="input-group-btn">
+                                                        <button id="button" class="btn btn-danger " type="button"><i
+                                                                class="fldemo glyphicon glyphicon-remove"></i>
+                                                            Remove</button>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        @endforeach
+                                            @endforeach
 
-
+                                        @endif
 
 
                                         <div class="clone hide" style="display:none">

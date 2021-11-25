@@ -18,6 +18,9 @@ use Image;
 
 class MerchantController extends Controller
 {
+
+
+
     public function index()
     {
         return view('merchant.main.home');
