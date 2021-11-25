@@ -128,8 +128,8 @@
                                                                     @foreach ($hot_item->product->files as $item)
 
                                                                         <div class="item"><a
-                                                                                href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
-                                                                                    src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                                                href="{{ asset('storage') }}/merchant/product/files/small/{{ $item['image'] }}"><img
+                                                                                    src="{{ asset('storage') }}/merchant/product/files/small/{{ $item['image'] }}"
                                                                                     alt=""></a></div>
                                                                     @endforeach
                                                                 @endif
@@ -147,7 +147,7 @@
                                                             @foreach ($hot_item->product->files as $item)
 
                                                                 <div class="item"><img
-                                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                                        src="{{ asset('storage') }}/merchant/product/files/small/{{ $item['image'] }}"
                                                                         alt=""></div>
                                                             @endforeach
                                                         @endif
