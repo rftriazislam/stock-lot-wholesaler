@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           } */
 
     </style>
 @endsection
@@ -310,8 +310,7 @@
                                         <sup class="required">option</sup>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea required="required" id="order_note" placeholder="X,XL,M,ML,M,L Color "
-                                            class="form-control "
+                                        <textarea id="order_note" placeholder="X,XL,M,ML,M,L Color " class="form-control "
                                             name="order_note">{{ $product->order_note }}</textarea>
                                     </div>
                                 </div>
@@ -453,7 +452,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="video_link" name="video_link"
-                                            value="{{ $product->video_link }}" required="required"
+                                            value="{{ $product->video_link }}"
                                             placeholder="https://www.youtube.com/watch?v=yKS8v6HUIss"
                                             class="form-control image file pb-34 ">
                                     </div>
