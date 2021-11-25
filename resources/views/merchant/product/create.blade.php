@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -162,12 +162,13 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <div class="input-group hdtuto control-group lst increment3">
                                             <input type="text" name="size[]" id="cor3" class=" demo3 form-control" multiple
-                                                placeholder="XL,L,ML,M,L,S,1000">
+                                                placeholder="XL">
 
                                             <div class="input-group-btn">
                                                 <button class="btn btn-success btn_color3" type="button"><i
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
+
                                         </div>
 
 

@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
 
     </style>
 @endsection
@@ -176,7 +176,7 @@
                                                 style="margin-top:10px">
 
                                                 <input type="text" name="sizee[]" id="cor3" value="{{ $item['size'] }}"
-                                                    class=" demo3 form-control" multiple placeholder="XL,L,ML,M,L,S,1000">
+                                                    class=" demo3 form-control" multiple placeholder="XL">
 
                                                 <div class="input-group-btn">
                                                     <button id="button" class="btn btn-danger btn_danger3" type="button"><i
@@ -382,6 +382,8 @@
                                         <img src="{{ asset('public/storage') }}/merchant/product/main/big/{{ $product->main_picture }}"
                                             style="height: 60px;width:60px">
 
+                                        <img src="{{ asset('public/storage') }}/merchant/product/main/medium/{{ $product->main_picture }}"
+                                            style="height: 60px;width:60px">
                                         <img src="{{ asset('public/storage') }}/merchant/product/main/small/{{ $product->main_picture }}"
                                             style="height: 60px;width:60px">
                                     </div>
@@ -405,7 +407,7 @@
 
                                             <div class="hdtuto control-group lst input-group" id="remove"
                                                 style="margin-top:10px">
-                                                <img src="{{ asset('public/storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                <img src="{{ asset('public/storage') }}/merchant/product/files/small/{{ $item['image'] }}"
                                                     style="height: 40px;width:40px">
                                                 <input type="text" name="oldfiles[]" class="myfrm form-control"
                                                     value="{{ $item['image'] }}" readonly multiple>

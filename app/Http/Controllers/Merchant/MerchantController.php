@@ -130,19 +130,32 @@ class MerchantController extends Controller
             'service_charge' => 'required',
         ]);
 
+
         if ($files = $request->file('files')) {
             $count = 0;
             $images = [];
             foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
+                $image1 = $file;
+                $image2 = $file;
                 $count = $count + 1;
-                $imagename = uniqid() . '.' . $file->getClientOriginalExtension();
-                $destinationPath = public_path('/storage/merchant/product/files');
-                $file->move($destinationPath, $imagename);
+                $imagename0 = uniqid() . '.' . $file->getClientOriginalExtension();
+                $destinationPath0 = public_path('/storage/merchant/product/files/big/');
+                $destinationPath01 = public_path('/storage/merchant/product/files/small/');
+
+                $file_resize = Image::make($image1);
+                $file_resize->resize(1100, 1100);
+                $file_resize->save($destinationPath0 . $imagename0);
+
+                $file_resize1 = Image::make($image2);
+                $file_resize1->resize(446, 514);
+                $file_resize1->save($destinationPath01 . $imagename0);
+                // $file->move($destinationPath, $imagename);
+
                 $images[] = array(
                     'id' => $count,
                     'extension' => $extension,
-                    'image' => $imagename
+                    'image' => $imagename0
                 );
                 // }
             }
@@ -151,9 +164,12 @@ class MerchantController extends Controller
         if ($request->file('main_picture')) {
             $image = $request->file('main_picture');
             $image2 = $request->file('main_picture');
+            $image3 = $request->file('main_picture');
             $imagename =  str_replace(' ', '-', $request->product_id) . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/storage/merchant/product/main/big/');
             $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
+            $destinationPath_3 = public_path('/storage/merchant/product/main/medium/');
+
 
             $resize_image = Image::make($image);
             $resize_image->resize(1200, 1200);
@@ -162,6 +178,10 @@ class MerchantController extends Controller
             $resize_image2 = Image::make($image2);
             $resize_image2->resize(300, 300);
             $resize_image2->save($destinationPath_2 . $imagename);
+
+            $resize_image3 = Image::make($image3);
+            $resize_image3->resize(446, 514);
+            $resize_image3->save($destinationPath_3 . $imagename);
 
             $validate['main_picture'] = $imagename;
         }
@@ -240,11 +260,7 @@ class MerchantController extends Controller
     public function update_product(Request $request)
     {
 
-
-
         // oldfiles
-
-
 
         $product_id = $request->p_id;
         $product = MerchantProduct::where('id', $product_id)->first();
@@ -274,10 +290,11 @@ class MerchantController extends Controller
             if ($request->file('main_picturee')) {
                 $image = $request->file('main_picturee');
                 $image2 = $request->file('main_picturee');
+                $image3 = $request->file('main_picturee');
                 $imagename =  str_replace(' ', '-', $request->product_id) . '.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('/storage/merchant/product/main/big/');
                 $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
-
+                $destinationPath_3 = public_path('/storage/merchant/product/main/medium/');
                 $resize_image = Image::make($image);
                 $resize_image->resize(1200, 1200);
                 $resize_image->save($destinationPath . $imagename);
@@ -285,6 +302,10 @@ class MerchantController extends Controller
                 $resize_image2 = Image::make($image2);
                 $resize_image2->resize(300, 300);
                 $resize_image2->save($destinationPath_2 . $imagename);
+
+                $resize_image3 = Image::make($image3);
+                $resize_image3->resize(446, 514);
+                $resize_image3->save($destinationPath_3 . $imagename);
 
                 $product->update(['main_picture' => $imagename]);
             }
@@ -295,14 +316,26 @@ class MerchantController extends Controller
                 $images = [];
                 foreach ($files as $file) {
                     $extension = $file->getClientOriginalExtension();
+                    $image1 = $file;
+                    $image2 = $file;
                     $count = $count + 1;
-                    $imagename = uniqid() . '.' . $file->getClientOriginalExtension();
-                    $destinationPath = public_path('/storage/merchant/product/files');
-                    $file->move($destinationPath, $imagename);
+                    $imagename0 = uniqid() . '.' . $file->getClientOriginalExtension();
+
+                    $destinationPath0 = public_path('/storage/merchant/product/files/big/');
+                    $destinationPath01 = public_path('/storage/merchant/product/files/small/');
+
+                    $file_resize = Image::make($image1);
+                    $file_resize->resize(1100, 1100);
+                    $file_resize->save($destinationPath0 . $imagename0);
+
+                    $file_resize1 = Image::make($image2);
+                    $file_resize1->resize(446, 514);
+                    $file_resize1->save($destinationPath01 . $imagename0);
+                    // $file->move($destinationPath, $imagename);
                     $images[] = array(
                         'id' => $count,
                         'extension' => $extension,
-                        'image' => $imagename
+                        'image' => $imagename0
                     );
                     // }
                 }

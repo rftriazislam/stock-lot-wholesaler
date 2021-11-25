@@ -38,7 +38,7 @@
                           src="{{ asset('frontend') }}/img/logo/2h.png" alt=""></a>
                   <div class="menu--product-categories">
                       <div class="menu__toggle"><span> <a href="{{ route('home') }}"><img
-                                      src="{{ asset('public/frontend') }}/img/logo/2hh.png" alt=""></a></span></div>
+                                      src="{{ asset('frontend') }}/img/logo/2hh.png" alt=""></a></span></div>
                       <div class="menu__content">
                           <ul class="menu--dropdown">
                               @foreach (HelpCat::category_list() as $item)

@@ -69,14 +69,14 @@
                                 <div class="ps-product__gallery" data-arrow="true">
                                     <div class="item"><a
                                             href="{{ asset('storage') }}/merchant/product/main/big/{{ $single_product->main_picture }}"><img
-                                                src="{{ asset('storage') }}/merchant/product/main/big/{{ $single_product->main_picture }}"
+                                                src="{{ asset('storage') }}/merchant/product/main/medium/{{ $single_product->main_picture }}"
                                                 alt=""></a></div>
                                     @if ($single_product->files)
                                         @foreach ($single_product->files as $item)
 
                                             <div class="item"><a
-                                                    href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
-                                                        src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
+                                                    href="{{ asset('storage') }}/merchant/product/files/big/{{ $item['image'] }}"><img
+                                                        src="{{ asset('storage') }}/merchant/product/files/small/{{ $item['image'] }}"
                                                         alt=""></a></div>
                                         @endforeach
                                     @endif
@@ -92,120 +92,112 @@
                             @if ($single_product->files)
                                 @foreach ($single_product->files as $item)
 
-                                    <div class="item"><a
-                                            href="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"><img
-                                                src="{{ asset('storage') }}/merchant/product/files/{{ $item['image'] }}"
-                                                alt=""></a></div>
+                                    <div class="item"><img
+                                            src="{{ asset('storage') }}/merchant/product/files/big/{{ $item['image'] }}"
+                                            alt=""></div>
                                 @endforeach
                             @endif
                         </div>
                     </div>
                     <div class="ps-product__info">
-                        <h1>{{ $single_product->product_name }}
+                        <h1>{{ $single_product->product_name }}</h1>
 
-                            <div class="ps-product__meta">
+                        <div class="ps-product__meta">
 
-                                <div class="ps-product__rating">
-                                    <select class="ps-rating" data-read-only="true">
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="1">3</option>
-                                        <option value="1">4</option>
-                                        <option value="2">5</option>
-                                    </select>
-                                    <span>(1 review)</span>
-                                    <span>({{ $single_product->sell_count }}
-                                        Sold)</span>
-                                    <span>({{ $single_product->views }} view)</span>
+                            <div class="ps-product__rating">
+                                <select class="ps-rating" data-read-only="true">
+                                    <option value="1">1</option>
+                                    <option value="1">2</option>
+                                    <option value="1">3</option>
+                                    <option value="1">4</option>
+                                    <option value="2">5</option>
+                                </select>
+                                <span>(1 review)</span>
+                                <span>({{ $single_product->sell_count }}
+                                    Sold)</span>
+                                <span>({{ $single_product->views }} view)</span>
 
-                                </div>
                             </div>
-                            <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }}
-                                BDT
-                            </h4>
-                            <div class="ps-product__desc">
-                                <p>Sold By:<a href="{{ route('shop.view', [$single_product->user_id]) }}"><strong>
-                                            {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
-                                <ul class="ps-list--dot">
-                                    <li>{{ $single_product->order_note }}</li>
+                        </div>
+                        <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }}
+                            BDT
+                        </h4>
+                        <div class="ps-product__desc">
+                            <p>Sold By:<a href="{{ route('shop.view', [$single_product->user_id]) }}"><strong>
+                                        {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
+                            <ul class="ps-list--dot">
+                                <li>{{ $single_product->order_note }}</li>
 
-                                </ul>
-                            </div>
-                            <div class="ps-product__variations">
-                                @if ($single_product->color)
-                                    <figure>
-                                        <figcaption>Color</figcaption>
-                                        @foreach ($single_product->color as $item)
-
-                                            <div class="ps-variant ps-variant--color colorr  @if ($loop->iteration == 1) color_r @endif "
-                                                id="color{{ $loop->iteration }}"
-                                                onclick="colorSelect({{ $loop->iteration }})"
-                                                pc="{{ $item['color'] }}"
-                                                style="background: {{ $item['color'] }};@if ($loop->iteration == 1)border-radius:0%;border: 4px solid #fcb800 @endif">
-                                                <span class="ps-variant__tooltip">{{ $item['color'] }}</span>
-                                            </div>
-
-                                        @endforeach
-
-
-
-                                    </figure>
-                                @endif
-                                @if ($single_product->size)
-                                    <figure>
-
-                                        <figcaption>Size</figcaption>
-                                        @foreach ($single_product->size as $item)
-
-                                            <div class="ps-variant sizee ps-variangdt--color @if ($loop->iteration == 1) size_r @endif "
-                                                id="size{{ $loop->iteration }}"
-                                                onclick="sizeSelect({{ $loop->iteration }})" ps="{{ $item['size'] }}"
-                                                style="border-radius: 0%;text-align:center;padding-top: 4px ;@if ($loop->iteration == 1)border-radius:50%;background:#fcb800 @endif">
-                                                <span>{{ $item['size'] }}</span>
-                                            </div>
-                                        @endforeach
-                                    </figure>
-                                @endif
-                            </div>
-                            <h4 class="add_cart_item" style="color:rgb(11, 180, 180)"></h4>
-
-                            <div class="ps-product__shopping">
+                            </ul>
+                        </div>
+                        <div class="ps-product__variations">
+                            @if ($single_product->color)
                                 <figure>
-                                    <figcaption>Quantity</figcaption>
+                                    <figcaption>Color</figcaption>
+                                    @foreach ($single_product->color as $item)
 
-                                    <div class="form-group--number">
-                                        <button class="up" onclick="plus()"><i
-                                                class="fa fa-plus"></i></button>
-                                        <button class="down" onclick="minus()"><i
-                                                class="fa fa-minus"></i></button>
-                                        <input class="form-control" type="text" id="price"
-                                            min="{{ $single_product->mini_order }}" max="{{ $single_product->stock }}"
-                                            placeholder="1" value="{{ $single_product->mini_order }}">
-                                        <input value="{{ $single_product->id }}" type="hidden" id="product_id">
-                                    </div>
+                                        <div class="ps-variant ps-variant--color colorr  @if ($loop->iteration == 1) color_r @endif "
+                                            id="color{{ $loop->iteration }}"
+                                            onclick="colorSelect({{ $loop->iteration }})" pc="{{ $item['color'] }}"
+                                            style="background: {{ $item['color'] }};@if ($loop->iteration == 1)border-radius:0%;border: 4px solid #fcb800 @endif">
+                                            <span class="ps-variant__tooltip">{{ $item['color'] }}</span>
+                                        </div>
+
+                                    @endforeach
+
+
 
                                 </figure>
+                            @endif
+                            @if ($single_product->size)
+                                <figure>
 
-                                @auth
-                                    <a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a>
-                                    <a class="ps-btn" href="{{ route('product.cart') }}">Buy Now</a>
-                                @else
-                                    <a class="ps-btn ps-btn--black" style="cursor: pointer;color:white" data-toggle="modal"
-                                        data-target="#loginModal">Add to cart</a>
-                                    <a class="ps-btn" href="#">Buy Now</a>
-                                @endauth
+                                    <figcaption>Size</figcaption>
+                                    @foreach ($single_product->size as $item)
 
+                                        <div class="ps-variant sizee ps-variangdt--color @if ($loop->iteration == 1) size_r @endif "
+                                            id="size{{ $loop->iteration }}"
+                                            onclick="sizeSelect({{ $loop->iteration }})" ps="{{ $item['size'] }}"
+                                            style="border-radius: 0%;text-align:center;padding-top: 4px ;@if ($loop->iteration == 1)border-radius:50%;background:#fcb800 @endif">
+                                            <span>{{ $item['size'] }}</span>
+                                        </div>
+                                    @endforeach
+                                </figure>
+                            @endif
+                        </div>
+                        <h4 class="add_cart_item" style="color:rgb(11, 180, 180)"></h4>
 
-                                <div class="ps-product__actions">
-                                    <a href="#"><i class="icon-heart"></i></a>
+                        <div class="ps-product__shopping">
+                            <figure>
+                                <figcaption>Quantity</figcaption>
 
+                                <div class="form-group--number">
+                                    <button class="up" onclick="plus()"><i class="fa fa-plus"></i></button>
+                                    <button class="down" onclick="minus()"><i class="fa fa-minus"></i></button>
+                                    <input class="form-control" type="text" id="price"
+                                        min="{{ $single_product->mini_order }}" max="{{ $single_product->stock }}"
+                                        placeholder="1" value="{{ $single_product->mini_order }}">
+                                    <input value="{{ $single_product->id }}" type="hidden" id="product_id">
                                 </div>
 
-                            </div>
+                            </figure>
+
+                            @auth
+                                <a class="ps-btn ps-btn--black" id="addTocart">Add to cart</a>
+                                <a class="ps-btn" href="{{ route('product.cart') }}">Buy Now</a>
+                            @else
+                                <a class="ps-btn ps-btn--black" style="cursor: pointer;color:white" data-toggle="modal"
+                                    data-target="#loginModal">Add to cart</a>
+                                <a class="ps-btn" href="#">Buy Now</a>
+                            @endauth
+
+
+
+                        </div>
 
                     </div>
                 </div>
-                <div class="ps-product__content">
+                <div class="ps-product__content" style="padding-top:0">
                     <h3 class="ps-product__heading">Description</h3>
                     <div class="ps-document">
 
