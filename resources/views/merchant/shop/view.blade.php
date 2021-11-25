@@ -86,16 +86,16 @@
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
-                                        alt="Avatar" title="Change the avatar" style="width:261;height:161">
+                                        src="{{ asset('public/storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
+                                        alt="Avatar" title="Change the avatar" style="width:261px;height:161px">
                                 </div>
                             </div>
                             <div class="profile_img">
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
-                                        alt="Avatar" title="Change the avatar" style="width:261;height:161">
+                                        src="{{ asset('public/storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
+                                        alt="Avatar" title="Change the avatar" style="width:261px;height:161px">
                                 </div>
                             </div>
                             <!-- start skills -->
