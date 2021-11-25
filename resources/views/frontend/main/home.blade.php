@@ -135,7 +135,10 @@
                                                                 @endif
 
                                                             </div>
-                                                            {{-- <div class="ps-product__badge"><span>Save <br> $280.000</span></div> --}}
+                                                            <div class="ps-product__badge"><span>Save
+                                                                    <br>{{ Hel::discount_percent($hot_item->product->id, $hot_item->product->user_id) }}%</span>
+
+                                                            </div>
                                                         </div>
                                                     </figure>
                                                     <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3"
