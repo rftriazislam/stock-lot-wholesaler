@@ -68,11 +68,19 @@ class FrontendController extends Controller
             return view('frontend.product.lists', compact('products'));
         }
     }
-
-    public function shop_view($id)
+    public $subproduct;
+    public function shop_view(Request $request, $id)
     {
 
-        $shop = MerchantShop::with('marchantproduct')->where('user_id', $id)->first();
+        if ($request->subproduct) {
+            $this->subproduct = $request->subproduct;
+            $shop = MerchantShop::with(['marchantproduct' => function ($q) {
+                $q->select('*')->where('status', 2)->where('subcategory_id',  $this->subproduct)->get();
+            }])->where('user_id', $id)->first();
+        } else {
+            $shop = MerchantShop::with('marchantproduct')->where('user_id', $id)->first();
+        }
+
         if (!$shop) {
             return view('frontend.main.error');
         }

@@ -82,7 +82,9 @@
 
                                     @foreach ($miniproduct as $item)
                                         <div class="ps-product">
-                                            <div class="ps-product__thumbnail"><a href=""><img class="zoomm"
+                                            <div class="ps-product__thumbnail"><a
+                                                    href="{{ route('shop.view', [$shop->user_id, 'subproduct' => $item['sid']]) }}"><img
+                                                        class="zoomm"
                                                         src="{{ asset('storage') }}/subcategory/{{ $item['image'] }}"
                                                         alt=""></a>
 
@@ -100,7 +102,7 @@
                                             </div>
                                             <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>
                                                 <div class="ps-product_g_content ti"><a class="ps-product__title"
-                                                        href="product-default.html">{{ $item['name'] }}
+                                                        href="{{ route('shop.view', [$shop->user_id, 'subproduct' => $item['sid']]) }}">{{ $item['name'] }}
                                                     </a>
 
                                                     <p class="ps-product__price sale">
