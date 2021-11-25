@@ -25,11 +25,11 @@ class FrontendController extends Controller
         }])->where('status', 1)->get();
         // return $product;
         // exit();
-       $hotdeals=HotDealProduct::with('product')->where('status',1)->get();
+        $hotdeals = HotDealProduct::with('product')->where('status', 1)->get();
 
-       $top_sells=MerchantProduct::orderBy('stock','desc')->take(12)->get();
+        $top_sells = MerchantProduct::orderBy('stock', 'desc')->take(12)->get();
 
-        return view('frontend.main.home', compact('product','hotdeals','top_sells'));
+        return view('frontend.main.home', compact('product', 'hotdeals', 'top_sells'));
     }
 
     public function product_view($id, $slug)
@@ -79,7 +79,7 @@ class FrontendController extends Controller
         $sub = Subcategory::where('status', 1)->get();
         $miniproduct = [];
         foreach ($sub as $i) {
-            $product = MerchantProduct::where('subcategory_id', $i->id)->where('user_id', $id)->count();
+            $product = MerchantProduct::where('subcategory_id', $i->id)->where('user_id', $id)->where('status', 2)->count();
             if ($product) {
                 $miniproduct[] = array(
                     'sid' => $i->id,
