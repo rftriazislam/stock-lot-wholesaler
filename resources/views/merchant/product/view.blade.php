@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
 
     </style>
 @endsection
@@ -405,7 +405,7 @@
                                                         class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                             </div>
                                         </div>
-                                        @if ($product->color)
+                                        @if ($product->files)
 
                                             @foreach ($product->files as $item)
 
