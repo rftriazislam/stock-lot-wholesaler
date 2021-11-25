@@ -103,10 +103,14 @@ class MerchantController extends Controller
 
     public function add_product()
     {
-
-        $product_id =   substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJK0123456789LMNOPQRSTUVWXYZ', ceil(7 / strlen($x)))), 1, 7);
-        $category = Category::where('status', 1)->get();
-        return view('merchant.product.create', compact('category', 'product_id'));
+        $merchant = MerchantShop::where('user_id', Auth::user()->id)->first();
+        if ($merchant) {
+            $product_id =   substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJK0123456789LMNOPQRSTUVWXYZ', ceil(7 / strlen($x)))), 1, 7);
+            $category = Category::where('status', 1)->get();
+            return view('merchant.product.create', compact('category', 'product_id'));
+        } else {
+            return view('merchant.shop.create');
+        }
     }
     public function save_product(Request $request)
     {
