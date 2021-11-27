@@ -81,10 +81,13 @@
                                                 </div>
                                                 <div class="ps-block__content">
                                                     <div class="ps-block__author"><a class="ps-block__user"
-                                                            href="{{ route('shop.view', [$shop->user_id, $shop->name]) }}"><img
-                                                                style="height: 100px;width: 100px;"
-                                                                src="{{ asset('storage/profile') }}/{{ $shop->user_info->image }}"
-                                                                alt=""></a><a class="ps-btn"
+                                                            href="{{ route('shop.view', [$shop->user_id, $shop->name]) }}">
+                                                            @if ($shop->user_info->image)
+                                                                <img style="height: 100px;width: 100px;"
+                                                                    src="{{ asset('storage/profile') }}/{{ $shop->user_info->image }}"
+                                                                    alt="">
+                                                            @endif
+                                                        </a><a class="ps-btn"
                                                             href="{{ route('shop.view', [$shop->user_id, $shop->name]) }}">Visit
                                                             Store</a>
                                                     </div>
