@@ -1,7 +1,7 @@
-<footer class="ps-footer ps-footer--3">
+<footer class="ps-footer ps-footer--3 ">
     <div class="container">
 
-        <div class="ps-footer__widgets">
+        <div class="ps-footer__widgets pt-4">
             <aside class="widget widget_footer widget_contact-us">
                 <h4 class="widget-title">Contact us</h4>
                 <div class="widget_content">

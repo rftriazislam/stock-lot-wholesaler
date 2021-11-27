@@ -123,7 +123,12 @@
                             BDT
                         </h4>
                         <div class="ps-product__desc">
-                            <p>Sold By:<a href="{{ route('shop.view', [$single_product->user_id]) }}"><strong>
+                            <h5>Retail Price: {{ $single_product->min_retail_price }} BDT -
+                                {{ $single_product->max_retail_price }} BDT </h5>
+                        </div>
+                        <div class="ps-product__desc">
+                            <p>Sold By:<a
+                                    href="{{ route('shop.view', [$single_product->user_id, , Hel::shop_info($single_product->user_id)->name]) }}"><strong>
                                         {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
                             <ul class="ps-list--dot">
                                 <li>{{ $single_product->order_note }}</li>
@@ -188,7 +193,7 @@
                             @else
                                 <a class="ps-btn ps-btn--black" style="cursor: pointer;color:white" data-toggle="modal"
                                     data-target="#loginModal">Add to cart</a>
-                                <a class="ps-btn" href="#">Buy Now</a>
+                                <a class="ps-btn" href="#loginModal">Buy Now</a>
                             @endauth
 
 
@@ -243,8 +248,8 @@
                     </div>
                     <h3 class="ps-product__heading">Vendor</h3>
                     <h4> {{ Hel::shop_info($single_product->user_id)->name }}</h4>
-                    <p>Digiworld US, New York’s no.1 online retailer was established in May 2012 with the aim and vision to
-                        become the one-stop shop for retail in New York with implementation of best practices both online
+                    <p>
+                        {{ Hel::shop_info($single_product->user_id)->address }}
                     </p><a href="#">More Products from gopro</a>
                     <h3 class="ps-product__heading">Reviews (1)</h3>
                     <div class="row">

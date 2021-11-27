@@ -48,6 +48,9 @@ Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_vie
 Route::get('/product-lists-{sid}', [FrontendController::class, 'product_list_subcategory'])->name('product.list.subcategory');
 Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_category'])->name('product.list.category');
 Route::get('/shop-view-{id}', [FrontendController::class, 'shop_view'])->name('shop.view');
+Route::get('/shop-lists', [FrontendController::class, 'shop_lists'])->name('shop.lists');
+
+
 
 Route::group(['middleware' => ['auth'],], function () {
 

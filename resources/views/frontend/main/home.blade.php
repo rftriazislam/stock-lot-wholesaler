@@ -369,9 +369,10 @@
 
                                             </ul>
                                         </div>
-                                        <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>
+                                        <div class="ps-product__container"><a class="ps-product__vendor"
+                                                href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}"></a>
                                             <div class="ps-product_g_content ti"><a class="ps-product__title"
-                                                    href="product-default.html">{{ $subitem->product_name }}
+                                                    href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}">{{ $subitem->product_name }}
                                                 </a>
                                                 <div class="ps-product__rating">
                                                     <select class="ps-rating" data-read-only="true">
@@ -405,8 +406,8 @@
                                         <div class="ps-product">
                                             <div class="ps-product__thumbnail"><a
                                                     href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}"><img
-                                                        class="zoomm"
-                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $subitem->main_picture }}"
+                                                        class="zokomm"
+                                                        src="{{ asset('storage') }}/merchant/product/main/big/{{ $subitem->main_picture }}"
                                                         alt="" /></a>
                                                 <ul class="ps-product__actions">
                                                     <li><a href="#" data-toggle="tooltip" data-placement="top"
@@ -421,9 +422,10 @@
 
                                                 </ul>
                                             </div>
-                                            <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>
+                                            <div class="ps-product__container"><a class="ps-product__vendor ti"
+                                                    href="{{ route('shop.view', [$subitem->user_id, Hel::shop_info($subitem->user_id)->name]) }}">{{ Hel::shop_info($subitem->user_id)->name }}</a>
                                                 <div class="ps-product_g_content ti"><a class="ps-product__title"
-                                                        href="product-default.html">{{ $subitem->product_name }}
+                                                        href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}">{{ $subitem->product_name }}
                                                     </a>
                                                     <div class="ps-product__rating">
                                                         <select class="ps-rating" data-read-only="true">

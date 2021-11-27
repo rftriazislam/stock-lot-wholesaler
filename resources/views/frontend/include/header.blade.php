@@ -89,7 +89,8 @@
                       <input class="form-control" type="text" placeholder="I'm shopping for...">
                       <button>Search</button>
                   </form>
-                  <p><a href="#">Product</a><a href="#">Best Shop</a><a href="#">Best Product</a><a href="#">Top
+                  <p><a href="#">Product</a><a href="{{ route('shop.lists') }}">Best Shop</a><a href="#">Best
+                          Product</a><a href="#">Top
                           Sale</a><a href="#">Quality</a><a href="#">Wholesale Marketplace</a>
                   </p>
               </div>
@@ -158,7 +159,7 @@
       </div>
   </div>
   <div class="navigation--mobile">
-      <div class="navigation__left"><a class="ps-logo" href="index.html"><img
+      <div class="navigation__left"><a class="ps-logo" href="{{ route('home') }}"><img
                   src="{{ asset('frontend') }}/img/logo/2h.png" alt=""></a></div>
       <div class="navigation__right">
           <div class="header__actions">

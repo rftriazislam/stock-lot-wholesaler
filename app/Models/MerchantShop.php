@@ -26,4 +26,8 @@ class MerchantShop extends Model
     {
         return $this->hasMany('App\Models\MerchantProduct', 'user_id', 'user_id')->where('status', 2);
     }
+    public function user_info()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

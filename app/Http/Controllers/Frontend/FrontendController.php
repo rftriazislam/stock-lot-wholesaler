@@ -68,6 +68,18 @@ class FrontendController extends Controller
             return view('frontend.product.lists', compact('products'));
         }
     }
+
+
+    public function shop_lists()
+    {
+        $shops = MerchantShop::with('user_info')->get();
+
+        return view('frontend.shop.lists', compact('shops'));
+    }
+
+
+
+
     public $subproduct;
     public function shop_view(Request $request, $id)
     {

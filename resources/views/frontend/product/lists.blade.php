@@ -155,7 +155,7 @@
                                         @forelse ($products as $item)
 
 
-                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 ">
                                                 <div class="ps-product">
                                                     <div class="ps-product__thumbnail"><a
                                                             href="{{ route('product.view', [$item->id, $item->slug]) }}"><img
@@ -176,10 +176,11 @@
 
                                                         </ul>
                                                     </div>
-                                                    <div class="ps-product__container"><a class="ps-product__vendor"
-                                                            href="#"> {{ Hel::shop_info($item->user_id)->name }}</a>
+                                                    <div class="ps-product__container"><a class="ps-product__vendor ti"
+                                                            href="{{ route('shop.view', [$item->user_id, Hel::shop_info($item->user_id)->name]) }}">
+                                                            {{ Hel::shop_info($item->user_id)->name }}</a>
                                                         <div class="ps-product_g_content ti"><a class="ps-product__title"
-                                                                href="product-default.html">{{ $item->product_name }}</a>
+                                                                href="{{ route('product.view', [$item->id, $item->slug]) }}">{{ $item->product_name }}</a>
                                                             <p class="ps-product__price">
                                                                 {{ $item->price + $item->service_charge }}</p>
                                                         </div>
