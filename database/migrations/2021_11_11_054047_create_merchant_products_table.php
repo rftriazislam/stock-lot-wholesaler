@@ -37,6 +37,8 @@ class CreateMerchantProductsTable extends Migration
             $table->double('max_retail_price', 16, 3)->default(0.0);
             $table->integer('sell_count')->default(0);
             $table->integer('views')->default(0);
+            $table->text('delivery')->nullable();
+
             $table->tinyInteger('hot_product')->default(0);
             $table->tinyInteger('offline')->default(0);
             $table->tinyInteger('status')->default(1);

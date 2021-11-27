@@ -9,12 +9,13 @@ use App\Models\Method;
 use App\Models\Slider;
 use App\Models\Subcategory;
 use App\Models\HotDealProduct;
-
+use App\Models\PreProduct;
 use App\Models\User;
 use CreateSlidersTable;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Image;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -313,6 +314,153 @@ class AdminController extends Controller
 
         return redirect()->route('list.slider');
     }
+
+    public function pre_add_product()
+    {
+        $product_id =   substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJK0123456789LMNOPQRSTUVWXYZ', ceil(7 / strlen($x)))), 1, 7);
+        $category = Category::where('status', 1)->get();
+        return view('admin.preorder.create', compact('category', 'product_id'));
+    }
+
+
+    public function save_product(Request $request)
+    {
+
+        $validate = $this->validate($request, [
+            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:subcategories,id',
+            'product_name' => 'required',
+            'product_id' => 'required',
+            'description' => 'required',
+            'size.*' => 'nullable',
+            'unit' => 'required',
+            'color.*' => 'nullable',
+            'stock' => 'required',
+            'mini_order' => 'required',
+            'order_note' => 'nullable',
+            'price' => 'required',
+            'min_retail_price' => 'required',
+            'max_retail_price' => 'required',
+            'files.*' => 'nullable|image|mimes:jpeg,jpg,png,webp',
+            'video_link' => 'nullable',
+            'main_picture' => 'required|image|mimes:jpeg,jpg,png,webp',
+            'status' => 'required',
+            'delivery_date' => 'required',
+            'delivery.*' => 'nullable',
+            'service_charge' => 'required',
+            'date' => 'required',
+        ]);
+
+
+        if ($files = $request->file('files')) {
+            $count = 0;
+            $images = [];
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $image1 = $file;
+                $image2 = $file;
+                $count = $count + 1;
+                $imagename0 = uniqid() . '.' . $file->getClientOriginalExtension();
+                $destinationPath0 = public_path('/storage/merchant/product/files/big/');
+                $destinationPath01 = public_path('/storage/merchant/product/files/small/');
+
+                $file_resize = Image::make($image1);
+                $file_resize->resize(1100, 1100);
+                $file_resize->save($destinationPath0 . $imagename0);
+
+                $file_resize1 = Image::make($image2);
+                $file_resize1->resize(446, 514);
+                $file_resize1->save($destinationPath01 . $imagename0);
+                // $file->move($destinationPath, $imagename);
+
+                $images[] = array(
+                    'id' => $count,
+                    'extension' => $extension,
+                    'image' => $imagename0
+                );
+                // }
+            }
+            $validate['files'] =  $images;
+        }
+        if ($request->file('main_picture')) {
+            $image = $request->file('main_picture');
+            $image2 = $request->file('main_picture');
+            $image3 = $request->file('main_picture');
+            $imagename =  str_replace(' ', '-', $request->product_id) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/merchant/product/main/big/');
+            $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
+            $destinationPath_3 = public_path('/storage/merchant/product/main/medium/');
+
+
+            $resize_image = Image::make($image);
+            $resize_image->resize(1200, 1200);
+            $resize_image->save($destinationPath . $imagename);
+
+            $resize_image2 = Image::make($image2);
+            $resize_image2->resize(300, 300);
+            $resize_image2->save($destinationPath_2 . $imagename);
+
+            $resize_image3 = Image::make($image3);
+            $resize_image3->resize(446, 514);
+            $resize_image3->save($destinationPath_3 . $imagename);
+
+            $validate['main_picture'] = $imagename;
+        }
+        if ($request->color) {
+            $col = [];
+            foreach ($request->color as $c) {
+                if ($c && $c != '#5367ce') {
+                    $col[] = array('color' => $c);
+                }
+            }
+            $validate['color'] =  $col;
+        }
+        if ($request->delivery) {
+            $del = [];
+            foreach ($request->delivery as $d) {
+                if ($d) {
+                    $del[] = array('delivery' => $d);
+                }
+            }
+            $validate['delivery'] =  $del;
+        }
+
+        if ($request->size) {
+            $size = [];
+            foreach ($request->size as $s) {
+                if ($s) {
+                    $size[] = array('size' => $s);
+                }
+            }
+            $validate['size'] =  $size;
+        }
+        // dd($validate);
+        $validate['user_id'] = Auth::user()->id;
+        $validate['slug'] =  str_replace(' ', '-', $request->product_name);
+
+        $product_save = MerchantProduct::create($validate);
+
+        if ($product_save) {
+            $savepreproduct = new PreProduct();
+            $savepreproduct->user_id = Auth::user()->id;
+            $savepreproduct->product_id =   $product_save->id;
+            $savepreproduct->delivery_date = $request->delivery_date;
+            $savepreproduct->expried_time = $request->date;
+            $savepreproduct->save();
+        }
+
+        return back();
+    }
+
+    public function pre_product_lists()
+    {
+        $products = MerchantProduct::with(['category:id,name', 'subcategory:id,name', 'preproduct'])->where('user_id', Auth::user()->id)->where('status', 4)->latest()->paginate();
+
+
+        return view('admin.preorder.lists', compact('products'));
+    }
+
+
     //-------------------merchant--------------
     public function list_merchant()
     {
@@ -343,43 +491,43 @@ class AdminController extends Controller
             return back();
         }
     }
-public function hot_addproduct(Request $request,$id)
-{
-    
-    $product = MerchantProduct::where('id', $id)->first();
-    if ($product) {
-        $request['product_id']=$id;
-       $this->validate($request,['product_id'=>'required|unique:hot_deal_products,product_id']);
-        return view('admin.product.merchant.hotproduct',['id'=>$id]);
-    } else {
-        return back();
-    }
-}
+    public function hot_addproduct(Request $request, $id)
+    {
 
-    public function merchant_hot_saveproduct (Request $request){
+        $product = MerchantProduct::where('id', $id)->first();
+        if ($product) {
+            $request['product_id'] = $id;
+            $this->validate($request, ['product_id' => 'required|unique:hot_deal_products,product_id']);
+            return view('admin.product.merchant.hotproduct', ['id' => $id]);
+        } else {
+            return back();
+        }
+    }
+
+    public function merchant_hot_saveproduct(Request $request)
+    {
 
         $product = MerchantProduct::where('id', $request->product_id)->first();
         if ($product) {
-           $up= $product->update(['hot_product' => 1]);
-           
-           $hot=new HotDealProduct();
-           $hot->product_id=$request->product_id;
-           $hot->expried_time=$request->date;
-           $hot->save();
-        } 
-        return redirect()->route('admin.merchant.products');
+            $up = $product->update(['hot_product' => 1]);
 
+            $hot = new HotDealProduct();
+            $hot->product_id = $request->product_id;
+            $hot->expried_time = $request->date;
+            $hot->save();
+        }
+        return redirect()->route('admin.merchant.products');
     }
     public function hot_removeproduct($id)
     {
         $product = MerchantProduct::where('id', $id)->first();
         if ($product) {
-           $up= $product->update(['hot_product' => 0]);
-           HotDealProduct::where('product_id', $id)->delete();
-        } 
+            $up = $product->update(['hot_product' => 0]);
+            HotDealProduct::where('product_id', $id)->delete();
+        }
         return redirect()->route('admin.merchant.products');
     }
-    
+
     //-------------------merchant--------------
 
     //-------------------reseller--------------

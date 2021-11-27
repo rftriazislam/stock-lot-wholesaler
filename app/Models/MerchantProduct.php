@@ -34,12 +34,14 @@ class MerchantProduct extends Model
         'views',
         'offline',
         'hot_product',
+        'delivery',
         'status',
     ];
     protected $casts = [
         'files' => 'array',
         'color' => 'array',
         'size' => 'array',
+        'delivery' => 'array',
     ];
     public function category()
     {
@@ -48,5 +50,10 @@ class MerchantProduct extends Model
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);
+    }
+
+    public function preproduct()
+    {
+        return $this->hasOne('App\Models\PreProduct', 'product_id', 'id');
     }
 }

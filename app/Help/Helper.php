@@ -18,6 +18,16 @@ class Helper
         return $shop;
     }
 
+    public static function user_check($id)
+    {
+        $p =  User::where('id', $id)->where('role', 'merchant')->first();
+        if ($p) {
+            return  true;
+        } else {
+            return  false;
+        }
+    }
+
     public static function product_sub_count($id)
     {
         $mer = MerchantProduct::where('subcategory_id', $id)->where('status', 2)->count();
@@ -39,6 +49,7 @@ class Helper
         $products = MerchantProduct::where('id', $p_id)
             ->where('user_id', $user_id)
             ->where('status', 2)
+            ->orWhere('status', 4)
             ->first();
         $tage = (($products->price + $products->service_charge) * 100) / $products->min_retail_price;
         $percentage = round((100 - $tage), 2);
@@ -94,16 +105,16 @@ class Helper
 
         return true;
     }
-    public function productsell($order_list){
+    public function productsell($order_list)
+    {
 
-        foreach($order_list as $item){
+        foreach ($order_list as $item) {
             $product = MerchantProduct::where('id', $item['product_id'])->first();
             $product->update([
-                'stock'=>$product->stock-$item['qty'],
-                'sell_count'=>$product->sell_count+$item['qty'],
+                'stock' => $product->stock - $item['qty'],
+                'sell_count' => $product->sell_count + $item['qty'],
             ]);
         }
         return true;
-
     }
 }

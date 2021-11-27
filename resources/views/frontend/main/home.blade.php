@@ -57,7 +57,9 @@
                     <div class="ps-block__item">
                         <div class="ps-block__left"><i class="icon-sync"></i></div>
                         <div class="ps-block__right">
-                            <h4>Pre Order</h4>
+                            <a href="{{ route('pre.order') }}">
+                                <h4>Pre Order</h4>
+                            </a>
 
                         </div>
                     </div>

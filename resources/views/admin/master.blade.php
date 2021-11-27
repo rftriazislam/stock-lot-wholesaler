@@ -21,7 +21,7 @@
         rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('backend') }}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    @yield('css')
     <!-- Custom Theme Style -->
     <link href="{{ asset('backend') }}/build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -40,7 +40,7 @@
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="">Codewin IT</a>
+                StockLot by <a href="">Codewin IT</a>
             </div>
             <div class="clearfix"></div>
         </footer>
@@ -89,7 +89,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('backend') }}/build/js/custom.min.js"></script>
-
+    @yield('js')
 </body>
 
 </html>

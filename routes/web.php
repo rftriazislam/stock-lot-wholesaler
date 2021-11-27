@@ -50,7 +50,9 @@ Route::get('/product-ste-lists-{id}', [FrontendController::class, 'product_list_
 Route::get('/shop-view-{id}', [FrontendController::class, 'shop_view'])->name('shop.view');
 Route::get('/shop-lists', [FrontendController::class, 'shop_lists'])->name('shop.lists');
 
+Route::get('/pre-order', [FrontendController::class, 'pre_order'])->name('pre.order');
 
+Route::get('/dashboard/pre-order/lists', [AdminController::class, 'pre_product_lists'])->name('pre.product.lists');
 
 Route::group(['middleware' => ['auth'],], function () {
 
@@ -92,6 +94,12 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
 
     Route::get('/dashboard/method/add', [AdminController::class, 'add_method'])->name('method.add');
     Route::post('/dashboard/method/save', [AdminController::class, 'save_method'])->name('method.save');
+    Route::get('/dashboard/pre-order/add', [AdminController::class, 'pre_add_product'])->name('pre.add.product');
+
+    Route::post('/dashboard/pre-order/save', [AdminController::class, 'save_product'])->name('admin.save.product');
+    Route::get('/dashboard/pre-order/lists', [AdminController::class, 'pre_product_lists'])->name('pre.product.lists');
+
+
 
 
 

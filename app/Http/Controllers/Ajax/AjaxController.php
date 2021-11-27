@@ -199,8 +199,13 @@ class AjaxController extends Controller
                                         <span class="ps-variant__tooltip">' . $item['color']  . '</span>
                                     </div>
                                     <p> Size:' . $item->size  . '</p>
-
+                                    ';
+            if ($item->vendor) {
+                $output .= '
                                     <p>Sold By:<strong> ' . $item->vendor->name  . '</strong></p>
+                                    ';
+            }
+            $output .= '
                                 </div>
                             </div>
                         </td>
@@ -278,7 +283,11 @@ class AjaxController extends Controller
 
         if (Auth::check()) {
             $item_count = CartAdd::where('user_id', Auth::user()->id)->count();
+
             $carts =  CartAdd::with('vendor', 'product')->where('user_id', Auth::user()->id)->get();
+
+
+
             $output = ' <div class="ps-cart__items" style="overflow: scroll;height: 300px;">';
             $total = 0;
             foreach ($carts as $item) {
@@ -289,7 +298,15 @@ class AjaxController extends Controller
             </div>
             <div class="ps-product__content"><a class="ps-product__remove" href="#" onclick="removed(' . $item->id . ')"><i
                         class="icon-cross"></i></a><a href="' . route('product.view', [$item->product->id, $item->product->slug]) . '">' . $item->product->product_name . '</a>
-                <p><strong>Sold by:</strong>  ' . $item->vendor->name  . '<br>size: ' . $item->size . '&nbsp; color : <span style="height:2px;width:2px;background:' . $item->color . ';color:' . $item->color . '">xx</span></p>
+               <p><strong>Sold by:</strong>  ';
+
+
+                if ($item->vendor) {
+                    echo  $item->vendor->name;
+                }
+
+
+                $output .= '<br>size: ' . $item->size . '&nbsp; color : <span style="height:2px;width:2px;background:' . $item->color . ';color:' . $item->color . '">xx</span></p>
                 <small>' . $item->qty . ' x ' . ($item->product->price + $item->product->service_charge) . '</small>
             </div>
         </div>';

@@ -127,9 +127,11 @@
                                 {{ $single_product->max_retail_price }} BDT </h5>
                         </div>
                         <div class="ps-product__desc">
-                            <p>Sold By:<a
-                                    href="{{ route('shop.view', [$single_product->user_id, Hel::shop_info($single_product->user_id)->name]) }}"><strong>
-                                        {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
+                            @if (Hel::user_check($single_product->user_id))
+                                <p>Sold By:<a
+                                        href="{{ route('shop.view', [$single_product->user_id, Hel::shop_info($single_product->user_id)->name]) }}"><strong>
+                                            {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
+                            @endif
                             <ul class="ps-list--dot">
                                 <li>{{ $single_product->order_note }}</li>
 
@@ -247,10 +249,13 @@
                         </table>
                     </div>
                     <h3 class="ps-product__heading">Vendor</h3>
-                    <h4> {{ Hel::shop_info($single_product->user_id)->name }}</h4>
-                    <p>
-                        {{ Hel::shop_info($single_product->user_id)->address }}
-                    </p><a href="#">More Products from gopro</a>
+                    @if (Hel::user_check($single_product->user_id))
+                        <h4> {{ Hel::shop_info($single_product->user_id)->name }}</h4>
+                        <p>
+                            {{ Hel::shop_info($single_product->user_id)->address }}
+                        </p>
+                    @endif
+                    <a href="#">More Products from gopro</a>
                     <h3 class="ps-product__heading">Reviews (1)</h3>
                     <div class="row">
                         <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 ">

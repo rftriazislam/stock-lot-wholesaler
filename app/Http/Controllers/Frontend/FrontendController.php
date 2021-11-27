@@ -9,6 +9,7 @@ use App\Models\DeliveryDetail;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\HotDealProduct;
+use App\Models\PreProduct;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,7 @@ class FrontendController extends Controller
     public function product_view($id, $slug)
     {
 
-        $single_product = MerchantProduct::where('id', $id)->where('slug', $slug)->where('status', 2)->first();
+        $single_product = MerchantProduct::where('id', $id)->where('slug', $slug)->where('status', 2)->orWhere('status', 4)->first();
         if ($single_product) {
             $single_product->update(['views' => $single_product->views + 1,]);
             return view('frontend.product.view', compact('single_product'));
@@ -130,6 +131,16 @@ class FrontendController extends Controller
             return back();
         }
     }
+
+    public function pre_order()
+    {
+        $hotdeals = PreProduct::with('product')->where('status', 1)
+            ->latest()
+            ->get();
+        $top_sells = MerchantProduct::orderBy('stock', 'desc')->take(12)->get();
+        return view('frontend.preorder.lists', compact('hotdeals', 'top_sells'));
+    }
+
 
     public function payment_message(Request $request)
     {
