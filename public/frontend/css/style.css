@@ -251,6 +251,9 @@
     border-radius: 50%;
     background: #fcb800;
 }
+.p_35 {
+    padding: 3.5px;
+}
 
 @media (min-width: 768px) {
     .masonry-wrapper[data-col-sm="1"] .grid-item,

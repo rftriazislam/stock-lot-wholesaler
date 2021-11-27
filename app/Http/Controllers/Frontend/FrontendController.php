@@ -21,7 +21,7 @@ class FrontendController extends Controller
         $product = Category::withCount('subcategory')->with(['subcategory' => function ($q) {
             $q->select('*')->withCount('merchantproduct')->where('status', 1);
         }])->with(['cateproduct' => function ($q) {
-            $q->select('*')->where('status', 2)->latest()->take(10);
+            $q->select('*')->where('status', 2)->latest()->take(12);
         }])->where('status', 1)->get();
         // return $product;
         // exit();

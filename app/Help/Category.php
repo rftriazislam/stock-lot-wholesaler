@@ -10,7 +10,7 @@ class Category
 
     public static function category_list()
     {
-        $product = ModelsCategory::where('status', 1)->get();
+        $product = ModelsCategory::select('id', 'name', 'image')->where('status', 1)->take(8)->get();
         return $product;
     }
 

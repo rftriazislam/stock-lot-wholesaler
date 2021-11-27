@@ -290,8 +290,9 @@
                 <h3>Top categories of the month</h3>
                 <div class="row">
                     @foreach (HelpCat::category_list() as $item)
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                            <div class="ps-block--category"><a class="ps-block__overlay" href="shop-default.html"></a><img
+                        <div class=" col-lg-3 col-md-4 col-sm-4 col-6 ">
+                            <div class="p_35 ps-block--category" style="padding: 3.5px"><a class="ps-block__overlay"
+                                    href="shop-default.html"></a><img
                                     src="{{ asset('storage') }}/category/big/{{ $item->image }}" alt="">
                                 <p>{{ $item->name }}</p>
                             </div>
@@ -341,13 +342,15 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="ps-section__content" style="background-color: #ffffff;">
+
+                        <div class="ps-section__content ddd1" style="background-color: #ffffff;">
                             <div class="ps-carousel--nav owl-slider" data-owl-auto="false" data-owl-loop="false"
                                 data-owl-speed="10000" data-owl-gap="30" data-owl-nav="true" data-owl-dots="true"
                                 data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="2" data-owl-item-md="2"
                                 data-owl-item-lg="3" data-owl-item-xl="5" data-owl-duration="1000" data-owl-mousedrag="on">
 
                                 @foreach ($item->cateproduct as $subitem)
+
                                     <div class="ps-product">
                                         <div class="ps-product__thumbnail"><a
                                                 href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}"><img
@@ -393,6 +396,57 @@
 
                             </div>
                         </div>
+
+                        <div class="ps-section__content ddd2">
+                            <div class="row">
+                                @foreach ($item->cateproduct as $subitem)
+
+                                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-12 ">
+                                        <div class="ps-product">
+                                            <div class="ps-product__thumbnail"><a
+                                                    href="{{ route('product.view', [$subitem->id, $subitem->slug]) }}"><img
+                                                        class="zoomm"
+                                                        src="{{ asset('storage') }}/merchant/product/main/small/{{ $subitem->main_picture }}"
+                                                        alt="" /></a>
+                                                <ul class="ps-product__actions">
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="top"
+                                                            title="Add To Cart"><i class="icon-bag2"></i></a></li>
+                                                    <li><a href="#" data-placement="top" title="Quick View"
+                                                            data-toggle="modal" data-target="#product-quickview"><i
+                                                                class="icon-eye"></i></a>
+                                                    </li>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="top"
+                                                            title="Add to Whishlist"><i class="icon-heart"></i></a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="ps-product__container"><a class="ps-product__vendor" href="#"></a>
+                                                <div class="ps-product_g_content ti"><a class="ps-product__title"
+                                                        href="product-default.html">{{ $subitem->product_name }}
+                                                    </a>
+                                                    <div class="ps-product__rating">
+                                                        <select class="ps-rating" data-read-only="true">
+                                                            <option value="1">1</option>
+                                                            <option value="1">2</option>
+                                                            <option value="1">3</option>
+                                                            <option value="1">4</option>
+                                                            <option value="2">5</option>
+                                                        </select><span>02</span>
+                                                    </div>
+                                                    <p class="ps-product__price sale">
+                                                        {{ $subitem->price + $subitem->service_charge }}
+                                                        <del>{{ $subitem->min_retail_price }}
+                                                        </del>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
                     @endif
                 @endforeach
 
@@ -401,8 +455,13 @@
 
             </div>
         </div>
+
+
+
     </div>
-    {{-- @include('frontend.include.quickview') --}}
+
+
+    <script src="{{ asset('frontend') }}/js/custom/custom.js"></script>
 
 
 @endsection

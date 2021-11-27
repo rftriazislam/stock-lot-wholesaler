@@ -4,7 +4,7 @@
         rel="stylesheet">
     <style>
         /* .colorpicker.colorpicker-hidden{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           } */
 
     </style>
 @endsection
@@ -300,7 +300,8 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="number" id="price" required="required" min="1" name="price"
-                                            class="form-control " placeholder="8400 {{ Auth::user()->currency }}">
+                                            class="form-control "
+                                            placeholder="8400 {{ Auth::user()->currency }} per unit">
                                     </div>
                                 </div>
                                 <div class="item form-group">
