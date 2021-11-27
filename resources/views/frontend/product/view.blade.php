@@ -128,7 +128,7 @@
                         </div>
                         <div class="ps-product__desc">
                             <p>Sold By:<a
-                                    href="{{ route('shop.view', [$single_product->user_id, , Hel::shop_info($single_product->user_id)->name]) }}"><strong>
+                                    href="{{ route('shop.view', [$single_product->user_id, Hel::shop_info($single_product->user_id)->name]) }}"><strong>
                                         {{ Hel::shop_info($single_product->user_id)->name }}</strong></a></p>
                             <ul class="ps-list--dot">
                                 <li>{{ $single_product->order_note }}</li>

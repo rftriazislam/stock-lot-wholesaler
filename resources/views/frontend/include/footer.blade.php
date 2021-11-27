@@ -49,12 +49,12 @@
 
         <div class="ps-footer__copyright">
             <p>© {{ date('y') }} Codewin IT. All Rights Reserved</p>
-            <p><span>We Using Safe Payment For:</span><a href="#"><img
+            {{-- <p><span>We Using Safe Payment For:</span><a href="#"><img
                         src="{{ asset('frontend') }}/img/payment-method/1.jpg" alt=""></a><a href="#"><img
                         src="{{ asset('frontend') }}/img/payment-method/2.jpg" alt=""></a><a href="#"><img
                         src="{{ asset('frontend') }}/img/payment-method/3.jpg" alt=""></a><a href="#"><img
                         src="{{ asset('frontend') }}/img/payment-method/4.jpg" alt=""></a><a href="#"><img
-                        src="{{ asset('frontend') }}/img/payment-method/5.jpg" alt=""></a></p>
+                        src="{{ asset('frontend') }}/img/payment-method/5.jpg" alt=""></a></p> --}}
         </div>
     </div>
 </footer>
