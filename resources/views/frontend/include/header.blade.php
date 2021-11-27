@@ -238,6 +238,8 @@
               </div>
           </li>
       @endforeach
+      <li><a href="{{ route('shop.lists') }}">Shop Lists</a>
+      </li>
       <li><a href="#">Contact</a>
       </li>
 
