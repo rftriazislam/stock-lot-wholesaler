@@ -364,9 +364,11 @@
                 $('#totalitem').text(res.item);
                 $('#totalitem2').text(res.item);
                 $('#minicart2').html(res.minicart);
+                $('#minicart').html(res.minicart);
+
             },
             error: function(data) {
-                alert("item fail");
+                alert("I1 fail");
             }
         });
     }
@@ -385,7 +387,7 @@
                 totalitem();
             },
             error: function(data) {
-                alert("fail");
+                alert("R1 fail");
             }
         });
     }

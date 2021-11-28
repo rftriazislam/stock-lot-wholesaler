@@ -24,8 +24,8 @@
 
                          </ul>
                      </div>
-                     <div class="ps-product__container"><a class="ps-product__vendor" href="#">SHOP NAME</a>
-                         <div class="ps-product_g_content"><a class="ps-product__title" href="product-default.html">
+                     <div class="ps-product__container"><a class="ps-product__vendor ti" href="#">SHOP NAME</a>
+                         <div class="ps-product_g_content ti"><a class="ps-product__title" href="product-default.html">
                                  {{ $item->product_name }}</a>
                              <div class="ps-product__rating">
                                  <select class="ps-rating" data-read-only="true">
