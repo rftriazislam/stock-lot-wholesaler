@@ -39,7 +39,7 @@
                                                                 <div class="item">
                                                                     <a
                                                                         href="{{ asset('storage') }}/merchant/product/main/big/{{ $hot_item->product->main_picture }}"><img
-                                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
+                                                                            src="{{ asset('storage') }}/merchant/product/main/medium/{{ $hot_item->product->main_picture }}"
                                                                             alt="">
                                                                     </a>
                                                                 </div>
@@ -64,7 +64,7 @@
                                                     <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3"
                                                         data-arrow="false">
                                                         <div class="item"><img
-                                                                src="{{ asset('storage') }}/merchant/product/main/small/{{ $hot_item->product->main_picture }}"
+                                                                src="{{ asset('storage') }}/merchant/product/main/medium/{{ $hot_item->product->main_picture }}"
                                                                 alt=""></div>
                                                         @if ($hot_item->product->files)
                                                             @foreach ($hot_item->product->files as $item)

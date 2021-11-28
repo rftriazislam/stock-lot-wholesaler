@@ -28,7 +28,7 @@ class FrontendController extends Controller
         // exit();
         $hotdeals = HotDealProduct::with('product')->where('status', 1)->get();
 
-        $top_sells = MerchantProduct::orderBy('stock', 'desc')->take(12)->get();
+        $top_sells = MerchantProduct::where('status', 2)->orderBy('stock', 'desc')->take(12)->get();
 
         return view('frontend.main.home', compact('product', 'hotdeals', 'top_sells'));
     }
@@ -138,7 +138,7 @@ class FrontendController extends Controller
         $hotdeals = PreProduct::with('product')->where('status', 1)
             ->latest()
             ->get();
-        $top_sells = MerchantProduct::orderBy('stock', 'desc')->take(12)->get();
+        $top_sells = MerchantProduct::where('status', 2)->orderBy('stock', 'desc')->take(12)->get();
         return view('frontend.preorder.lists', compact('hotdeals', 'top_sells'));
     }
 

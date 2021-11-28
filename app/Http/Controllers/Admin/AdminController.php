@@ -460,6 +460,163 @@ class AdminController extends Controller
         return view('admin.preorder.lists', compact('products'));
     }
 
+    public function pre_product_edit($id)
+    {
+        $product = MerchantProduct::with(['category:id,name', 'subcategory:id,name', 'preproduct'])->where('id', $id)->first();
+        $category = Category::where('status', 1)->get();
+        if ($product) {
+            return view('admin.preorder.view', compact('product', 'category'));
+        } else {
+            return back();
+        }
+    }
+
+
+
+    public function preproduct_update(Request $request)
+    {
+
+        // oldfiles
+
+        $product_id = $request->p_id;
+        $product = MerchantProduct::where('id', $product_id)->first();
+
+        if ($product) {
+            $product->update($request->all());
+
+            if ($request->colorr) {
+                $col = [];
+                foreach ($request->colorr as $c) {
+                    if ($c && $c != '#5367ce') {
+                        $col[] = array('color' => $c);
+                    }
+                }
+                $product->update(['color' => $col]);
+            }
+            if ($request->sizee) {
+                $size = [];
+                foreach ($request->sizee as $s) {
+                    if ($s) {
+                        $size[] = array('size' => $s);
+                    }
+                }
+                $product->update(['size' => $size]);
+            }
+            if ($request->deliveryy) {
+                $del = [];
+                foreach ($request->deliveryy as $d) {
+                    if ($d) {
+                        $del[] = array('delivery' => $d);
+                    }
+                }
+
+                $product->update(['delivery' => $del]);
+            }
+
+            if ($request->file('main_picturee')) {
+                $image = $request->file('main_picturee');
+                $image2 = $request->file('main_picturee');
+                $image3 = $request->file('main_picturee');
+                $imagename =  str_replace(' ', '-', $request->product_id) . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path('/storage/merchant/product/main/big/');
+                $destinationPath_2 = public_path('/storage/merchant/product/main/small/');
+                $destinationPath_3 = public_path('/storage/merchant/product/main/medium/');
+                $resize_image = Image::make($image);
+                $resize_image->resize(1200, 1200);
+                $resize_image->save($destinationPath . $imagename);
+
+                $resize_image2 = Image::make($image2);
+                $resize_image2->resize(300, 300);
+                $resize_image2->save($destinationPath_2 . $imagename);
+
+                $resize_image3 = Image::make($image3);
+                $resize_image3->resize(446, 514);
+                $resize_image3->save($destinationPath_3 . $imagename);
+
+                $product->update(['main_picture' => $imagename]);
+            }
+
+
+            if ($files = $request->file('filess')) {
+                $count = 0;
+                $images = [];
+                foreach ($files as $file) {
+                    $extension = $file->getClientOriginalExtension();
+                    $image1 = $file;
+                    $image2 = $file;
+                    $count = $count + 1;
+                    $imagename0 = uniqid() . '.' . $file->getClientOriginalExtension();
+
+                    $destinationPath0 = public_path('/storage/merchant/product/files/big/');
+                    $destinationPath01 = public_path('/storage/merchant/product/files/small/');
+
+                    $file_resize = Image::make($image1);
+                    $file_resize->resize(1100, 1100);
+                    $file_resize->save($destinationPath0 . $imagename0);
+
+                    $file_resize1 = Image::make($image2);
+                    $file_resize1->resize(446, 514);
+                    $file_resize1->save($destinationPath01 . $imagename0);
+                    // $file->move($destinationPath, $imagename);
+                    $images[] = array(
+                        'id' => $count,
+                        'extension' => $extension,
+                        'image' => $imagename0
+                    );
+                    // }
+                }
+                $images;
+
+                $imagesss = [];
+                if ($request->oldfiles) {
+                    foreach ($request->oldfiles  as $i) {
+                        foreach ($product->files  as $j) {
+                            if ($j['image'] == $i) {
+                                $imagesss[] = array(
+                                    'id' => $j['id'],
+                                    'extension' => $j['extension'],
+                                    'image' => $j['image']
+                                );
+                            }
+                        }
+                    }
+
+                    $output = array_merge($images, $imagesss);
+                } else {
+                    $output = $images;
+                }
+            } else {
+                $imagesss = [];
+                if ($request->oldfiles) {
+                    foreach ($request->oldfiles  as $i) {
+                        foreach ($product->files  as $j) {
+                            if ($j['image'] == $i) {
+                                $imagesss[] = array(
+                                    'id' => $j['id'],
+                                    'extension' => $j['extension'],
+                                    'image' => $j['image']
+                                );
+                            }
+                        }
+                    }
+
+                    $output =  $imagesss;
+                } else {
+                    $output = $product->files;
+                }
+            }
+
+            $product->update(['files' => $output]);
+        }
+
+        return back();
+    }
+
+
+
+
+
+
 
     //-------------------merchant--------------
     public function list_merchant()

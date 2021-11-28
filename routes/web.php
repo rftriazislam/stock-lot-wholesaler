@@ -98,8 +98,8 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
 
     Route::post('/dashboard/pre-order/save', [AdminController::class, 'save_product'])->name('admin.save.product');
     Route::get('/dashboard/pre-order/lists', [AdminController::class, 'pre_product_lists'])->name('pre.product.lists');
-
-
+    Route::get('/dashboard/pre-order/edit/{id}', [AdminController::class, 'pre_product_edit'])->name('admin.preorder.edit');
+    Route::post('/dashboard/pre-order/update', [AdminController::class, 'preproduct_update'])->name('admin.preproduct.update');
 
 
 
