@@ -231,6 +231,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'HelpCat' => App\Help\Category::class,
         'Hel' => App\Help\Helper::class,
+        'Currency' => App\Help\Currency::class,
+
 
 
     ],

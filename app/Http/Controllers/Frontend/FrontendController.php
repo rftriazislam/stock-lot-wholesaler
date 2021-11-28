@@ -13,7 +13,10 @@ use App\Models\PreProduct;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Laravel\Ui\Presets\React;
+use App\Help\Helper;
+use App\Models\Fb_live;
 
 class FrontendController extends Controller
 {
@@ -155,5 +158,22 @@ class FrontendController extends Controller
     public function error()
     {
         return view('frontend.main.error');
+    }
+
+
+
+    public function live_sell()
+    {
+
+        $d = Fb_live::all();
+        $live = [];
+        foreach ($d as $s) {
+            $ss = Helper::live_video($s->page_name);
+            if ($ss == true) {
+                $live[] = array('live' => $s->page_name);
+            }
+        }
+        $fb = $live;
+        return view('frontend.main.live_sell', compact('fb'));
     }
 }

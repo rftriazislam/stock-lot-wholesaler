@@ -42,6 +42,7 @@ Route::get('/logout-logout', [App\Http\Controllers\Auth\LoginController::class, 
 Route::post('/login-cart', [App\Http\Controllers\Auth\LoginController::class, 'logincart'])->name('logincart');
 
 Route::get('/pro-rft-link-{id}', [App\Http\Controllers\Auth\LoginController::class, 'affiliate_link']);
+Route::get('/live-sell', [FrontendController::class, 'live_sell'])->name('live.sell');
 
 
 Route::get('/product-view-{id}-{slug}', [FrontendController::class, 'product_view'])->name('product.view');
@@ -122,7 +123,7 @@ Route::group(['middleware' => ['auth', 'admin'],], function () {
     Route::get('/dashboard/reseller/lists', [AdminController::class, 'list_reseller'])->name('list.reseller');
     //----------reseller----------
 
-
+    Route::get('/currency/convert', [AdminController::class, 'currency_convert'])->name('currency.convert');
 });
 //------------------------------------------------------------Admin----------------------------------------------------------------------------------
 

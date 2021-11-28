@@ -8,6 +8,7 @@ use App\Models\MerchantShop;
 use App\Models\TransanctionHistory;
 use App\Models\User;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Support\Facades\Http;
 
 class Helper
 {
@@ -114,5 +115,18 @@ class Helper
             ]);
         }
         return true;
+    }
+
+    public static function  live_video($user_name)
+    {
+
+        $response = Http::get('https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/' . $user_name . '/live');
+        $body = $response->body();
+        if (strpos($body, "This video may no longer exist")) {
+            $msg = false;
+        } else {
+            $msg = true;
+        }
+        return $msg;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ExchangeRate;
 use App\Models\MerchantProduct;
 use App\Models\Method;
 use App\Models\Slider;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Image;
 use Auth;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -699,4 +701,43 @@ class AdminController extends Controller
     }
     //-------------------reseller--------------
 
+    public function currency_convert()
+    {
+
+        $data = Http::get('https://openexchangerates.org/api/latest.json?app_id=1d198fa2354940eca5d4bb7a85983404')->json();
+        $base = $data['base'];
+        $rates =   $data['rates'];
+        $rat =    count($rates);
+
+        $exchange = ExchangeRate::all();
+
+        $i = 0;
+        if ($exchange == '[]' || $exchange == null) {
+            foreach ($rates as $key => $value) {
+                if ($rat >= $i) {
+                    $rates = new ExchangeRate();
+                    $rates->base = $base;
+                    $rates->rates = $key;
+                    $rates->money = $value;
+                    $rates->save();
+                    $i = $i + 1;
+                }
+            }
+        } else {
+
+            foreach ($rates as $key => $value) {
+                if ($rat >= $i) {
+                    $rates = ExchangeRate::where('rates', $key)->first();
+
+                    $rates->update([
+                        $rates->money = $value,
+                    ]);
+
+
+                    $i = $i + 1;
+                }
+            }
+        }
+        return back();
+    }
 }

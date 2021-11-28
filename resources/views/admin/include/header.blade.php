@@ -124,6 +124,10 @@
 
                         </ul>
                     </li>
+
+                    <li><a href="{{ route('currency.convert') }}"><i class="fa fa-laptop"></i>Currency Convert</a>
+                    </li>
+
                 </ul>
             </div>
 

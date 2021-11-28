@@ -50,8 +50,9 @@
                     <div class="ps-block__item">
                         <div class="ps-block__left"><i class="icon-rocket"></i></div>
                         <div class="ps-block__right">
-                            <h4>Live Sell</h4>
-
+                            <a href="{{ route('live.sell') }}">
+                                <h4>Live Sell</h4>
+                            </a>
                         </div>
                     </div>
                     <div class="ps-block__item">
