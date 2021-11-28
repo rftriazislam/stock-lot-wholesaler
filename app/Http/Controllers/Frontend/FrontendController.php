@@ -36,13 +36,14 @@ class FrontendController extends Controller
     public function product_view($id, $slug)
     {
 
-        $single_product = MerchantProduct::where('id', $id)->where('slug', $slug)->where('status', 2)->orWhere('status', 4)->first();
+        $single_product = MerchantProduct::where('id', $id)->where('slug', $slug)->first();
         if ($single_product) {
-            $single_product->update(['views' => $single_product->views + 1,]);
-            return view('frontend.product.view', compact('single_product'));
-        } else {
-            return back();
+            if ($single_product->status == 2 || $single_product->status == 4) {
+                $single_product->update(['views' => $single_product->views + 1,]);
+                return view('frontend.product.view', compact('single_product'));
+            }
         }
+        return back();
     }
 
     public function product_list_subcategory($id)

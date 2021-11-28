@@ -48,8 +48,6 @@ class Helper
     {
         $products = MerchantProduct::where('id', $p_id)
             ->where('user_id', $user_id)
-            ->where('status', 2)
-            ->orWhere('status', 4)
             ->first();
         $tage = (($products->price + $products->service_charge) * 100) / $products->min_retail_price;
         $percentage = round((100 - $tage), 2);

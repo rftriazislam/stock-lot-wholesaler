@@ -302,7 +302,7 @@ class AjaxController extends Controller
 
 
                 if ($item->vendor) {
-                    echo  $item->vendor->name;
+                    $item->vendor->name;
                 }
 
 

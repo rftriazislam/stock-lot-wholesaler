@@ -17,7 +17,7 @@
                         <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12 ">
                             <div class="ps-block--deal-hot" data-mh="dealhot">
                                 <div class="ps-block__header">
-                                    <h3>Deal hot today</h3>
+                                    <h3>Pre Order</h3>
                                     <div class="ps-block__navigation"><a class="ps-carousel__prev"
                                             href=".ps-carousel--deal-hot"><i class="icon-chevron-left"></i></a><a
                                             class="ps-carousel__next" href=".ps-carousel--deal-hot"><i
