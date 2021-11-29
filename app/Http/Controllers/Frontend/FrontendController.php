@@ -164,6 +164,7 @@ class FrontendController extends Controller
 
     public function live_sell()
     {
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 
 
         $d = Fb_live::all();
