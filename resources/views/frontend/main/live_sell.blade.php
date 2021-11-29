@@ -22,11 +22,9 @@
                                     frameborder="0" controls="controls" allowfullscreen="" height="275px" autoplay="false">
                                 </iframe>
                             </div>
-
-
                         </div>
-
                     </div>
+
                 @endforeach
             </div>
         </div>

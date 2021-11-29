@@ -3,6 +3,7 @@
 namespace App\Help;
 
 use App\Models\DeliveryDetail;
+use App\Models\HotDealProduct;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
 use App\Models\TransanctionHistory;
@@ -144,5 +145,21 @@ class Helper
             $msg = "true";
         }
         return $msg;
+    }
+    public static function hotdel()
+    {
+        date_default_timezone_set("Asia/Dhaka");
+        $time = date('Y-m-d H:i:s');
+
+        $hotdeals = HotDealProduct::where('expried_time', '<', $time)->get();
+
+        foreach ($hotdeals as $do) {
+            $r = MerchantProduct::where('id', $do->product_id)->first();
+            $r->update([
+                'hot_product' => 0
+            ]);
+            HotDealProduct::where('id', $do->id)->delete();
+        }
+        return true;
     }
 }

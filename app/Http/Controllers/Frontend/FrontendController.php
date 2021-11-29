@@ -29,8 +29,8 @@ class FrontendController extends Controller
         }])->where('status', 1)->get();
         // return $product;
         // exit();
+        $hot = Helper::hotdel();
         $hotdeals = HotDealProduct::with('product')->where('status', 1)->get();
-
         $top_sells = MerchantProduct::where('status', 2)->orderBy('stock', 'desc')->take(12)->get();
 
         return view('frontend.main.home', compact('product', 'hotdeals', 'top_sells'));
