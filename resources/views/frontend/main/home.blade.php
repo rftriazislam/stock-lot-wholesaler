@@ -295,7 +295,7 @@
                     @foreach (HelpCat::category_list() as $item)
                         <div class=" col-lg-3 col-md-4 col-sm-4 col-6 ">
                             <div class="p_35 ps-block--category" style="padding: 3.5px"><a class="ps-block__overlay"
-                                    href="shop-default.html"></a><img
+                                    href="{{ route('product.list.category', [$item->id]) }}"></a><img
                                     src="{{ asset('storage') }}/category/big/{{ $item->image }}" alt="">
                                 <p>{{ $item->name }}</p>
                             </div>
