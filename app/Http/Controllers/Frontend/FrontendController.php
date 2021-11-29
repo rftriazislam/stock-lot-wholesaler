@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Help\Currency;
 use App\Http\Controllers\Controller;
 use App\Models\CartAdd;
 use App\Models\Category;
@@ -20,6 +21,9 @@ use App\Models\Fb_live;
 
 class FrontendController extends Controller
 {
+
+
+
     public function index()
     {
         $product = Category::withCount('subcategory')->with(['subcategory' => function ($q) {
@@ -64,9 +68,7 @@ class FrontendController extends Controller
     public function product_list_category($id)
     {
         $products = MerchantProduct::where('category_id', $id)->where('status', 2)->get();
-
         if ($products) {
-
             return view('frontend.product.lists', compact('products'));
         } else {
             $products = 0;
@@ -74,11 +76,9 @@ class FrontendController extends Controller
         }
     }
 
-
     public function shop_lists()
     {
         $shops = MerchantShop::with('user_info')->get();
-
         return view('frontend.shop.lists', compact('shops'));
     }
 
@@ -88,7 +88,6 @@ class FrontendController extends Controller
     public $subproduct;
     public function shop_view(Request $request, $id)
     {
-
         if ($request->subproduct) {
             $this->subproduct = $request->subproduct;
             $shop = MerchantShop::with(['marchantproduct' => function ($q) {
@@ -97,7 +96,6 @@ class FrontendController extends Controller
         } else {
             $shop = MerchantShop::with('marchantproduct')->where('user_id', $id)->first();
         }
-
         if (!$shop) {
             return view('frontend.main.error');
         }

@@ -119,12 +119,13 @@
 
                             </div>
                         </div>
-                        <h4 class="ps-product__price">{{ $single_product->price + $single_product->service_charge }}
-                            BDT
+                        <h4 class="ps-product__price">
+                            {{ Currency::mc('BDT', $single_product->price + $single_product->service_charge) }}
+
                         </h4>
                         <div class="ps-product__desc">
-                            <h5>Retail Price: {{ $single_product->min_retail_price }} BDT -
-                                {{ $single_product->max_retail_price }} BDT </h5>
+                            <h5>Retail Price: {{ Currency::mc('BDT', $single_product->min_retail_price) }} -
+                                {{ Currency::mc('BDT', $single_product->max_retail_price) }} </h5>
                         </div>
                         <div class="ps-product__desc">
                             @if (Hel::user_check($single_product->user_id))

@@ -182,7 +182,8 @@
                                                         <div class="ps-product_g_content ti"><a class="ps-product__title"
                                                                 href="{{ route('product.view', [$item->id, $item->slug]) }}">{{ $item->product_name }}</a>
                                                             <p class="ps-product__price">
-                                                                {{ $item->price + $item->service_charge }}</p>
+                                                                {{ Currency::mc('BDT', $item->price + $item->service_charge) }}
+                                                            </p>
                                                         </div>
 
                                                     </div>
@@ -228,8 +229,8 @@
                                                 </div>
                                                 <div class="ps-product__shopping">
                                                     <p class="ps-product__price">
-                                                        {{ $item->price + $item->service_charge }}</p><a
-                                                        class="ps-btn" href="#">Add to cart</a>
+                                                        {{ Currency::mc('BDT', $item->price + $item->service_charge) }}
+                                                    </p><a class="ps-btn" href="#">Add to cart</a>
                                                     <ul class="ps-product__actions">
                                                         <li><a href="#"><i class="icon-heart"></i> Wishlist</a></li>
 

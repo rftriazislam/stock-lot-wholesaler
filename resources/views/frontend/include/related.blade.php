@@ -36,7 +36,8 @@
                                      <option value="2">5</option>
                                  </select><span>01</span>
                              </div>
-                             <p class="ps-product__price">{{ $item->price + $item->service_charge }}</p>
+                             <p class="ps-product__price">
+                                 {{ Currency::mc('BDT', $item->price + $item->service_charge) }}</p>
                          </div>
 
                      </div>

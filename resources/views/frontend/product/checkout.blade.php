@@ -85,7 +85,7 @@
                                                 class="form-control @error('state') is-invalid @enderror" required>
                                                 <option selected
                                                     value=' @if (Hel::deliveryDetails(Auth::user()->id))
-                                                                        {{ Hel::deliveryDetails(Auth::user()->id)->state }}@endif'>
+                                                                            {{ Hel::deliveryDetails(Auth::user()->id)->state }}@endif'>
                                                     @if (Hel::deliveryDetails(Auth::user()->id))
                                                         {{ Hel::deliveryDetails(Auth::user()->id)->state }}
                                                     @else Select State/Division
@@ -116,8 +116,8 @@
                                             <textarea class="form-control  @error('note') is-invalid @enderror" required
                                                 rows="7" name="note"
                                                 placeholder="Notes about your order, e.g. special notes for delivery."> @if (Hel::deliveryDetails(Auth::user()->id))
-                                                                           {{ Hel::deliveryDetails(Auth::user()->id)->note }}
-                                                                @endif</textarea>
+                                                                               {{ Hel::deliveryDetails(Auth::user()->id)->note }}
+                                                                    @endif</textarea>
                                         </div>
                                     </div>
 
@@ -147,7 +147,7 @@
 
                                                                 </td>
                                                                 <td style="border-top:0; ">
-                                                                    {{ round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1) }}
+                                                                    {{ Currency::mc('BDT', round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1)) }}
                                                                 </td>
                                                             </tr>@php
                                                                 $total = $total + round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1);
@@ -159,7 +159,7 @@
                                                                 <h4>Total</h4>
                                                             </td>
                                                             <td style="border-top:1px solid red; ">
-                                                                <h4> {{ $total }} </h4>
+                                                                <h4> {{ Currency::mc('BDT', $total) }} </h4>
                                                             </td>
                                                         </tr>
                                                         <tr style="border-top:0; ">
@@ -167,7 +167,8 @@
                                                                 <h4>Cash On Delivery(90%) </h4>
                                                             </td>
                                                             <td style="border-top:0px; ">
-                                                                <h4> {{ Hel::percentage($total, 90) }} </h4>
+                                                                <h4> {{ Currency::mc('BDT', Hel::percentage($total, 90)) }}
+                                                                </h4>
                                                             </td>
                                                         </tr>
                                                         <tr style="border-top:0; ">
@@ -175,19 +176,21 @@
                                                                 <h4>Advanced Pay(10%) </h4>
                                                             </td>
                                                             <td style="border-top:0px; ">
-                                                                <h4> {{ Hel::percentage($total, 10) }} </h4>
+                                                                <h4> {{ Currency::mc('BDT', Hel::percentage($total, 10)) }}
+                                                                </h4>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
 
 
-                                                <input type="hidden" value="{{ Hel::percentage($total, 10) }}"
+                                                <input type="hidden"
+                                                    value="{{ Currency::mc('BDT', Hel::percentage($total, 10)) }}"
                                                     name="toris">
                                             </div>
                                         </div><button class="ps-btn ps-btn--fullwidth" type="submit"
                                             style="font-size: 28px;color:white; background: linear-gradient(120deg, rgb(134 7 19), rgb(255 2 2) 55%, rgb(221 8 8), rgb(255 0 0) 45%);">Payment
-                                            {{ Hel::percentage($total, 10) }}</button>
+                                            {{ Currency::mc('BDT', Hel::percentage($total, 10)) }}</button>
                                     </div>
                                 </div>
                             </div>

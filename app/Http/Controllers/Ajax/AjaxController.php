@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ajax;
 
+use App\Help\Currency;
 use App\Help\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\CartAdd;
@@ -225,10 +226,10 @@ class AjaxController extends Controller
                             </div>
                         </td>
                         <td class="price">
-                        ' . round($item->product->price + $item->product->service_charge, 1)  . '
+                        ' . Currency::mc('BDT', round($item->product->price + $item->product->service_charge, 1)) . '
                         </td>
 
-                        <td> ' . round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1)  . '
+                        <td> ' . Currency::mc('BDT', round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1))  . '
                         </td>
                         <td><a href="#" class="btn btn-danger" onclick="removed(' . $item->id . ')"><i class="icon-cross"></i></a></td>
                     </tr>
@@ -252,16 +253,16 @@ class AjaxController extends Controller
         $total_page = '            <div class="ps-block--shopping-total">
        
         <div class="ps-block__content">
-        <h3>CashOn(90%) <span>' . Helper::percentage($total, 90) . '</span>
+        <h3>CashOn(90%) <span>' . Currency::mc('BDT', Helper::percentage($total, 90)) . '</span>
                 Delivery
             </h3>
         <br>
-            <h3>Advanced(10%)<span>' . Helper::percentage($total, 10)  . '</span></h3>
+            <h3>Advanced(10%)<span>' . Currency::mc('BDT', Helper::percentage($total, 10)) . '</span></h3>
            
            
             <br>
             <br>
-            <h3>Total <span>' . $total . '</span></h3>
+            <h3>Total <span>' . Currency::mc('BDT', $total) . '</span></h3>
         </div>
     </div>
     
@@ -307,7 +308,7 @@ class AjaxController extends Controller
 
 
                 $output .= '<br>size: ' . $item->size . '&nbsp; color : <span style="height:2px;width:2px;background:' . $item->color . ';color:' . $item->color . '">xx</span></p>
-                <small>' . $item->qty . ' x ' . ($item->product->price + $item->product->service_charge) . '</small>
+                <small>' . $item->qty . ' x ' . Currency::mc('BDT', ($item->product->price + $item->product->service_charge)) . '</small>
             </div>
         </div>';
                 $total = $total + round($item->qty * round($item->product->price + $item->product->service_charge, 1), 1);
@@ -316,7 +317,7 @@ class AjaxController extends Controller
     </div>';
             $output .= '
     <div class="ps-cart__footer">
-        <h3>Sub Total:<strong>' . $total . '</strong></h3>
+        <h3>Sub Total:<strong>' . Currency::mc('BDT', $total) . '</strong></h3>
         <figure><a class="ps-btn" href="' . route('product.cart') . '">View
                 Cart</a><a class="ps-btn" href="' . route('cart.checkout') . '">Checkout</a></figure>
     </div>';

@@ -169,8 +169,8 @@
                                                     </a>
                                                     <div class="ps-product__meta">
                                                         <h4 class="ps-product__price sale">
-                                                            {{ $hot_item->product->price + $hot_item->product->service_charge }}
-                                                            <del>{{ $hot_item->product->min_retail_price }}
+                                                            {{ Currency::mc('BDT', $hot_item->product->price + $hot_item->product->service_charge) }}
+                                                            <del>{{ Currency::mc('BDT', $hot_item->product->min_retail_price) }}
                                                             </del>
                                                         </h4>
                                                         <div class="ps-product__rating">
@@ -250,7 +250,9 @@
                                                         </select><span>01</span>
                                                     </div>
                                                     <p class="ps-product__price sale">
-                                                        {{ $topsell->price + $topsell->service_charge }}</p>
+                                                        {{ Currency::mc('BDT', $topsell->price + $topsell->service_charge) }}
+
+                                                    </p>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -275,7 +277,8 @@
                                                         </select><span>02</span>
                                                     </div>
                                                     <p class="ps-product__price sale">
-                                                        {{ $topsell2->price + $topsell2->service_charge }}</p>
+                                                        {{ Currency::mc('BDT', $topsell2->price + $topsell2->service_charge) }}
+                                                    </p>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -387,8 +390,8 @@
                                                     </select><span>02</span>
                                                 </div>
                                                 <p class="ps-product__price sale">
-                                                    {{ $subitem->price + $subitem->service_charge }}
-                                                    <del>{{ $subitem->min_retail_price }}
+                                                    {{ Currency::mc('BDT', $subitem->price + $subitem->service_charge) }}
+                                                    <del>{{ Currency::mc('BDT', $subitem->min_retail_price) }}
                                                     </del>
                                                 </p>
                                             </div>
