@@ -169,10 +169,11 @@ class FrontendController extends Controller
         $live = [];
         foreach ($d as $s) {
             $ss = Helper::live_video($s->page_name);
-            if ($ss == true) {
+            if ($ss == "true") {
                 $live[] = array('live' => $s->page_name);
             }
         }
+
         $fb = $live;
         return view('frontend.main.live_sell', compact('fb'));
     }

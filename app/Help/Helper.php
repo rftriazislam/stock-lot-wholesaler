@@ -123,9 +123,9 @@ class Helper
         $response = Http::get('https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/' . $user_name . '/live');
         $body = $response->body();
         if (strpos($body, "This video may no longer exist")) {
-            $msg = false;
+            $msg = "false";
         } else {
-            $msg = true;
+            $msg = "true";
         }
         return $msg;
     }
