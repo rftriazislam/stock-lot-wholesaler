@@ -165,11 +165,12 @@ class FrontendController extends Controller
     public function live_sell()
     {
 
+
         $d = Fb_live::all();
         $live = [];
         foreach ($d as $s) {
             $ss = Helper::live_video($s->page_name);
-            if ($ss == "true") {
+            if ($ss == "false") {
                 $live[] = array('live' => $s->page_name);
             }
         }

@@ -121,9 +121,25 @@ class Helper
     {
 
         $response = Http::get('https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/' . $user_name . '/live');
+        // $response = Http::get('https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/GAMEWggORLD72621/live');
         $body = $response->body();
-        if (strpos($body, "This video may no longer exist")) {
-            $msg = "false";
+
+        $gcheck = strpos($body, 'Entweder existiert dieses Video nicht mehr oder du bist nicht berechtigt, es dir anzusehen');
+        $gcheck_2 = strpos($body, 'Video nicht verfügbar');
+        $gcheck_3 = strpos($body, 'war live');
+        $gcheck_4 = strpos($body, 'ist live');
+
+        $echeck = strpos($body, 'This video may no longer exist, or you don' . "'" . 't have permission to view it.');
+        $echeck_2 = strpos($body, 'Video unavailable');
+        $echeck_3 = strpos($body, 'was live');
+        $echeck_4 = strpos($body, 'is live');
+
+        if ($gcheck === false || $echeck === false) {
+            if (($gcheck_3 === false && $gcheck_4 !== false) || ($echeck_3 === false && $echeck_4 !== false)) {
+                $msg = "false";
+            } else {
+                $msg = "trufe";
+            }
         } else {
             $msg = "true";
         }
