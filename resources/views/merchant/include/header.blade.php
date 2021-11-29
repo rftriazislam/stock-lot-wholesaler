@@ -79,6 +79,9 @@
                             <li><a href="{{ route('merchant.affiliate.member') }}">Lists</a></li>
                         </ul>
                     </li>
+                    <li><a href="{{ route('merchant.live.create') }}"><i class="fa fa-facebook"></i> Facebook Live
+                        </a>
+                    </li>
 
                 </ul>
             </div>

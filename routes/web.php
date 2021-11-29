@@ -170,6 +170,11 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
 
     Route::get('/dashboard/merchant/affiliate', [MerchantController::class, 'affiliate'])->name('merchant.affiliate');
     Route::get('/dashboard/merchant/affiliate/member', [MerchantController::class, 'affiliate_member'])->name('merchant.affiliate.member');
+
+    Route::get('/dashboard/merchant/facebook/live', [MerchantController::class, 'facebook_live'])->name('merchant.live.create');
+    Route::post('/dashboard/merchant/facebook/save', [MerchantController::class, 'save_live'])->name('merchant.save.live');
+
+    Route::post('/dashboard/merchant/facebook/update', [MerchantController::class, 'update_live'])->name('merchant.update.live');
 });
 //------------------------------------------------------------Merchant----------------------------------------------------------------------------------
 

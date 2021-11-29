@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Fb_live;
 use App\Models\MerchantOrder;
 use App\Models\MerchantProduct;
 use App\Models\MerchantShop;
@@ -541,9 +542,33 @@ class MerchantController extends Controller
 
     public function affiliate_member()
     {
-
         $members = User::where('refered_id', Auth::user()->id)->get();
-
         return view('merchant.main.my_member', compact('members'));
+    }
+
+    public function facebook_live()
+    {
+        $facebook = Fb_live::where('user_id', Auth::user()->id)->first();
+        return view('merchant.live.create', compact('facebook'));
+    }
+
+    public function save_live(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+        $save = new Fb_live();
+        $save->page_name = $request->name;
+        $save->user_id = Auth::user()->id;
+        $save->save();
+        return back();
+    }
+    public function update_live(Request $request)
+    {
+        $u = Fb_live::where('user_id', Auth::user()->id)->first();
+        if ($u) {
+            $u->update(['page_name' => $request->name]);
+        }
+        return back();
     }
 }
