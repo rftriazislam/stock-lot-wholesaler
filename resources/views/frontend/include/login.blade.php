@@ -1,5 +1,5 @@
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="margin-top: 183px;">
+    <div class="modal-dialog" role="document" style="margin-top: 59%; height:100%">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="loginModal" style="text-align: center;margin: 2px 50% 2px 50%;">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Merchant;
 
+use App\Help\Currency;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Fb_live;
@@ -137,7 +138,9 @@ class MerchantController extends Controller
             'service_charge' => 'required',
         ]);
 
-
+        $validate['price'] = Currency::mcd2($request->price);
+        $validate['min_retail_price'] = Currency::mcd2($request->min_retail_price);
+        $validate['max_retail_price'] = Currency::mcd2($request->max_retail_price);
         if ($files = $request->file('files')) {
             $count = 0;
             $images = [];

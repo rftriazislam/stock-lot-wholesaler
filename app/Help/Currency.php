@@ -80,16 +80,11 @@ class Currency
         $price_product =  round($prc, 2) . ' ' .     $exchange->rates;
         return $price_product;
     }
-    public static   function mcd2($currency, $price)
+    public static   function mcd2($price)
     {
-        $currecny_user = $currency;
-
-        $exchange_user = ExchangeRate::where('rates', $currecny_user)->first();
+        $exchange_user = ExchangeRate::where('rates', Auth::user()->currency)->first();
         $price_user = $price / $exchange_user->money;
-
-        $social = User::select('currency')->where('id', Auth::user()->id)->first();
-        $currecny = $social->currency;
-        $exchange = ExchangeRate::where('rates', $currecny)->first();
+        $exchange = ExchangeRate::where('rates', "BDT")->first();
         $prc = $price_user * $exchange->money;
 
         $price_product =  round($prc, 2);
