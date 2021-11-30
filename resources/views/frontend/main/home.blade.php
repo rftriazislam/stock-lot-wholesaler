@@ -443,8 +443,8 @@
                                                         </select><span>02</span>
                                                     </div>
                                                     <p class="ps-product__price sale">
-                                                        {{ $subitem->price + $subitem->service_charge }}
-                                                        <del>{{ $subitem->min_retail_price }}
+                                                        {{ Currency::mc('BDT', $subitem->price + $subitem->service_charge) }}
+                                                        <del>{{ Currency::mc('BDT', $subitem->min_retail_price) }}
                                                         </del>
                                                     </p>
                                                 </div>

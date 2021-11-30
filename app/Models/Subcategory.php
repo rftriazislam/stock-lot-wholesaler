@@ -22,6 +22,6 @@ class Subcategory extends Model
     }
     public function merchantproduct()
     {
-        return $this->hasMany('App\Models\MerchantProduct', 'subcategory_id', 'id');
+        return $this->hasMany('App\Models\MerchantProduct', 'subcategory_id', 'id')->where('status', 2);
     }
 }
