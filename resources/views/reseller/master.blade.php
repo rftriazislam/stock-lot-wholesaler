@@ -40,7 +40,7 @@
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Power by <a href="">Codewin IT</a>
+                Power by <a href="">Codewin IT {{ date('Y') }}</a>
             </div>
             <div class="clearfix"></div>
         </footer>

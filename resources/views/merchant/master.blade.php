@@ -41,7 +41,7 @@
         <!-- footer content -->
         <footer>
             <div class="pull-right">
-                Gentelella - Bootstrap Admin Template by <a href="">Codewin IT</a>
+                StockLot by <a href="">Codewin IT {{ date('Y') }}</a>
             </div>
             <div class="clearfix"></div>
         </footer>
