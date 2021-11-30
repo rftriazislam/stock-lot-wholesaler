@@ -34,15 +34,15 @@ class Currency
     }
 
 
-    public static   function mc($currency, $price)
+    public static   function mc($currencyw, $price)
     {
 
-        $currecny_user = $currency;
+        $currecny_user = $currencyw;
         $exchange_user = ExchangeRate::where('rates', $currecny_user)->first();
         $price_user = $price / $exchange_user->money;
         if (Auth::check()) {
-            $social = User::select('currency')->where('id', Auth::user()->id)->first();
-            $currecny = $social->currency;
+            // $social = User::select('currency')->where('id', Auth::user()->id)->first();
+            $currecny = Auth::user()->currency;
         } else {
 
             $cahe =   FacadesCache::get('data_currency');
@@ -51,7 +51,11 @@ class Currency
                 // $data =   Http::get('https://ipapi.co/' . '220.152.115.222' . '/json/')->json();
                 $cahe =   FacadesCache::put('data_currency',   $data);
                 $currency_api = FacadesCache::get('data_currency');
-                $currecny =   $currency_api['currency'];
+                if (count($currency_api) <= 8) {
+                    $currecny = 'BDT';
+                } else {
+                    $currecny =   $currency_api['currency'];
+                }
             } else {
                 $currency_api = FacadesCache::get('data_currency');
                 $currecny = $currency_api['currency'];
