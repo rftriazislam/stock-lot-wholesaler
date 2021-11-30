@@ -46,7 +46,7 @@ class Currency
         } else {
 
             $cahe =   FacadesCache::get('data_currency');
-            if ($cahe == null || count($cahe) <= 8) {
+            if ($cahe == null || count($cahe) <= 8 || isset($cahe['ip']) == false || $cahe['ip'] !=  Currency::getUserIP()) {
                 $data =   Http::get('https://ipapi.co/' . Currency::getUserIP() . '/json/')->json();
                 // $data =   Http::get('https://ipapi.co/' . '220.152.115.222' . '/json/')->json();
                 $cahe =   FacadesCache::put('data_currency',   $data);

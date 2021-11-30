@@ -25,7 +25,6 @@ class FrontendController extends Controller
 {
 
 
-
     public function index()
     {
         $product = HelpCategory::catproduct();
