@@ -110,6 +110,7 @@
                 success: function(data) {
                     showcart();
                     totalitem();
+                    cartmobile();
                 },
                 error: function(data) {
                     alert("fail");

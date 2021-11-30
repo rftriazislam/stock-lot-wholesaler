@@ -344,6 +344,7 @@
     </div>
     @include('frontend.include.login')
 
+    @include('frontend.include.loader')
 
 
 @section('js')
