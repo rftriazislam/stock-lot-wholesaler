@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Help\Category as HelpCategory;
 use App\Help\Currency;
 use App\Http\Controllers\Controller;
 use App\Models\CartAdd;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Http;
 use Laravel\Ui\Presets\React;
 use App\Help\Helper;
 use App\Models\Fb_live;
+use Illuminate\Support\Facades\Cache;
 
 class FrontendController extends Controller
 {
@@ -26,18 +28,13 @@ class FrontendController extends Controller
 
     public function index()
     {
-        $product = Category::withCount('subcategory')->with(['subcategory' => function ($q) {
-            $q->select('*')->withCount('merchantproduct')->where('status', 1);
-        }])->with(['cateproduct' => function ($q) {
-            $q->select('*')->where('status', 2)->latest()->take(12);
-        }])->where('status', 1)->get();
-        // return $product;
-        // exit();
+        $product = HelpCategory::catproduct();
         $hot = Helper::hotdel();
-        $hotdeals = HotDealProduct::with('product')->where('status', 1)->get();
-        $top_sells = MerchantProduct::where('status', 2)->orderBy('stock', 'desc')->take(12)->get();
-
-        return view('frontend.main.home', compact('product', 'hotdeals', 'top_sells'));
+        $hotdeals = HelpCategory::hotdeals();
+        $top_sells = HelpCategory::topsell();
+        $slider = HelpCategory::slider();
+        $categories = HelpCategory::category_list();
+        return view('frontend.main.home', compact('product', 'hotdeals', 'top_sells', 'slider', 'categories'));
     }
 
     public function product_view($id, $slug)

@@ -36,7 +36,7 @@
                 data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000"
                 data-owl-mousedrag="on" data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
 
-                @foreach (HelpCat::slider() as $item)
+                @foreach ($slider as $item)
                     <div class="ps-banner--market-1" data-background="{{ asset('storage') }}/slider/{{ $item->image }}">
                         <img src="{{ asset('storage') }}/slider/{{ $item->image }}" alt="">
 
@@ -295,7 +295,7 @@
             <div class="container">
                 <h3>Top categories of the month</h3>
                 <div class="row">
-                    @foreach (HelpCat::category_list() as $item)
+                    @foreach ($categories as $item)
                         <div class=" col-lg-3 col-md-4 col-sm-4 col-6 ">
                             <div class="p_35 ps-block--category" style="padding: 3.5px"><a class="ps-block__overlay"
                                     href="{{ route('product.list.category', [$item->id]) }}"></a><img

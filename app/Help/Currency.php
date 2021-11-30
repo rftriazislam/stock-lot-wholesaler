@@ -4,7 +4,9 @@ namespace App\Help;
 
 use App\Models\ExchangeRate;
 use App\Models\User;
+use Illuminate\Filesystem\Cache;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache as FacadesCache;
 use Illuminate\Support\Facades\Http;
 
 class Currency
@@ -34,7 +36,7 @@ class Currency
 
     public static   function mc($currency, $price)
     {
-        $data =   Http::get('https://ipapi.co/' . Currency::getUserIP() . '/json/')->json();
+
         $currecny_user = $currency;
         $exchange_user = ExchangeRate::where('rates', $currecny_user)->first();
         $price_user = $price / $exchange_user->money;
@@ -42,10 +44,17 @@ class Currency
             $social = User::select('currency')->where('id', Auth::user()->id)->first();
             $currecny = $social->currency;
         } else {
-            if (!empty($data['currency'])) {
-                $currecny =   $data['currency'];
+
+            $cahe =   FacadesCache::get('data_currency');
+            if ($cahe == null || count($cahe) <= 8) {
+                $data =   Http::get('https://ipapi.co/' . Currency::getUserIP() . '/json/')->json();
+                // $data =   Http::get('https://ipapi.co/' . '220.152.115.222' . '/json/')->json();
+                $cahe =   FacadesCache::put('data_currency',   $data);
+                $currency_api = FacadesCache::get('data_currency');
+                $currecny =   $currency_api['currency'];
             } else {
-                $currecny = $currecny_user;
+                $currency_api = FacadesCache::get('data_currency');
+                $currecny = $currency_api['currency'];
             }
         }
         $exchange = ExchangeRate::where('rates', $currecny)->first();
