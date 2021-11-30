@@ -435,6 +435,7 @@
                             $('.add_cart_item').css('color', 'red');
                         }
                         totalitem();
+                        cartmobile();
 
                     },
                     error: function(data) {
