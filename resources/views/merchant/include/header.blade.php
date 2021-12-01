@@ -10,7 +10,8 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="{{ asset('backend') }}/images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="{{ asset('public/storage/profile') }}/{{ Auth::user()->image }}" alt="..."
+                    class="img-circle profile_img">
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
@@ -119,7 +120,8 @@
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
                         data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('backend') }}/images/img.jpg" alt="">{{ Auth::user()->name }}
+                        <img src="{{ asset('public/storage/profile') }}/{{ Auth::user()->image }}"
+                            alt="">{{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="javascript:;"> Profile</a>
