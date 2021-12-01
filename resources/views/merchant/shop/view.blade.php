@@ -40,8 +40,8 @@
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/logo/') }}/{{ $merchant->logo }}" alt="Avatar"
-                                        title="Change the avatar"
+                                        src="{{ asset('public/storage/merchant/logo/') }}/{{ $merchant->logo }}"
+                                        alt="Avatar" title="Change the avatar"
                                         style="width:100%;height:220px;border: 1.5px solid #ded8d8;">
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
+                                        src="{{ asset('public/storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
                                         alt="Avatar" title="Change the avatar"
                                         style="width:100%;height:161px;border:1.5px solid #ded8d8">
                                 </div>
@@ -96,7 +96,7 @@
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
+                                        src="{{ asset('public/storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
                                         alt="Avatar" title="Change the avatar"
                                         style="width:100%;height:161px;border:1.5px solid #ded8d8">
                                 </div>

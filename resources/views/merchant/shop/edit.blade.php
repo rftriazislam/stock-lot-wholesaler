@@ -43,8 +43,8 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="file" id="image" name="logos" class="form-control image file pb-34 ">
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/logo/') }}/{{ $shop->logo }}" alt="Avatar"
-                                        title="Change the avatar"
+                                        src="{{ asset('public/storage/merchant/logo/') }}/{{ $shop->logo }}"
+                                        alt="Avatar" title="Change the avatar"
                                         style="width:100%;height:220px;border: 1.5px solid #ded8d8;">
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="file" id="image" name="nid_fronts" class="form-control image file pb-34 ">
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/nid_front/') }}/{{ $shop->nid_front }}"
+                                        src="{{ asset('public/storage/merchant/nid_front/') }}/{{ $shop->nid_front }}"
                                         alt="Avatar" title="Change the avatar"
                                         style="width:100%;height:161px;border:1.5px solid #ded8d8">
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="file" id="image" name="nid_backs" class="form-control image file pb-34 ">
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('storage/merchant/nid_back/') }}/{{ $shop->nid_back }}"
+                                        src="{{ asset('public/storage/merchant/nid_back/') }}/{{ $shop->nid_back }}"
                                         alt="Avatar" title="Change the avatar"
                                         style="width:100%;height:161px;border:1.5px solid #ded8d8">
                                 </div>

@@ -43,7 +43,7 @@
                     <li><a><i class="fa fa-desktop"></i> Sale Order <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('merchant.income.order') }}">Order inComming</a></li>
-                            <li><a href="{{ route('merchant.list.product') }}">Order Complete</a></li>
+                            <li><a>Order Complete</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Buy Order <span class="fa fa-chevron-down"></span></a>
@@ -138,7 +138,7 @@
                     <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1"
                         data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
+                        <span class="badge bg-green"></span>
                     </a>
                     <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                         <li class="nav-item">

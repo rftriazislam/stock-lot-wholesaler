@@ -35,6 +35,7 @@
             <div class="right_col" role="main">
                 @yield('content')
             </div>
+            <div class="balance" style=""><b>{{ Currency::mcd2(Auth::user()->balance + 111) }} </b></div>
         </div>
         <!-- /page content -->
 

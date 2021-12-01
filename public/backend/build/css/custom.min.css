@@ -1180,6 +1180,30 @@ body {
     font-weight: 400;
     line-height: 1.471;
 }
+.balance {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 50%;
+    right: 0;
+    width: 65px;
+    height: 65px;
+    z-index: 10000;
+    border: none;
+    border: 1px solid #ddd;
+    transition: all 0.4s ease;
+    background-color: transparent;
+    border-radius: 50%;
+    background: linear-gradient(
+        120deg,
+        rgb(134 7 19),
+        rgb(255 2 2) 55%,
+        rgb(221 8 8),
+        rgb(255 0 0) 45%
+    );
+    color: white;
+}
 .main_container .top_nav {
     display: block;
     margin-left: 230px;
