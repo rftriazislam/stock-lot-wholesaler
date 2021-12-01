@@ -60,8 +60,10 @@
                                 </li>
 
                                 <li>
-                                    <i class="fa fa-briefcase user-profile-icon"></i> {{ Auth::user()->balance }}
+                                    <i class="fa fa-briefcase user-profile-icon"></i>
+                                    {{ Currency::md2(Auth::user()->balance) }}
                                     {{ Auth::user()->currency }}
+
                                 </li>
                             </ul>
 

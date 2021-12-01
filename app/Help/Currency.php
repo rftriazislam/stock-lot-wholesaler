@@ -104,4 +104,15 @@ class Currency
         $price_product =  round($prc, 4);
         return $price_product;
     }
+
+    public static   function md2($price)
+    {
+        $exchange_user = ExchangeRate::where('rates', "BDT")->first();
+        $price_user = $price / $exchange_user->money;
+        $exchange = ExchangeRate::where('rates', Auth::user()->currency)->first();
+        $prc = $price_user * $exchange->money;
+
+        $price_product =  round($prc, 2);
+        return $price_product;
+    }
 }
