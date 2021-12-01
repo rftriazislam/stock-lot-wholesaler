@@ -34,10 +34,12 @@
                                     @if (Auth::user()->image)
                                         <img class="img-responsive avatar-view"
                                             src="{{ asset('public/storage/profile') }}/{{ Auth::user()->image }}"
-                                            alt="Avatar" title="Change the avatar">
+                                            alt="Avatar" title="Change the avatar"
+                                            style="width:100%;height:100%;border: 1.5px solid #ded8d8;">
                                     @else
                                         <img class="img-responsive avatar-view"
                                             src="{{ asset('public/backend') }}/images/picture.jpg" alt="Avatar"
+                                            style="width:100%;height:100%;border: 1.5px solid #ded8d8;"
                                             title="Change the avatar">
                                     @endif
                                 </div>
