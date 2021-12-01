@@ -28,11 +28,19 @@ class MerchantController extends Controller
     }
     public function add_shop()
     {
+        $shop = MerchantShop::where('user_id', Auth::user()->id)->first();
+        if ($shop) {
+            return view('merchant.shop.edit', compact('shop'));
+        } else {
+            return view('merchant.shop.create');
+        }
+    }
+    public function view_shop()
+    {
         $merchant = MerchantShop::where('user_id', Auth::user()->id)->first();
         if ($merchant) {
             return view('merchant.shop.view', compact('merchant'));
         } else {
-
             return view('merchant.shop.create');
         }
     }
@@ -73,6 +81,45 @@ class MerchantController extends Controller
         }
         $validate['user_id'] = Auth::user()->id;
         MerchantShop::create($validate);
+
+        return back();
+    }
+
+    public function edit_shop($id)
+    {
+        $shop =  MerchantShop::where('id', $id)->first();
+        if ($shop) {
+            return view('merchant.shop.edit', compact('shop'));
+        } else {
+            return back();
+        }
+    }
+
+    public function update_shop(Request $request)
+    {
+        $shop =  MerchantShop::where('user_id', Auth::user()->id)->first();
+        $shop->update($request->all());
+        if ($request->hasFile('logos')) {
+            $image = $request->file('logos');
+            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/merchant/logo');
+            $image->move($destinationPath, $imagename);
+            $shop->update(['logo' => $imagename]);
+        }
+        if ($request->hasFile('nid_fronts')) {
+            $image = $request->file('nid_fronts');
+            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/merchant/nid_front');
+            $image->move($destinationPath, $imagename);
+            $shop->update(['nid_front' => $imagename]);
+        }
+        if ($request->hasFile('nid_backs')) {
+            $image = $request->file('nid_backs');
+            $imagename =  str_replace(' ', '-', $request->name) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/storage/merchant/nid_back');
+            $image->move($destinationPath, $imagename);
+            $shop->update(['nid_back' => $imagename]);
+        }
 
         return back();
     }

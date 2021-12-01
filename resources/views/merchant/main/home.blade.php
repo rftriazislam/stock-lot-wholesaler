@@ -1,43 +1,5 @@
 @extends('merchant.master')
 @section('content')
-    <div class="row" style="display: inline-block;">
-        <div class=" top_tiles" style="margin: 10px 0;">
-            <div class="col-md-3 col-sm-3  tile">
-                <span>Total Sale</span>
-                <h2>0</h2>
-                <span class="sparkline_one" style="height: 160px;">
-                    <canvas width="200" height="60"
-                        style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                </span>
-            </div>
-            <div class="col-md-3 col-sm-3  tile">
-                <span>Total order</span>
-                <h2>0</h2>
-                <span class="sparkline_one" style="height: 160px;">
-                    <canvas width="200" height="60"
-                        style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                </span>
-            </div>
-            <div class="col-md-3 col-sm-3  tile">
-                <span>Total Panding</span>
-                <h2>0</h2>
-                <span class="sparkline_one" style="height: 160px;">
-                    <canvas width="200" height="60"
-                        style="display: inline-block; vertical-align: top; width: 94px; height: 125px;"></canvas>
-                </span>
-            </div>
-            <div class="col-md-3 col-sm-3  tile">
-                <span>Total Upload</span>
-                <h2>0</h2>
-                <span class="sparkline_one" style="height: 160px;">
-                    <canvas width="200" height="60"
-                        style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                </span>
-            </div>
-        </div>
-    </div>
-    <br />
-
     <div class="row">
         <div class="col-md-4 col-sm-6 ">
             <div class="x_panel fixed_height_320">
@@ -47,8 +9,8 @@
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i
+                                    class="fa fa-wrench"></i></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Settings 1</a>
                                 <a class="dropdown-item" href="#">Settings 2</a>
@@ -60,7 +22,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <h4>App Versions</h4>
+                    <h4>Sale</h4>
                     <div class="widget_summary">
                         <div class="w_left w_25">
                             <span>1.5.2</span>
@@ -299,7 +261,6 @@
                 </div>
                 <div class="x_content">
 
-                    <div id="graph_bar" style="width:100%; height:200px;"></div>
 
                     <div class=" bg-white progress_summary">
 

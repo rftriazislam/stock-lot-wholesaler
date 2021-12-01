@@ -135,6 +135,12 @@ Route::group(['middleware' => ['auth', 'merchant'],], function () {
 
     Route::get('/dashboard/merchant/shop/add', [MerchantController::class, 'add_shop'])->name('merchant.add.shop');
     Route::post('/dashboard/merchant/shop/save', [MerchantController::class, 'save_shop'])->name('merchant.save.shop');
+    Route::get('/dashboard/merchant/shop/view', [MerchantController::class, 'view_shop'])->name('merchant.view.shop');
+
+
+    Route::get('/dashboard/merchant/shop/edit/{id}', [MerchantController::class, 'edit_shop'])->name('merchant.shop.edit');
+    Route::post('/dashboard/merchant/shop/update', [MerchantController::class, 'update_shop'])->name('merchant.update.shop');
+
     Route::get('/dashboard/merchant/myprofile', [MerchantController::class, 'myprofile'])->name('myprofile');
     Route::post('/dashboard/merchant/profile/update', [MerchantController::class, 'update_profile'])->name('update.profile');
 
@@ -202,7 +208,6 @@ Route::post('/show--update-cart', [AjaxController::class, 'cart_update'])->name(
 Route::post('/show--removed-cart', [AjaxController::class, 'removed_cart'])->name('removed.cart');
 Route::post('/total-item', [AjaxController::class, 'total_item'])->name('total-item');
 Route::post('/total-item-mobile', [AjaxController::class, 'total_item_mobile'])->name('total-item-mobile');
-
 
 
 

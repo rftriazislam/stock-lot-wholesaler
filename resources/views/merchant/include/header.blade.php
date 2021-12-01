@@ -27,10 +27,10 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     <li><a href="{{ route('merchant') }}"><i class="fa fa-home"></i> Dashboard </a></li>
-                    <li><a><i class="fa fa-edit"></i> My Product/Shop <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-edit"></i> My Shop <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('merchant.add.shop') }}">Add Shop</a></li>
-                            <li><a href="{{ route('merchant.add.shop') }}">View Shop</a></li>
+                            <li><a href="{{ route('merchant.view.shop') }}">View Shop</a></li>
 
                         </ul>
                     </li>

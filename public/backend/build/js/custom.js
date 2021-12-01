@@ -2574,11 +2574,11 @@ function init_morris_charts() {
         Morris.Bar({
             element: 'graph_bar',
             data: [
-                { device: 'iPhone 4', geekbench: 380 },
-                { device: 'iPhone 4S', geekbench: 655 },
-                { device: 'iPhone 3GS', geekbench: 275 },
-                { device: 'iPhone 5', geekbench: 1571 },
-                { device: 'iPhone 5S', geekbench: 655 },
+                { device: 'iPhone s', geekbench: 380 },
+                { device: 'iPhone sS', geekbench: 655 },
+                { device: 'iPhone sGS', geekbench: 275 },
+                { device: 'iPhones', geekbench: 1571 },
+                { device: 'iPhone 5sS', geekbench: 655 },
                 { device: 'iPhone 6', geekbench: 2154 },
                 { device: 'iPhone 6 Plus', geekbench: 1144 },
                 { device: 'iPhone 6S', geekbench: 2371 },

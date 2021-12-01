@@ -472,4 +472,6 @@
     <script src="{{ asset('frontend') }}/js/custom/custom.js"></script>
 
     @include('frontend.include.loader')
+
+
 @endsection

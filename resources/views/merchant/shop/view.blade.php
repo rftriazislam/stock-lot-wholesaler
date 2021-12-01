@@ -28,14 +28,7 @@
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Settings 1</a>
-                                    <a class="dropdown-item" href="#">Settings 2</a>
-                                </div>
-                            </li>
+
                             <li><a class="close-link"><i class="fa fa-close"></i></a>
                             </li>
                         </ul>
@@ -48,7 +41,8 @@
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
                                         src="{{ asset('storage/merchant/logo/') }}/{{ $merchant->logo }}" alt="Avatar"
-                                        title="Change the avatar" style="width:220px;height:220px">
+                                        title="Change the avatar"
+                                        style="width:100%;height:220px;border: 1.5px solid #ded8d8;">
                                 </div>
                             </div>
                             <h3>{{ $merchant->name }}</h3>
@@ -79,94 +73,53 @@
                                 </li>
                             </ul>
 
-                            <a class="btn btn-success" style="color:white"><i class="fa fa-edit m-right-xs"></i>Live
+                            <a class="btn btn-success"
+                                href="{{ route('shop.view', [$merchant->user_id, $merchant->name]) }}"
+                                style="color:white"><i class="fa fa-edit m-right-xs"></i>Live
                                 Preview</a>
+                            <a class="btn btn-info"
+                                href="{{ route('merchant.shop.edit', [$merchant->id, $merchant->name, $merchant->user_id]) }}"
+                                style="color:white"><i class="fa fa-edit m-right-xs"></i>Edit/Update
+                            </a>
+
                             <br />
-                            <div class="profile_img">
+                            <div class="profile_img" style="margin-bottom: 7px;margin-top: 9px;">
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('public/storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
-                                        alt="Avatar" title="Change the avatar" style="width:261px;height:161px">
+                                        src="{{ asset('storage/merchant/nid_front/') }}/{{ $merchant->nid_front }}"
+                                        alt="Avatar" title="Change the avatar"
+                                        style="width:100%;height:161px;border:1.5px solid #ded8d8">
                                 </div>
                             </div>
-                            <div class="profile_img">
+                            <div class="profile_img" style="margin-bottom: 7px;margin-top: 9px;">
                                 <div id="crop-avatar">
                                     <!-- Current avatar -->
                                     <img class="img-responsive avatar-view"
-                                        src="{{ asset('public/storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
-                                        alt="Avatar" title="Change the avatar" style="width:261px;height:161px">
+                                        src="{{ asset('storage/merchant/nid_back/') }}/{{ $merchant->nid_back }}"
+                                        alt="Avatar" title="Change the avatar"
+                                        style="width:100%;height:161px;border:1.5px solid #ded8d8">
                                 </div>
                             </div>
-                            <!-- start skills -->
-                            <h4>Product Sale</h4>
-                            <ul class="list-unstyled user_data">
-                                <li>
-                                    <p>Product Upload</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Product Order</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Product Sell</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30">
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Product Review</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50">
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <a class="btn btn-info" style="color:white"><i class="fa fa-edit m-right-xs"></i>Edit/Update
-                                Shop</a>
-                            <br />
-                            <!-- end of skills -->
+
 
                         </div>
                         <div class="col-md-9 col-sm-9 ">
 
-                            <div class="profile_title">
-                                <div class="col-md-6">
-                                    <h2>Sale Activity Report</h2>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="reportrange" class="pull-right"
-                                        style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- start of user-activity-graph -->
-                            <div id="graph_bar" style="width:100%; height:280px;"></div>
-                            <!-- end of user-activity-graph -->
 
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist"
+                                    style="background:white;border-bottom:0;">
                                     <li role="presentation" class="active"><a href="#tab_content1" id="home-tab"
                                             role="tab" data-toggle="tab" aria-expanded="true">Recent Buyer</a>
                                     </li>
                                     <li role="presentation" class=""><a href="#tab_content2" role="tab"
                                             id="profile-tab" data-toggle="tab" aria-expanded="false">Product Sale</a>
                                     </li>
-                                    <li role="presentation" class=""><a href="#tab_content3" role="tab"
-                                            id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
-                                    </li>
+
                                 </ul>
-                                <div id="myTabContent" class="tab-content">
+                                <div id="myTabContent" class="tab-content"
+                                    style="padding-left: 23px;border: 1px solid #e2dddd;">
                                     <div role="tabpanel" class="tab-pane active " id="tab_content1"
                                         aria-labelledby="home-tab">
 
@@ -175,85 +128,23 @@
                                             <li>
                                                 <img src="{{ asset('backend') }}/images/img.jpg" class="avatar"
                                                     alt="Avatar">
-                                                <div class="message_date">
+                                                <div class="message_date" style="padding-right: 10px;">
                                                     <h3 class="date text-info">24</h3>
                                                     <p class="month">May</p>
                                                 </div>
                                                 <div class="message_wrapper">
-                                                    <h4 class="heading">Desmond Davison</h4>
-                                                    <blockquote class="message">Raw denim you probably haven't heard
-                                                        of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher
-                                                        retro keffiyeh dreamcatcher synth.</blockquote>
+                                                    <h4 class="heading">MR JSON Roy</h4>
+                                                    <blockquote class="message">Product Name</blockquote>
                                                     <br />
                                                     <p class="url">
                                                         <span class="fs1 text-info" aria-hidden="true"
                                                             data-icon=""></span>
-                                                        <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc
+                                                        <a href="#"><i class="fa fa-paperclip"></i>Quentity 12
                                                         </a>
                                                     </p>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <img src="{{ asset('backend') }}/images/img.jpg" class="avatar"
-                                                    alt="Avatar">
-                                                <div class="message_date">
-                                                    <h3 class="date text-error">21</h3>
-                                                    <p class="month">May</p>
-                                                </div>
-                                                <div class="message_wrapper">
-                                                    <h4 class="heading">Brian Michaels</h4>
-                                                    <blockquote class="message">Raw denim you probably haven't heard
-                                                        of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher
-                                                        retro keffiyeh dreamcatcher synth.</blockquote>
-                                                    <br />
-                                                    <p class="url">
-                                                        <span class="fs1" aria-hidden="true"
-                                                            data-icon=""></span>
-                                                        <a href="#" data-original-title="">Download</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('backend') }}/images/img.jpg" class="avatar"
-                                                    alt="Avatar">
-                                                <div class="message_date">
-                                                    <h3 class="date text-info">24</h3>
-                                                    <p class="month">May</p>
-                                                </div>
-                                                <div class="message_wrapper">
-                                                    <h4 class="heading">Desmond Davison</h4>
-                                                    <blockquote class="message">Raw denim you probably haven't heard
-                                                        of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher
-                                                        retro keffiyeh dreamcatcher synth.</blockquote>
-                                                    <br />
-                                                    <p class="url">
-                                                        <span class="fs1 text-info" aria-hidden="true"
-                                                            data-icon=""></span>
-                                                        <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <img src="{{ asset('backend') }}/images/img.jpg" class="avatar"
-                                                    alt="Avatar">
-                                                <div class="message_date">
-                                                    <h3 class="date text-error">21</h3>
-                                                    <p class="month">May</p>
-                                                </div>
-                                                <div class="message_wrapper">
-                                                    <h4 class="heading">Brian Michaels</h4>
-                                                    <blockquote class="message">Raw denim you probably haven't heard
-                                                        of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher
-                                                        retro keffiyeh dreamcatcher synth.</blockquote>
-                                                    <br />
-                                                    <p class="url">
-                                                        <span class="fs1" aria-hidden="true"
-                                                            data-icon=""></span>
-                                                        <a href="#" data-original-title="">Download</a>
-                                                    </p>
-                                                </div>
-                                            </li>
+
 
                                         </ul>
                                         <!-- end recent activity -->
@@ -266,74 +157,28 @@
                                         <table class="data table table-striped no-margin">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Project Name</th>
-                                                    <th>Client Company</th>
-                                                    <th class="hidden-phone">Hours Spent</th>
-                                                    <th>Contribution</th>
+
+                                                    <th>Product Name</th>
+                                                    <th>Price</th>
+                                                    <th class="hidden-phone">Date</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>New Company Takeover Review</td>
-                                                    <td>Deveint Inc</td>
-                                                    <td class="hidden-phone">18</td>
-                                                    <td class="vertical-align-mid">
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                data-transitiongoal="35"></div>
-                                                        </div>
-                                                    </td>
+
+                                                    <td>Shirt</td>
+                                                    <td>102</td>
+                                                    <td class="hidden-phone">12.12.2021</td>
+
                                                 </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>New Partner Contracts Consultanci</td>
-                                                    <td>Deveint Inc</td>
-                                                    <td class="hidden-phone">13</td>
-                                                    <td class="vertical-align-mid">
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-danger"
-                                                                data-transitiongoal="15"></div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Partners and Inverstors report</td>
-                                                    <td>Deveint Inc</td>
-                                                    <td class="hidden-phone">30</td>
-                                                    <td class="vertical-align-mid">
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                data-transitiongoal="45"></div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>New Company Takeover Review</td>
-                                                    <td>Deveint Inc</td>
-                                                    <td class="hidden-phone">28</td>
-                                                    <td class="vertical-align-mid">
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success"
-                                                                data-transitiongoal="75"></div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+
                                             </tbody>
                                         </table>
                                         <!-- end user projects -->
 
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="tab_content3"
-                                        aria-labelledby="profile-tab">
-                                        <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin
-                                            coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next
-                                            level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                                            photo booth letterpress, commodo enim craft beer mlkshk </p>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

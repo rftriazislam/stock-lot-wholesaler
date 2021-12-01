@@ -40,7 +40,7 @@
 
         <!-- footer content -->
         <footer>
-            <div class="pull-right">
+            <div style="text-align: center">
                 StockLot by <a href="">Codewin IT {{ date('Y') }}</a>
             </div>
             <div class="clearfix"></div>
