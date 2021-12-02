@@ -356,7 +356,8 @@
 
             },
             error: function(data) {
-                alert("I1 fail");
+                console.log('I1 failed');
+
             }
         });
     }
@@ -376,7 +377,8 @@
                 cartmobile();
             },
             error: function(data) {
-                alert("R1 fail");
+                console.log('R1 failed');
+
             }
         });
     }
@@ -394,7 +396,7 @@
                 $('#cartmobile').html(res.cartmobile);
             },
             error: function(data) {
-                alert("mobile fail");
+                console.log('mobile failed');
             }
         });
     }
