@@ -452,6 +452,12 @@
 
     <script src="{{ asset('frontend') }}/js/custom/custom.js"></script>
 
+    <script>
+        setTimeout(() => {
+            $('.opacity2').css('opacity', '1');
+        }, 2000);
+    </script>
+
 
 @endsection
 {{-- @section('js')
