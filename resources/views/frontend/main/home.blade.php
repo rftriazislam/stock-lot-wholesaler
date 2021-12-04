@@ -30,7 +30,7 @@
 
     <div id="homepage-6">
 
-        <div class="ps-home-banner">
+        <div class="ps-home-banner opacity1">
             <div class="ps-carousel--nav-inside owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000"
                 data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1"
                 data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000"
@@ -94,8 +94,26 @@
                 </div>
             </div>
         </div>
-        <div class="ps-deal-hot">
+        {{-- @include('frontend.include.loader') --}}
+        <div class="ps-top-categories">
             <div class="container">
+                <h3>Top categories of the month</h3>
+                <div class="row">
+                    @foreach ($categories as $item)
+                        <div class=" col-lg-3 col-md-4 col-sm-4 col-6 ">
+                            <div class="p_35 ps-block--category" style="padding: 3.5px"><a class="ps-block__overlay"
+                                    href="{{ route('product.list.category', [$item->id]) }}"></a><img
+                                    src="{{ asset('storage') }}/category/big/{{ $item->image }}" alt="">
+                                <p>{{ $item->name }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="ps-deal-hot opacity2" style="opacity:0">
+            <div class="container">
+
                 <div class="row">
                     <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12 ">
                         <div class="ps-block--deal-hot" data-mh="dealhot">
@@ -113,6 +131,7 @@
                                     data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000"
                                     data-owl-mousedrag="on">
                                     @foreach ($hotdeals as $hot_item)
+
                                         <div class="ps-product--detail ps-product--hot-deal">
                                             <div class="ps-product__header">
                                                 <div class="ps-product__thumbnail" data-vertical="true">
@@ -224,12 +243,9 @@
                     </div>
                     <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 ">
                         <aside class="widget widget_best-sale" data-mh="dealhot">
-                            <h3 class="widget-title" style="margin-bottom:0px">Top 20 Best Seller</h3>
+                            <h3 class="widget-title" style="margin-bottom:0px">Top 10 Best Seller</h3>
                             <div class="widget__content">
-                                <div class="owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000"
-                                    data-owl-gap="0" data-owl-nav="false" data-owl-dots="false" data-owl-item="1"
-                                    data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1"
-                                    data-owl-duration="1000" data-owl-mousedrag="on">
+                                <div class="owl-slider">
 
                                     <div class="ps-product-group">
                                         @foreach ($top_sells->take(6) as $topsell)
@@ -258,55 +274,20 @@
                                         @endforeach
                                     </div>
 
-                                    <div class="ps-product-group">
-                                        @foreach ($top_sells->skip(6)->take(6) as $topsell2)
-                                            <div class="ps-product--horizontal">
-                                                <div class="ps-product__thumbnail"><a
-                                                        href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}"><img
-                                                            src="{{ asset('storage') }}/merchant/product/main/small/{{ $topsell2->main_picture }}"
-                                                            alt=""></a></div>
-                                                <div class="ps-product__content"><a class="ps-product__title"
-                                                        href="{{ route('product.view', [$topsell2->id, $topsell2->slug]) }}">{{ substr($topsell2->product_name, 0, 15) }}...</a>
-                                                    <div class="ps-product__rating">
-                                                        <select class="ps-rating" data-read-only="true">
-                                                            <option value="1">1</option>
-                                                            <option value="1">2</option>
-                                                            <option value="1">3</option>
-                                                            <option value="1">4</option>
-                                                            <option value="2">5</option>
-                                                        </select><span>02</span>
-                                                    </div>
-                                                    <p class="ps-product__price sale">
-                                                        {{ Currency::mc('BDT', $topsell2->price + $topsell2->service_charge) }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        @endforeach
 
-                                    </div>
                                 </div>
                             </div>
                         </aside>
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="ps-top-categories">
-            <div class="container">
-                <h3>Top categories of the month</h3>
-                <div class="row">
-                    @foreach ($categories as $item)
-                        <div class=" col-lg-3 col-md-4 col-sm-4 col-6 ">
-                            <div class="p_35 ps-block--category" style="padding: 3.5px"><a class="ps-block__overlay"
-                                    href="{{ route('product.list.category', [$item->id]) }}"></a><img
-                                    src="{{ asset('storage') }}/category/big/{{ $item->image }}" alt="">
-                                <p>{{ $item->name }}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+
+
+
+
+
         <div class="ps-categories-box">
             <div class="container">
 
@@ -471,7 +452,35 @@
 
     <script src="{{ asset('frontend') }}/js/custom/custom.js"></script>
 
-    @include('frontend.include.loader')
+    <script>
+        setTimeout(() => {
+            $('.opacity2').css('opacity', '1');
+        }, 2000);
+    </script>
 
 
 @endsection
+{{-- @section('js')
+    <script>
+        hotdeal();
+
+        function hotdeal() {
+            $.ajax({
+                url: "{{ route('hot.deal') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+
+                dataType: "json",
+                success: function(res) {
+                    $("#hot_deal").html(res.hotdeal);
+                    console.log();
+                },
+                error: function(data) {
+                    console.log("hot failed");
+                },
+            });
+        }
+    </script>
+@endsection --}}

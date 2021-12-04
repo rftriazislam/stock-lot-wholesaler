@@ -208,6 +208,7 @@ Route::post('/show--update-cart', [AjaxController::class, 'cart_update'])->name(
 Route::post('/show--removed-cart', [AjaxController::class, 'removed_cart'])->name('removed.cart');
 Route::post('/total-item', [AjaxController::class, 'total_item'])->name('total-item');
 Route::post('/total-item-mobile', [AjaxController::class, 'total_item_mobile'])->name('total-item-mobile');
+Route::post('/hot-deal', [AjaxController::class, 'hot_deal'])->name('hot.deal');
 
 
 
