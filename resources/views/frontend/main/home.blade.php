@@ -455,7 +455,7 @@
     <script>
         setTimeout(() => {
             $('.opacity2').css('opacity', '1');
-        }, 2000);
+        }, 3000);
     </script>
 
 
