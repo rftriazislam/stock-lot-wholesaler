@@ -242,10 +242,10 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-12 ">
-                        <aside class="widget widget_best-sale" data-mh="dealhot">
+                        <div class="widget widget_best-sale">
                             <h3 class="widget-title" style="margin-bottom:0px">Top 10 Best Seller</h3>
                             <div class="widget__content">
-                                <div class="owl-slider">
+                                <div class="owl-slsdfider">
 
                                     <div class="ps-product-group">
                                         @foreach ($top_sells->take(6) as $topsell)
@@ -277,7 +277,7 @@
 
                                 </div>
                             </div>
-                        </aside>
+                        </div>
                     </div>
                 </div>
 
