@@ -2572,7 +2572,7 @@ function init_morris_charts() {
     if ($('#graph_bar').length) {
 
         Morris.Bar({
-            element: 'graph_bar',
+            element: 'graph_bar', 
             data: [
                 { device: 'iPhone s', geekbench: 380 },
                 { device: 'iPhone sS', geekbench: 655 },
