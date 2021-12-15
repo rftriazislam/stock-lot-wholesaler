@@ -23,13 +23,17 @@ class ProductController extends Controller
             'color',
             'stock',
             'views',
-            'service_charge'
+            'mini_order',
+            'service_charge',
+            'min_retail_price',
+            'max_retail_price',
         )
             ->where('status', 2)
             ->latest()
-            ->get();
+            ->paginate(12);
+
         $image = array(
-            'product_image' => url('/public/storage/merchant/product/main/small/'),
+            'product_image' => url('/storage/merchant/product/main/small/'),
             'subcategory_image' => url('/public/storage/subcategory/'),
             'category_image' => url('/public/storage/category/small/'),
         );
