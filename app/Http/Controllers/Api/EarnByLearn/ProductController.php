@@ -33,7 +33,7 @@ class ProductController extends Controller
             ->paginate(12);
 
         $image = array(
-            'product_image' => url('/storage/merchant/product/main/small/'),
+            'product_image' => url('/public/storage/merchant/product/main/small/'),
             'subcategory_image' => url('/public/storage/subcategory/'),
             'category_image' => url('/public/storage/category/small/'),
         );
